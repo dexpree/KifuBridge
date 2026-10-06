@@ -1,0 +1,949 @@
+/* =========================================================
+   KIFUBRIDGE — CREATE CAMPAIGN
+   Dusk dockside-manifest theme. Fully self-contained: every
+   rule is scoped under .cc-layout so nothing here leaks out,
+   and the reset block below stops anything leaking IN from
+   shared dashboard styles (this is what was causing the huge
+   blank space under every card).
+========================================================= */
+
+.cc-layout {
+  --cc-bg: #120b1c;
+  --cc-panel: #1c1228;
+  --cc-panel-2: #241632;
+  --cc-panel-3: #2b1b3a;
+
+  --cc-border: rgba(205, 164, 79, 0.20);
+  --cc-border-soft: rgba(255, 255, 255, 0.07);
+
+  --cc-gold: #e7b44f;
+  --cc-gold-light: #f2d080;
+  --cc-purple: #9b71d5;
+
+  --cc-text: #f8f1e7;
+  --cc-text-soft: #d4c9da;
+  --cc-muted: #9c8eaa;
+
+  --cc-danger: #e78378;
+  --cc-success: #7fd99a;
+
+  --cc-radius-xl: 22px;
+  --cc-radius-lg: 16px;
+  --cc-radius-md: 12px;
+  --cc-radius-sm: 9px;
+
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 10px clamp(18px, 2.5vw, 42px) 70px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 28px;
+  align-items: start;
+
+  color: var(--cc-text);
+  font-family: Inter, Manrope, Arial, sans-serif;
+  font-size: 15px;
+
+  isolation: isolate;
+}
+
+/* ---------------------------------------------------------
+   HARD RESET
+   Neutralises box model + sizing properties a global
+   dashboard stylesheet (e.g. a shared .card / stat-card
+   class, or a generic "form > div" rule) might otherwise
+   impose on these elements. Every box in this component
+   sizes to its own content, full stop.
+--------------------------------------------------------- */
+.cc-layout,
+.cc-layout * ,
+.cc-layout *::before,
+.cc-layout *::after {
+  box-sizing: border-box;
+}
+
+.cc-layout .cc-card,
+.cc-layout .cc-manifest,
+.cc-layout .cc-field,
+.cc-layout .cc-requirement-card,
+.cc-layout .cc-input,
+.cc-layout .cc-image-upload {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  flex: none !important;
+}
+
+/* .cc-field and .cc-requirement-card have no width rule of their
+   own (unlike .cc-card/.cc-manifest, which set width: 100%) — they
+   were relying on flex cross-axis stretch to fill their row. Give
+   them an explicit width so they always fill the row correctly
+   regardless of what kind of parent (flex, grid, or block) they
+   end up inside. */
+.cc-layout .cc-field,
+.cc-layout .cc-requirement-card {
+  width: 100% !important;
+}
+
+.cc-layout .cc-textarea {
+  min-height: 130px !important;
+}
+
+.cc-layout .cc-form,
+.cc-layout .cc-requirements,
+.cc-layout .cc-manifest-list {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.cc-form {
+  position: relative; /* anchors the submit-feedback overlay to the form */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+/* =========================================================
+   PANELS
+========================================================= */
+
+.cc-card {
+  position: relative;
+  width: 100%;
+  padding: 27px 29px;
+  border-radius: var(--cc-radius-xl);
+  border: 1px solid var(--cc-border);
+  background: linear-gradient(145deg, rgba(43, 27, 58, 0.98), rgba(20, 12, 30, 0.98));
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+  color: var(--cc-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cc-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cc-gold), var(--cc-purple), transparent);
+  opacity: 0.9;
+}
+
+.cc-card:hover {
+  border-color: rgba(231, 180, 79, 0.32);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.28);
+}
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.cc-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  color: var(--cc-gold-light);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.cc-eyebrow::before {
+  content: "";
+  width: 17px;
+  height: 2px;
+  border-radius: 5px;
+  background: var(--cc-gold);
+}
+
+/* =========================================================
+   FIELDS
+========================================================= */
+
+.cc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.cc-field + .cc-field {
+  margin-top: 18px;
+}
+
+.cc-label {
+  color: var(--cc-text-soft);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.cc-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 13px;
+  border-radius: var(--cc-radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(11, 7, 17, 0.72);
+  color: var(--cc-text);
+  font-family: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cc-input::placeholder {
+  color: rgba(212, 201, 218, 0.32);
+}
+
+.cc-input:hover {
+  border-color: rgba(231, 180, 79, 0.28);
+}
+
+.cc-input:focus-visible,
+.cc-input:focus {
+  outline: none;
+  border-color: var(--cc-gold);
+  background: rgba(11, 7, 17, 0.94);
+  box-shadow: 0 0 0 3px rgba(231, 180, 79, 0.10);
+}
+
+.cc-textarea {
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.cc-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  padding-right: 40px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--cc-gold-light) 50%),
+    linear-gradient(135deg, var(--cc-gold-light) 50%, transparent 50%);
+  background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.cc-select option {
+  background: #160d20;
+  color: #fff;
+}
+
+/* =========================================================
+   ROWS
+========================================================= */
+
+.cc-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  width: 100%;
+}
+
+.cc-row > .cc-field {
+  flex: 1 1 140px;
+  min-width: 0;
+}
+
+.cc-grow {
+  flex: 2 1 220px;
+  min-width: 0;
+}
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.cc-chip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cc-chip {
+  min-height: 82px;
+  padding: 13px 9px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--cc-radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 5, 13, 0.52);
+  color: var(--cc-text-soft);
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.cc-chip:hover {
+  transform: translateY(-2px);
+  border-color: rgba(231, 180, 79, 0.34);
+  background: rgba(231, 180, 79, 0.06);
+}
+
+.cc-chip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(231, 180, 79, 0.25);
+}
+
+.cc-chip-active {
+  border-color: var(--cc-gold);
+  background: linear-gradient(145deg, rgba(231, 180, 79, 0.20), rgba(231, 180, 79, 0.05));
+  color: var(--cc-gold-light);
+  box-shadow: inset 0 0 0 1px rgba(231, 180, 79, 0.06);
+}
+
+.cc-chip-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.cc-chip-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+/* =========================================================
+   REQUIREMENTS
+========================================================= */
+
+.cc-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 21px;
+}
+
+.cc-section-description {
+  max-width: 600px;
+  margin: 7px 0 0;
+  color: var(--cc-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.cc-add-btn {
+  flex-shrink: 0;
+  border: 1px dashed rgba(231, 180, 79, 0.50);
+  border-radius: 999px;
+  padding: 9px 16px;
+  background: rgba(231, 180, 79, 0.05);
+  color: var(--cc-gold-light);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.cc-add-btn:hover {
+  background: rgba(231, 180, 79, 0.12);
+  border-color: var(--cc-gold);
+}
+
+.cc-requirements {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  counter-reset: cc-req;
+}
+
+.cc-requirement-card {
+  counter-increment: cc-req;
+  padding: 18px 18px 20px;
+  border-radius: var(--cc-radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid var(--cc-gold);
+  background: rgba(9, 6, 14, 0.50);
+}
+
+.cc-requirement-card .cc-field + .cc-row {
+  margin-top: 14px;
+}
+
+.cc-requirement-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.cc-requirement-header strong {
+  color: var(--cc-text);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.cc-remove-btn {
+  border: none;
+  background: transparent;
+  color: var(--cc-danger);
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.cc-remove-btn:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* =========================================================
+   DURATION
+========================================================= */
+
+.cc-duration-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cc-duration-pill {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 5, 13, 0.52);
+  color: var(--cc-muted);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.cc-duration-pill:hover {
+  transform: translateY(-1px);
+  border-color: rgba(231, 180, 79, 0.40);
+}
+
+.cc-duration-active {
+  background: linear-gradient(135deg, var(--cc-gold-light), var(--cc-gold));
+  border-color: var(--cc-gold);
+  color: #180f1d;
+  box-shadow: 0 8px 20px rgba(231, 180, 79, 0.20);
+}
+
+/* =========================================================
+   IMAGE UPLOAD
+========================================================= */
+
+.cc-image-upload {
+  position: relative;
+}
+
+.cc-image-upload input[type="file"] {
+  cursor: pointer;
+}
+
+.cc-image-upload input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  padding: 8px 13px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(231, 180, 79, 0.14);
+  color: var(--cc-gold-light);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cc-image-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.cc-image-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--cc-radius-sm);
+  overflow: hidden;
+  border: 1px solid rgba(231, 180, 79, 0.25);
+  background: var(--cc-bg);
+}
+
+.cc-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cc-image-number {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(18, 11, 28, 0.88);
+  color: var(--cc-gold-light);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   SUBMIT FEEDBACK — overlay confirmation card shown centered
+   over the form on success/fail, instead of alert()
+========================================================= */
+
+.cc-message-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(9, 6, 14, 0.72);
+  backdrop-filter: blur(3px);
+  border-radius: var(--cc-radius-xl);
+  animation: cc-overlay-in 0.2s ease;
+}
+
+.cc-message-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 340px;
+  padding: 34px 28px 28px;
+  border-radius: var(--cc-radius-lg);
+  background: linear-gradient(155deg, rgba(43, 27, 58, 0.98), rgba(18, 11, 28, 0.98));
+  border: 1px solid var(--cc-border);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  animation: cc-message-in 0.25s ease;
+}
+
+.cc-message-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.cc-message-box.success .cc-message-icon {
+  background: rgba(127, 217, 154, 0.14);
+  color: var(--cc-success);
+}
+
+.cc-message-box.error .cc-message-icon {
+  background: rgba(231, 131, 120, 0.14);
+  color: var(--cc-danger);
+}
+
+.cc-message-title {
+  margin: 0 0 8px;
+  color: var(--cc-text);
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.cc-message-text {
+  margin: 0 0 22px;
+  max-width: 260px;
+  color: var(--cc-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.cc-message-close {
+  min-width: 130px;
+  padding: 11px 0;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cc-message-box.success .cc-message-close {
+  background: linear-gradient(135deg, var(--cc-gold-light), var(--cc-gold));
+  color: #1b101e;
+}
+
+.cc-message-box.success .cc-message-close:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(231, 180, 79, 0.3);
+}
+
+.cc-message-box.error .cc-message-close {
+  background: rgba(231, 131, 120, 0.14);
+  color: var(--cc-danger);
+  border: 1px solid rgba(231, 131, 120, 0.3);
+}
+
+.cc-message-box.error .cc-message-close:hover {
+  background: rgba(231, 131, 120, 0.22);
+}
+
+@keyframes cc-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cc-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.cc-submit-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 5px 2px 0;
+}
+
+.cc-submit-note {
+  max-width: 520px;
+  margin: 0;
+  color: var(--cc-muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.cc-submit-btn {
+  flex-shrink: 0;
+  min-width: 180px;
+  padding: 13px 24px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--cc-gold-light), var(--cc-gold));
+  color: #1b101e;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 15px 25px rgba(231, 180, 79, 0.20);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.cc-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 32px rgba(231, 180, 79, 0.30);
+}
+
+.cc-submit-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(248, 241, 231, 0.5), 0 15px 25px rgba(231, 180, 79, 0.20);
+}
+
+.cc-submit-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* =========================================================
+   LIVE CAMPAIGN SUMMARY — the Manifest
+========================================================= */
+
+.cc-manifest {
+  position: sticky;
+  top: 95px;
+  width: 100%;
+  padding: 22px;
+  border-radius: var(--cc-radius-xl);
+  border: 1px solid rgba(231, 180, 79, 0.18);
+  background: linear-gradient(155deg, rgba(43, 27, 58, 0.98), rgba(18, 11, 28, 0.98));
+  color: var(--cc-text);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.cc-manifest::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cc-gold), var(--cc-purple));
+}
+
+.cc-manifest-perf {
+  display: none;
+}
+
+.cc-manifest-body {
+  padding: 0;
+  position: relative;
+}
+
+.cc-manifest-body::after {
+  display: none;
+}
+
+.cc-manifest-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 17px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 18px;
+}
+
+.cc-manifest-title {
+  color: var(--cc-text);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.cc-manifest-sub {
+  margin-top: 4px;
+  color: var(--cc-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+.cc-manifest-seal {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, var(--cc-gold-light), var(--cc-gold));
+  color: #1a0f1d;
+  font-size: 18px;
+  font-weight: 800;
+  box-shadow: 0 8px 22px rgba(231, 180, 79, 0.18);
+  flex-shrink: 0;
+}
+
+.cc-manifest-campaign {
+  margin-bottom: 5px;
+  color: var(--cc-text);
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.cc-manifest-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+  color: var(--cc-muted);
+  font-size: 11px;
+  text-transform: capitalize;
+}
+
+.cc-manifest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.cc-manifest-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.cc-manifest-item-name {
+  color: var(--cc-text-soft);
+  font-size: 12px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.cc-manifest-item-category {
+  margin-top: 3px;
+  color: var(--cc-muted);
+  font-size: 10px;
+  text-transform: capitalize;
+}
+
+.cc-manifest-item-qty {
+  flex-shrink: 0;
+  color: var(--cc-gold-light);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cc-manifest-empty {
+  padding: 22px 10px;
+  text-align: center;
+  color: var(--cc-muted);
+  font-size: 12px;
+}
+
+.cc-manifest-stamp {
+  margin-top: 22px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(231, 180, 79, 0.15);
+  background: rgba(231, 180, 79, 0.05);
+  color: var(--cc-gold-light);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   MISC TEXT
+========================================================= */
+
+.cc-layout .text-muted {
+  color: var(--cc-muted);
+  font-size: 11px;
+  margin-top: 7px;
+  display: block;
+}
+
+.cc-layout button,
+.cc-layout input,
+.cc-layout textarea,
+.cc-layout select {
+  font-family: inherit;
+}
+
+.cc-layout h1,
+.cc-layout h2,
+.cc-layout h3,
+.cc-layout h4,
+.cc-layout h5,
+.cc-layout h6,
+.cc-layout p {
+  color: inherit;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1150px) {
+  .cc-layout {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+
+  .cc-chip-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .cc-layout {
+    grid-template-columns: 1fr;
+    padding: 8px 16px 50px;
+  }
+
+  .cc-manifest {
+    position: static;
+  }
+
+  .cc-chip-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .cc-card {
+    padding: 21px 18px;
+  }
+
+  .cc-chip-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cc-row {
+    flex-direction: column;
+  }
+
+  .cc-row > .cc-field,
+  .cc-row > .cc-grow {
+    flex-basis: 100%;
+  }
+
+  .cc-section-header {
+    flex-direction: column;
+  }
+
+  .cc-add-btn {
+    align-self: flex-start;
+  }
+
+  .cc-image-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cc-submit-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cc-submit-btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-chip,
+  .cc-submit-btn,
+  .cc-duration-pill,
+  .cc-add-btn,
+  .cc-input {
+    transition: none;
+  }
+}

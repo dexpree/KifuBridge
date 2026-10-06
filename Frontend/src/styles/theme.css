@@ -1,0 +1,27 @@
+:root {
+  /* Dashboard / app background — light, warm, easy to read */
+  --background: #f8f6f2;
+  --background-soft: #f1ede4;
+
+  /* Card surfaces sitting on top of --background */
+  --card: #ffffff;
+  --card-alt: #fffdf9;
+
+  /* Dark gradient — for splash/hero/auth pages only */
+  --bg-dusk-start: #1b1f3b;
+  --bg-dusk-mid: #2d2f5e;
+  --bg-dusk-warm: #6b3f5c;
+  --bg-dusk-end: #c96a4e;
+
+  /* Sidebar / navbar dark surface */
+  --surface-dark: #1b1f3b;
+  --surface-dark-hover: #2d2f5e;
+
+  --gold: #e8a33d;
+  --gold-bright: #facc15;
+}
+
+body {
+  background: var(--background);
+  color: #1b1f3b;
+}

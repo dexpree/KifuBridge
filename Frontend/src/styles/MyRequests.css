@@ -1,0 +1,1068 @@
+/* ============================================================
+   KIFUBRIDGE — MY REQUESTS
+   Dark Indigo + Gold Theme
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap");
+
+
+/* ============================================================
+   COLOR SYSTEM
+   ============================================================ */
+
+:root {
+  --mrq-bg: #111126;
+
+  --mrq-card: #1b1938;
+  --mrq-card-deep: #16152f;
+  --mrq-card-raised: #242044;
+
+  --mrq-border: rgba(151, 133, 205, 0.20);
+  --mrq-border-hover: rgba(232, 183, 90, 0.50);
+
+  --mrq-gold: #e8b45c;
+  --mrq-gold-bright: #ffd477;
+  --mrq-gold-soft: rgba(232, 180, 92, 0.14);
+
+  --mrq-text: #f5f3ee;
+  --mrq-text-soft: #dedbea;
+  --mrq-text-muted: #aaa5c0;
+
+  --mrq-success: #65d39a;
+  --mrq-danger: #ef7777;
+  --mrq-info: #76b9ed;
+
+  --mrq-purple: #a98be8;
+  --mrq-radius: 16px;
+}
+
+
+/* ============================================================
+   LOADING
+   ============================================================ */
+
+.mrq-loading {
+  padding: 60px 0;
+
+  text-align: center;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 0.95rem;
+
+  color: var(--mrq-text-muted);
+}
+
+
+/* ============================================================
+   TOOLBAR
+   ============================================================ */
+
+.mrq-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-bottom: 20px;
+  padding: 12px 16px;
+
+  background: rgba(27, 25, 56, 0.88);
+
+  border: 1px solid var(--mrq-border);
+  border-radius: 12px;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.20);
+
+  backdrop-filter: blur(12px);
+}
+
+
+/* Count */
+
+.mrq-toolbar-count {
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  color: var(--mrq-text-muted);
+}
+
+.mrq-toolbar-count strong {
+  color: var(--mrq-gold-bright);
+}
+
+
+/* ============================================================
+   SORT
+   ============================================================ */
+
+.mrq-sort {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.mrq-sort-label {
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+
+  color: var(--mrq-gold);
+}
+
+.mrq-sort-select {
+  min-width: 130px;
+
+  padding: 7px 12px;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+
+  color: var(--mrq-text);
+
+  background: #171630;
+
+  border: 1px solid var(--mrq-border);
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.mrq-sort-select:hover {
+  background: #1e1c3b;
+
+  border-color: rgba(232, 180, 92, 0.40);
+}
+
+.mrq-sort-select:focus {
+  outline: none;
+
+  border-color: var(--mrq-gold);
+
+  box-shadow:
+    0 0 0 3px rgba(232, 180, 92, 0.13);
+}
+
+.mrq-sort-select option {
+  background: #181632;
+  color: #f5f3ee;
+}
+
+
+/* ============================================================
+   REQUEST GRID
+   ============================================================ */
+
+/*
+   If your JSX has a wrapper around the cards, this gives
+   the cards enough breathing room.
+*/
+
+.mrq-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(420px, 1fr));
+
+  gap: 20px;
+}
+
+
+/* ============================================================
+   REQUEST CARD
+   ============================================================ */
+
+.card.request-card {
+  position: relative;
+
+  background: var(--mrq-card) !important;
+
+  color: var(--mrq-text);
+
+  border: 1px solid var(--mrq-border);
+
+  border-top: 2px solid var(--mrq-gold);
+
+  border-radius: var(--mrq-radius);
+
+  overflow: hidden;
+
+  box-shadow:
+    0 14px 34px rgba(4, 4, 18, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+  animation: mrq-card-in 0.45s ease both;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* Subtle light at the top */
+
+.card.request-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 10%;
+  right: 10%;
+
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(232, 180, 92, 0.65),
+    transparent
+  );
+
+  opacity: 0.55;
+
+  pointer-events: none;
+}
+
+
+/* Hover */
+
+.card.request-card:hover {
+  transform: translateY(-3px);
+
+  border-color: var(--mrq-border-hover);
+
+  box-shadow:
+    0 20px 42px rgba(4, 4, 18, 0.52),
+    0 0 24px rgba(232, 180, 92, 0.07);
+}
+
+
+/* Card body */
+
+.card.request-card > .card-body {
+  background: transparent !important;
+
+  color: var(--mrq-text);
+
+  padding: 18px;
+}
+
+
+/* ============================================================
+   CARD ANIMATION
+   ============================================================ */
+
+@keyframes mrq-card-in {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* ============================================================
+   CARD HEADER
+   ============================================================ */
+
+.request-card-header {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+
+/* ============================================================
+   TITLE
+   ============================================================ */
+
+.request-title {
+  margin: 0 0 9px;
+
+  font-family: "Fraunces", serif;
+
+  font-size: 1.25rem;
+  font-weight: 600;
+
+  color: var(--mrq-gold-bright);
+
+  letter-spacing: 0.01em;
+}
+
+
+/* Date */
+
+.request-date-chip {
+  flex-shrink: 0;
+
+  padding: 5px 10px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.70rem;
+  font-weight: 700;
+
+  color: var(--mrq-text-muted);
+
+  background: rgba(255, 255, 255, 0.045);
+
+  border: 1px solid var(--mrq-border);
+
+  border-radius: 999px;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   META / DESCRIPTION
+   ============================================================ */
+
+.request-meta {
+  margin-bottom: 5px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.88rem;
+  line-height: 1.55;
+
+  color: var(--mrq-text-soft);
+}
+
+.request-meta strong {
+  color: var(--mrq-text);
+
+  font-weight: 700;
+
+  margin-right: 4px;
+}
+
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+
+.request-card hr {
+  margin: 17px 0;
+
+  border: 0;
+
+  border-top:
+    1px solid rgba(174, 163, 212, 0.13);
+
+  opacity: 1;
+}
+
+
+/* ============================================================
+   DONATION GALLERY
+   ============================================================ */
+
+.donation-gallery {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+
+  margin: 15px 0;
+
+  counter-reset: donation-index;
+}
+
+.donation-thumb {
+  position: relative;
+
+  overflow: hidden;
+
+  min-height: 120px;
+
+  background: #15142c;
+
+  border: 1px solid var(--mrq-border);
+
+  border-radius: 10px;
+
+  counter-increment: donation-index;
+}
+
+
+/* Image */
+
+.donation-thumb img {
+  display: block;
+
+  width: 100%;
+  height: 130px;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+.donation-thumb:hover img {
+  transform: scale(1.045);
+
+  filter: brightness(1.06);
+}
+
+
+/* Image number */
+
+.donation-thumb::before {
+  content: counter(donation-index);
+
+  position: absolute;
+
+  top: 8px;
+  left: 8px;
+
+  z-index: 3;
+
+  width: 21px;
+  height: 21px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  color: #21182b;
+
+  background: var(--mrq-gold-bright);
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.45);
+}
+
+
+/* Image overlay */
+
+.donation-thumb::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(9, 8, 25, 0.02),
+      rgba(9, 8, 25, 0.25)
+    );
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   PROOF SECTION
+   ============================================================ */
+
+.proof-block {
+  margin: 17px 0;
+}
+
+.proof-label {
+  display: flex;
+
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 9px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.76rem;
+  font-weight: 700;
+
+  color: var(--mrq-gold-bright);
+
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.proof-img {
+  display: block;
+
+  width: 100%;
+  height: 185px;
+
+  object-fit: cover;
+
+  border: 1px solid var(--mrq-border);
+
+  border-radius: 11px;
+
+  box-shadow:
+    0 9px 25px rgba(0, 0, 0, 0.30);
+
+  cursor: zoom-in;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.proof-img:hover {
+  transform: scale(1.012);
+
+  border-color:
+    rgba(232, 180, 92, 0.45);
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.40);
+}
+
+
+/* ============================================================
+   STATUS ROW
+   ============================================================ */
+
+.status-row {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 10px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.86rem;
+
+  color: var(--mrq-text-muted);
+}
+
+.status-row strong {
+  color: var(--mrq-text);
+
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   STATUS BADGES
+   ============================================================ */
+
+.status-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 26px;
+
+  padding: 4px 11px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.70rem;
+  font-weight: 700;
+
+  letter-spacing: 0.035em;
+
+  border-radius: 999px;
+
+  border: 1px solid transparent;
+}
+
+
+/* Pending */
+
+.status-badge.badge-pending {
+  color: #ffd27a;
+
+  background:
+    rgba(232, 180, 92, 0.11);
+
+  border-color:
+    rgba(232, 180, 92, 0.30);
+}
+
+
+/* Success */
+
+.status-badge.badge-success {
+  color: var(--mrq-success);
+
+  background:
+    rgba(101, 211, 154, 0.10);
+
+  border-color:
+    rgba(101, 211, 154, 0.30);
+}
+
+
+/* Danger */
+
+.status-badge.badge-danger {
+  color: var(--mrq-danger);
+
+  background:
+    rgba(239, 119, 119, 0.10);
+
+  border-color:
+    rgba(239, 119, 119, 0.30);
+}
+
+
+/* Info */
+
+.status-badge.badge-info {
+  color: var(--mrq-info);
+
+  background:
+    rgba(118, 185, 237, 0.10);
+
+  border-color:
+    rgba(118, 185, 237, 0.30);
+}
+
+
+/* Primary */
+
+.status-badge.badge-primary {
+  color: var(--mrq-gold-bright);
+
+  background:
+    rgba(232, 180, 92, 0.10);
+
+  border-color:
+    rgba(232, 180, 92, 0.30);
+}
+
+
+/* Secondary */
+
+.status-badge.badge-secondary {
+  color: var(--mrq-purple);
+
+  background:
+    rgba(169, 139, 232, 0.10);
+
+  border-color:
+    rgba(169, 139, 232, 0.28);
+}
+
+
+/* ============================================================
+   PROGRESS TITLE
+   ============================================================ */
+
+.progress-title {
+  margin-bottom: 14px;
+
+  font-family: "Fraunces", serif;
+
+  font-size: 0.98rem;
+  font-weight: 600;
+
+  color: var(--mrq-text);
+}
+
+
+/* ============================================================
+   PROGRESS STEPPER
+   ============================================================ */
+
+.progress-stepper {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding-left: 4px;
+}
+
+.stepper-item {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-height: 34px;
+}
+
+
+/* Connector */
+
+.stepper-item::before {
+  content: "";
+
+  position: absolute;
+
+  left: 9px;
+
+  top: 27px;
+  bottom: -3px;
+
+  width: 2px;
+
+  background:
+    rgba(210, 204, 230, 0.12);
+}
+
+.stepper-item:last-child::before {
+  display: none;
+}
+
+
+/* Completed connector */
+
+.stepper-item.is-complete::before {
+  background:
+    linear-gradient(
+      180deg,
+      var(--mrq-gold),
+      rgba(232, 180, 92, 0.35)
+    );
+}
+
+
+/* Dot */
+
+.stepper-dot {
+  position: relative;
+
+  z-index: 2;
+
+  flex-shrink: 0;
+
+  width: 20px;
+  height: 20px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-size: 0.63rem;
+  font-weight: 700;
+
+  color: var(--mrq-text-muted);
+
+  background:
+    #24223e;
+
+  border:
+    1px solid rgba(210, 204, 230, 0.18);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+/* Completed dot */
+
+.stepper-item.is-complete .stepper-dot {
+  color: #251b27;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--mrq-gold-bright),
+      var(--mrq-gold)
+    );
+
+  border-color: var(--mrq-gold-bright);
+
+  box-shadow:
+    0 0 13px rgba(232, 180, 92, 0.35);
+
+  transform: scale(1.06);
+}
+
+
+/* Label */
+
+.stepper-label {
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.84rem;
+
+  color: var(--mrq-text-muted);
+
+  transition:
+    color 0.2s ease;
+}
+
+.stepper-item.is-complete .stepper-label {
+  color: var(--mrq-text);
+
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   ALERTS
+   ============================================================ */
+
+.request-card .alert {
+  margin-bottom: 14px;
+
+  padding: 13px 15px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.84rem;
+  line-height: 1.55;
+
+  color: var(--mrq-text-soft);
+
+  background:
+    rgba(10, 9, 25, 0.34);
+
+  border: 1px solid transparent;
+
+  border-left-width: 3px;
+
+  border-radius: 10px;
+}
+
+
+/* Info */
+
+.request-card .alert-info {
+  color: #dcecf9;
+
+  background:
+    rgba(118, 185, 237, 0.08);
+
+  border-color:
+    rgba(118, 185, 237, 0.25);
+
+  border-left-color:
+    var(--mrq-info);
+}
+
+
+/* Warning */
+
+.request-card .alert-warning {
+  color: #ffe8bd;
+
+  background:
+    rgba(232, 180, 92, 0.08);
+
+  border-color:
+    rgba(232, 180, 92, 0.25);
+
+  border-left-color:
+    var(--mrq-gold);
+}
+
+
+/* Success */
+
+.request-card .alert-success {
+  color: #d9f4e5;
+
+  background:
+    rgba(101, 211, 154, 0.08);
+
+  border-color:
+    rgba(101, 211, 154, 0.25);
+
+  border-left-color:
+    var(--mrq-success);
+}
+
+
+/* Danger */
+
+.request-card .alert-danger {
+  color: #ffe0e0;
+
+  background:
+    rgba(239, 119, 119, 0.08);
+
+  border-color:
+    rgba(239, 119, 119, 0.25);
+
+  border-left-color:
+    var(--mrq-danger);
+}
+
+
+/* ============================================================
+   SUCCESS BUTTON
+   ============================================================ */
+
+.request-card .btn-success {
+  padding: 10px 16px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-weight: 700;
+
+  color: #14251d;
+
+  background:
+    linear-gradient(
+      135deg,
+      #72d9a4,
+      #4dbb84
+    );
+
+  border: none;
+
+  border-radius: 9px;
+
+  box-shadow:
+    0 7px 18px rgba(101, 211, 154, 0.15);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.request-card .btn-success:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 22px rgba(101, 211, 154, 0.25);
+}
+
+
+/* ============================================================
+   BOOTSTRAP TEXT OVERRIDES
+   Prevent light-theme Bootstrap styles from destroying
+   readability inside the dark cards.
+   ============================================================ */
+
+.request-card .text-muted {
+  color: var(--mrq-text-muted) !important;
+}
+
+.request-card .text-dark {
+  color: var(--mrq-text) !important;
+}
+
+.request-card .text-body {
+  color: var(--mrq-text-soft) !important;
+}
+
+.request-card p,
+.request-card span,
+.request-card div,
+.request-card label {
+  color: inherit;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .mrq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .mrq-toolbar {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .mrq-sort {
+    justify-content: space-between;
+  }
+
+  .mrq-sort-select {
+    flex: 1;
+  }
+
+  .donation-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .request-card-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .status-row {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 5px;
+  }
+
+  .proof-img {
+    height: 170px;
+  }
+}
+
+
+@media (max-width: 420px) {
+  .card.request-card > .card-body {
+    padding: 15px;
+  }
+
+  .request-title {
+    font-size: 1.15rem;
+  }
+
+  .mrq-sort {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+}

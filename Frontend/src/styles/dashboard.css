@@ -1,0 +1,883 @@
+/* ==========================================================
+   KifuBridge Premium Dashboard
+========================================================== */
+html,
+/* ==========================================================
+   KifuBridge Premium Dashboard
+========================================================== */
+
+/* ==========================================================
+   ROOT / DOCUMENT
+========================================================== */
+
+html,
+body,
+#root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+html {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+/* ==========================================================
+   DASHBOARD WRAPPER
+========================================================== */
+
+.dashboard-layout {
+    width: 100%;
+    min-height: 100vh;
+
+    /* Important:
+       do not create an independent scrolling container */
+    overflow: visible;
+
+    position: relative;
+}
+
+
+/* ==========================================================
+   MAIN AREA
+========================================================== */
+
+.dashboard-main {
+    width: calc(
+        100% - var(--content-margin-expanded)
+    );
+
+    min-height: 100vh;
+
+    margin-left: var(--content-margin-expanded);
+
+    transition:
+        margin-left 0.45s cubic-bezier(.23,1,.32,1);
+
+    position: relative;
+
+    overflow: visible;
+}
+
+
+/* Collapsed sidebar */
+
+body.sidebar-collapsed .dashboard-main {
+    width: calc(
+        100% - var(--content-margin-collapsed)
+    );
+
+    margin-left: var(--content-margin-collapsed);
+}
+
+
+/* ==========================================================
+   MAIN CONTENT
+========================================================== */
+
+.dashboard-content {
+    width: 100%;
+
+    min-height: 100vh;
+
+    box-sizing: border-box;
+
+    position: relative;
+
+    padding:
+        120px
+        45px
+        55px;
+
+    color: var(--text-primary);
+
+    overflow: visible;
+
+    background: transparent;
+}
+
+
+/* ==========================================================
+   DASHBOARD BACKGROUND
+========================================================== */
+
+body:has(.dashboard-main) {
+    background:
+        radial-gradient(
+            circle at 1px 1px,
+            rgba(247,241,230,.05) 1px,
+            transparent 0
+        ) 0 0 / 14px 14px,
+
+        linear-gradient(
+            165deg,
+            var(--dusk-2),
+            var(--dusk-1) 55%,
+            var(--ink)
+        );
+
+    background-attachment: fixed;
+}
+
+
+/* ==========================================================
+   DASHBOARD DECORATIVE GLOWS
+========================================================== */
+
+.dashboard-content::before {
+    content: "";
+
+    position: fixed;
+
+    width: 550px;
+    height: 550px;
+
+    top: -220px;
+    left: -180px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            rgba(59,130,246,.28),
+            transparent 70%
+        );
+
+    filter: blur(100px);
+
+    animation:
+        float1 16s ease-in-out infinite;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+.dashboard-content::after {
+    content: "";
+
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    right: -160px;
+    bottom: -220px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            rgba(139,92,246,.26),
+            transparent 70%
+        );
+
+    filter: blur(110px);
+
+    animation:
+        float2 18s ease-in-out infinite;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* ==========================================================
+   IMPORTANT:
+   DO NOT FORCE EVERY DIRECT CHILD TO A PARTICULAR POSITION
+========================================================== */
+
+.dashboard-content > * {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ==========================================================
+   SPECIAL FULL-WIDTH / CUSTOM PAGES
+========================================================== */
+
+/*
+   Create Campaign has its own layout system.
+
+   Dashboard styles should only provide:
+   - sidebar
+   - navbar
+   - page background
+
+   They should NOT constrain the campaign layout.
+*/
+
+body:has(.cc-layout) .dashboard-content {
+    width: 100%;
+
+    max-width: none;
+
+    padding:
+        110px
+        clamp(20px, 3vw, 50px)
+        70px;
+
+    overflow: visible;
+}
+
+
+/* Remove dashboard decorative positioning conflicts */
+
+body:has(.cc-layout) .dashboard-content::before,
+body:has(.cc-layout) .dashboard-content::after {
+    z-index: 0;
+}
+
+
+/* Campaign container gets all available space */
+
+body:has(.cc-layout) .cc-layout {
+    width: 100%;
+
+    max-width: 1450px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ==========================================================
+   OTHER CUSTOM FULL-PAGE LAYOUTS
+   You can reuse these classes later.
+========================================================== */
+
+body:has(.full-page-layout) .dashboard-content {
+    width: 100%;
+    max-width: none;
+
+    padding:
+        110px
+        clamp(20px, 3vw, 50px)
+        70px;
+}
+
+
+/* ==========================================================
+   ANIMATIONS
+========================================================== */
+
+@keyframes float1 {
+    0%,
+    100% {
+        transform: translate(0,0);
+    }
+
+    50% {
+        transform: translate(60px,35px);
+    }
+}
+
+@keyframes float2 {
+    0%,
+    100% {
+        transform: translate(0,0);
+    }
+
+    50% {
+        transform: translate(-70px,-40px);
+    }
+}
+
+
+/* ==========================================================
+   PAGE TITLE
+========================================================== */
+
+.page-title {
+    display: inline-block;
+
+    font-size: 36px;
+
+    font-weight: 700;
+
+    margin-bottom: 28px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #ffffff 15%,
+            var(--gold) 55%,
+            var(--secondary) 90%
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+:root{
+    --primary:#3B82F6;
+    --secondary:#8B5CF6;
+    --cyan:#06B6D4;
+    --green:#22C55E;
+    --amber:#F59E0B;
+    --danger:#EF4444;
+    --gold:#e8a33d;
+
+    --glass:rgba(245, 248, 253, 0.45);
+    --glass2:rgba(17,24,39,.55);
+    --border:rgba(255,255,255,.08);
+
+    --content-margin-expanded:322px;
+    --content-margin-collapsed:122px;
+
+    /* Text on the dark page background (dashboard-content,
+       stats-card, tables, form fields, dropdowns) — must
+       stay LIGHT, since the page sits on a dark gradient. */
+    --text-primary:#F1F5F9;
+    --text-secondary:#CBD5E1;
+    --text-muted:#94A3B8;
+
+    /* Text on the newer light-glass surfaces (.card,
+       .quick-card, .activity-card) — must stay DARK, since
+       --glass is now a light frosted tint. */
+    --text-oncard:#161a24;
+    --text-oncard-secondary:rgba(22,26,36,.68);
+}
+
+/* ==========================================================
+   CONTENT SHIFT — driven by body class (set in Sidebar.jsx),
+   not a fragile CSS sibling selector
+========================================================== */
+
+body:has(.dashboard-main){
+    background:
+   radial-gradient(circle at 1px 1px, rgba(247,241,230,.05) 1px, transparent 0) 0 0/14px 14px,
+        linear-gradient(165deg, var(--dusk-2), var(--dusk-1) 55%, var(--ink));
+    background-attachment:fixed;
+}
+
+.dashboard-main{
+    margin-left:var(--content-margin-expanded);
+    transition:margin-left .45s cubic-bezier(.23,1,.32,1);
+}
+
+body.sidebar-collapsed .dashboard-main {
+    width: calc(100% - var(--content-margin-collapsed));
+    margin-left: var(--content-margin-collapsed);
+}
+
+/* ==========================================================
+   MAIN CONTENT
+========================================================== */
+
+
+
+.dashboard-content::before{
+    content:"";
+    position:absolute;
+    width:550px;
+    height:550px;
+    top:-220px;
+    left:-180px;
+    border-radius:50%;
+    background:radial-gradient(rgba(59,130,246,.28), transparent 70%);
+    filter:blur(100px);
+    animation:float1 16s ease-in-out infinite;
+    pointer-events:none;
+    z-index:0;
+}
+
+.dashboard-content::after{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    bottom:-220px;
+    right:-160px;
+    border-radius:50%;
+    background:radial-gradient(rgba(139,92,246,.26), transparent 70%);
+    filter:blur(110px);
+    animation:float2 18s ease-in-out infinite;
+    pointer-events:none;
+    z-index:0;
+}
+
+@keyframes float1{
+    0%,100%{ transform:translate(0,0); }
+    50%{ transform:translate(60px,35px); }
+}
+
+@keyframes float2{
+    0%,100%{ transform:translate(0,0); }
+    50%{ transform:translate(-70px,-40px); }
+}
+
+.dashboard-content>*{
+    position:relative;
+    z-index:2;
+}
+
+/* ==========================================================
+   PAGE TITLE
+========================================================== */
+
+.page-title{
+    display:inline-block;
+    font-size:36px;
+    font-weight:700;
+    margin-bottom:28px;
+    background: linear-gradient(100deg, #ffffff 15%, var(--gold) 55%, var(--secondary) 90%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+/* ==========================================================
+   ALL CARDS (general interaction styling shared by every
+   card type on the dashboard)
+========================================================== */
+
+.card,
+.dashboard-card,
+.stats-card,
+.quick-card,
+.activity-card{
+    cursor:pointer;
+    user-select:none;
+    transition:
+        transform .3s cubic-bezier(.25,.8,.25,1),
+        box-shadow .3s ease,
+        border-color .3s ease,
+        background-color .3s ease;
+}
+
+.card:active,
+.dashboard-card:active,
+.stats-card:active,
+.quick-card:active,
+.activity-card:active{
+    transform:scale(0.98) translateY(-2px) !important;
+}
+
+/* .card / .dashboard-card now sit on the light --glass tint,
+   so they need the dark on-card text token, not text-primary */
+.card,
+.dashboard-card{
+    background:var(--glass)!important;
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--border);
+    border-radius:24px;
+    box-shadow:0 15px 40px rgba(191, 183, 183, 0.3);
+    color:var(--text-oncard);
+    overflow:hidden;
+}
+
+.card:hover,
+.dashboard-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(59,130,246,.40);
+    box-shadow:0 20px 50px rgba(59,130,246,.18);
+}
+
+/* ==========================================================
+   STATS CARDS — background stays its own hardcoded dark
+   gradient (untouched by the --glass change), so it keeps
+   using the light text-primary token.
+========================================================== */
+
+.stats-card{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    background:linear-gradient(135deg, rgba(30,41,59,.85), rgba(17,24,39,.88));
+    padding:28px;
+    border-radius:22px;
+    border:1px solid rgba(255,255,255,.08);
+    position:relative;
+    overflow:hidden;
+}
+
+.stats-card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:4px;
+    background:linear-gradient(90deg, #3B82F6, #06B6D4);
+}
+
+.stats-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 45px rgba(59,130,246,.18);
+    border-color:rgba(255,255,255,.2);
+}
+
+.stats-card h2{
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:8px;
+    color:#FFFFFF;
+}
+
+.stats-card h3{
+    color:var(--text-primary);
+    margin-bottom:8px;
+}
+
+.stats-card p{
+    margin:0;
+    color:var(--text-secondary);
+}
+
+.stats-card-icon{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    font-size:20px;
+    margin-bottom:16px;
+    color:#fff;
+}
+
+/* Color variants — swap both the top accent bar and the icon badge */
+
+.stats-card--primary .stats-card-icon{
+    background:linear-gradient(135deg, var(--primary), var(--secondary));
+}
+.stats-card--primary::before{
+    background:linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.stats-card--warning .stats-card-icon{
+    background:linear-gradient(135deg, var(--amber), var(--gold));
+}
+.stats-card--warning::before{
+    background:linear-gradient(90deg, var(--amber), var(--gold));
+}
+
+.stats-card--info .stats-card-icon{
+    background:linear-gradient(135deg, var(--cyan), var(--primary));
+}
+.stats-card--info::before{
+    background:linear-gradient(90deg, var(--cyan), var(--primary));
+}
+
+.stats-card--success .stats-card-icon{
+    background:linear-gradient(135deg, var(--green), #16a34a);
+}
+.stats-card--success::before{
+    background:linear-gradient(90deg, var(--green), #16a34a);
+}
+
+/* ==========================================================
+   QUICK ACTIONS
+   Each quick-action card gets its own hue via a modifier
+   class (e.g. quick-card--success). Card now sits on the
+   light --glass tint, so all its text uses the dark
+   on-card tokens, not text-primary/text-secondary.
+========================================================== */
+
+.quick-card{
+    background:var(--glass);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:24px;
+    color:var(--text-oncard);
+}
+
+.quick-card-icon{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    font-size:19px;
+    margin-bottom:14px;
+    color:#fff; /* glyph sits on a colored gradient badge, not the card itself — keep white for contrast against every variant */
+    background:linear-gradient(135deg, var(--cyan), var(--primary)); /* fallback if no variant is set */
+}
+
+.quick-card h1, .quick-card h2, .quick-card h3, .quick-card h4{
+    color:var(--text-oncard); /* neutral fallback heading color */
+}
+
+.quick-card p, .quick-card span{
+    color:var(--text-oncard-secondary);
+}
+
+.quick-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(255,255,255,.24);
+    background:rgba(255,255,255,.04);
+    box-shadow:0 15px 35px rgba(0,0,0,.22);
+}
+
+/* --- Variants: assign one of these classes per action card --- */
+
+.quick-card--primary .quick-card-icon{
+    background:linear-gradient(135deg, var(--primary), var(--secondary));
+}
+.quick-card--primary h1, .quick-card--primary h2,
+.quick-card--primary h3, .quick-card--primary h4{
+    color:var(--primary);
+}
+.quick-card--primary:hover{
+    border-color:rgba(59,130,246,.45);
+    background:rgba(59,130,246,.10);
+    box-shadow:0 15px 35px rgba(59,130,246,.18);
+}
+
+.quick-card--secondary .quick-card-icon{
+    background:linear-gradient(135deg, var(--secondary), #7c3aed);
+}
+.quick-card--secondary h1, .quick-card--secondary h2,
+.quick-card--secondary h3, .quick-card--secondary h4{
+    color:var(--secondary);
+}
+.quick-card--secondary:hover{
+    border-color:rgba(139,92,246,.45);
+    background:rgba(139,92,246,.10);
+    box-shadow:0 15px 35px rgba(139,92,246,.18);
+}
+
+.quick-card--info .quick-card-icon{
+    background:linear-gradient(135deg, var(--cyan), var(--primary));
+}
+.quick-card--info h1, .quick-card--info h2,
+.quick-card--info h3, .quick-card--info h4{
+    color:var(--cyan);
+}
+.quick-card--info:hover{
+    border-color:rgba(6,182,212,.45);
+    background:rgba(6,182,212,.10);
+    box-shadow:0 15px 35px rgba(6,182,212,.18);
+}
+
+.quick-card--success .quick-card-icon{
+    background:linear-gradient(135deg, var(--green), #16a34a);
+}
+.quick-card--success h1, .quick-card--success h2,
+.quick-card--success h3, .quick-card--success h4{
+    color:var(--green);
+}
+.quick-card--success:hover{
+    border-color:rgba(34,197,94,.45);
+    background:rgba(34,197,94,.10);
+    box-shadow:0 15px 35px rgba(34,197,94,.18);
+}
+
+.quick-card--warning .quick-card-icon{
+    background:linear-gradient(135deg, var(--amber), var(--gold));
+}
+.quick-card--warning h1, .quick-card--warning h2,
+.quick-card--warning h3, .quick-card--warning h4{
+    color:var(--amber);
+}
+.quick-card--warning:hover{
+    border-color:rgba(245,158,11,.45);
+    background:rgba(245,158,11,.10);
+    box-shadow:0 15px 35px rgba(245,158,11,.18);
+}
+
+.quick-card--danger .quick-card-icon{
+    background:linear-gradient(135deg, var(--danger), #b91c1c);
+}
+.quick-card--danger h1, .quick-card--danger h2,
+.quick-card--danger h3, .quick-card--danger h4{
+    color:var(--danger);
+}
+.quick-card--danger:hover{
+    border-color:rgba(239,68,68,.45);
+    background:rgba(239,68,68,.10);
+    box-shadow:0 15px 35px rgba(239,68,68,.18);
+}
+
+/* ==========================================================
+   RECENT ACTIVITY — also sits on the light --glass tint now,
+   so it needs its own dark on-card text throughout.
+========================================================== */
+
+.activity-card{
+    background:var(--glass);
+    border-radius:24px;
+    border:1px solid var(--border);
+    padding:24px;
+    color:var(--text-oncard);
+}
+
+.activity-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--secondary);
+    box-shadow:0 15px 35px rgba(139,92,246,.12);
+}
+
+.activity-card h3, .activity-card h4{
+    color:var(--secondary); /* deep violet accent, readable on light glass */
+}
+
+.activity-item{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:18px 0;
+    border-bottom:1px solid rgba(0,0,0,.08);
+}
+
+.activity-item:last-child{
+    border:none;
+}
+
+.activity-item p{
+    color:var(--text-oncard-secondary);
+}
+
+.activity-item small{
+    color:#7c3aed !important; /* deep purple — readable on light glass, still reads as the "activity" accent */
+}
+
+/* ==========================================================
+   TABLES — unaffected by the glass change, still sit
+   directly on the dark page background.
+========================================================== */
+
+.table{
+    color:var(--text-primary);
+}
+
+.table td,
+.table th{
+    border-color:rgba(255,255,255,.08);
+    color:var(--text-primary);
+}
+
+.table th{
+    color:var(--gold); /* standout column headers */
+}
+
+/* ==========================================================
+   FORMS — unaffected by the glass change.
+========================================================== */
+
+.form-control,
+.form-select{
+    background:rgba(15,23,42,.70);
+    border:1px solid rgba(255,255,255,.08);
+    color:var(--text-primary);
+}
+
+.form-control:focus,
+.form-select:focus{
+    background:rgba(15,23,42,.90);
+    border-color:#3B82F6;
+    box-shadow:none;
+    color:var(--text-primary);
+}
+
+.form-control::placeholder{
+    color:var(--text-muted);
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.btn-primary{
+    background:#2563EB;
+    border:none;
+    cursor:pointer;
+    transition:background .2s, transform .1s;
+}
+
+.btn-primary:hover{
+    background:#1D4ED8;
+}
+
+.btn-primary:active{
+    transform:scale(0.96);
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#334155;
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0F172A;
+}
+
+/* ==========================================================
+   TEXT VISIBILITY RULES
+========================================================== */
+
+.dashboard-content .text-muted,
+.dashboard-content small{
+    color:var(--text-muted)!important;
+}
+
+.dashboard-content .dropdown-menu,
+.dashboard-content select,
+.dashboard-content option{
+    background:#0F172A;
+    color:var(--text-primary);
+}
+
+.dashboard-content .dropdown-item{
+    color:var(--text-primary);
+}
+
+.dashboard-content .dropdown-item:hover,
+.dashboard-content .dropdown-item:focus{
+    background:rgba(59,130,246,.18);
+    color:#fff;
+}
+
+.dashboard-content .badge{
+    color:#fff;
+}
+
+.dashboard-content a{
+    color:var(--cyan);
+    transition:color .2s;
+}
+
+.dashboard-content a:hover{
+    color:var(--primary);
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:992px){
+    .dashboard-main{
+        margin-left:0;
+    }
+    .dashboard-content{
+        padding:95px 20px 20px;
+    }
+    .page-title{
+        font-size:28px;
+    }
+    .stats-card h2{
+        font-size:32px;
+    }
+}

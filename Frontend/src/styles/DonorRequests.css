@@ -1,0 +1,1166 @@
+/* ============================================================
+   DONATION REQUESTS
+   DARK AUBERGINE + GOLD THEME
+============================================================ */
+
+
+/* ============================================================
+   PAGE
+============================================================ */
+
+.dr-page {
+  width: 100%;
+  min-height: 100vh;
+
+  color: #f7f0e3;
+
+  font-family: "Manrope", sans-serif;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+============================================================ */
+
+.dr-empty {
+  padding: 60px 20px;
+
+  text-align: center;
+
+  color: #d9cfbf !important;
+
+  background:
+    rgba(25, 12, 42, 0.35) !important;
+
+  border:
+    1px dashed rgba(212, 175, 106, 0.28) !important;
+
+  border-radius: 16px;
+
+  font-family: "Manrope", sans-serif;
+}
+
+
+/* ============================================================
+   GRID
+============================================================ */
+
+.dr-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(380px, 1fr));
+
+  gap: 22px;
+}
+
+
+/* ============================================================
+   CARD
+   NO WHITE BACKGROUND
+============================================================ */
+
+.dr-card {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 560px;
+
+  padding: 22px 22px 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(43, 27, 61, 0.72),
+      rgba(24, 12, 40, 0.58)
+    ) !important;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.20) !important;
+
+  border-radius: 18px;
+
+  color: #f7f0e3 !important;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.28);
+
+  backdrop-filter: blur(8px);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* subtle top gold line */
+
+.dr-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 8%;
+
+  width: 84%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(212, 175, 106, 0.55),
+      transparent
+    );
+}
+
+
+.dr-card:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(212, 175, 106, 0.42) !important;
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.38),
+    0 0 25px rgba(212, 175, 106, 0.05);
+}
+
+
+/* ============================================================
+   CARD HEAD
+============================================================ */
+
+.dr-card-head {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+}
+
+
+.dr-item-name {
+  margin: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #fff8eb !important;
+
+  font-family: "Fraunces", serif;
+
+  font-size: 1.15rem;
+
+  font-weight: 600;
+}
+
+
+.dr-item-name i {
+  color: #e7c982 !important;
+
+  font-size: 1rem;
+}
+
+
+.dr-head-meta {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.dr-head-qty {
+  color: #d8cdbc !important;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.8rem;
+
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   STATUS BANNER
+============================================================ */
+
+.dr-status-banner {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  width: fit-content;
+
+  padding: 6px 14px;
+
+  margin-bottom: 16px;
+
+  border-radius: 999px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.78rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.03em;
+}
+
+
+/* Pending */
+
+.dr-status-banner--pending {
+  color: #f1c56e !important;
+
+  background:
+    rgba(224, 181, 98, 0.10);
+
+  border:
+    1px solid rgba(224, 181, 98, 0.28);
+}
+
+
+/* Approved */
+
+.dr-status-banner--approved {
+  color: #7fd49a !important;
+
+  background:
+    rgba(112, 194, 138, 0.10);
+
+  border:
+    1px solid rgba(112, 194, 138, 0.28);
+}
+
+
+/* Rejected */
+
+.dr-status-banner--rejected {
+  color: #ed8a7d !important;
+
+  background:
+    rgba(223, 121, 108, 0.10);
+
+  border:
+    1px solid rgba(223, 121, 108, 0.28);
+}
+
+
+/* Completed */
+
+.dr-status-banner--completed {
+  color: #82cda1 !important;
+
+  background:
+    rgba(112, 194, 138, 0.10);
+
+  border:
+    1px solid rgba(112, 194, 138, 0.28);
+}
+
+
+/* ============================================================
+   NGO DOCKET
+============================================================ */
+
+.dr-docket {
+  background:
+    rgba(18, 9, 30, 0.38) !important;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.20) !important;
+
+  border-radius: 12px;
+
+  padding: 14px 16px;
+
+  margin-bottom: 16px;
+
+  color: #f7f0e3 !important;
+}
+
+
+.dr-docket-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 10px;
+
+  color: #e7c982 !important;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.78rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+}
+
+
+.dr-docket-title i {
+  color: #e7c982 !important;
+}
+
+
+.dr-docket-main {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 8px;
+
+  color: #fff8eb !important;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.95rem;
+
+  font-weight: 700;
+}
+
+
+.dr-docket-rows {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 6px 12px;
+
+  color: #d9cfbf !important;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.83rem;
+}
+
+
+.dr-docket-rows span {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  min-width: 0;
+
+  color: #d9cfbf !important;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+.dr-docket-rows i {
+  flex-shrink: 0;
+
+  color: #d4af6a !important;
+
+  font-size: 0.85rem;
+}
+
+
+.dr-docket-row--full {
+  grid-column: 1 / -1;
+
+  white-space: normal !important;
+}
+
+
+/* ============================================================
+   DELIVERY META
+============================================================ */
+
+.dr-meta-row {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+
+.dr-meta-item {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+
+.dr-meta-label {
+  color: #bdb2a2 !important;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.72rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   BADGES
+============================================================ */
+
+.dr-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  width: fit-content;
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.75rem;
+
+  font-weight: 600;
+}
+
+
+/* Category */
+
+.dr-badge--category {
+  color: #e7c982 !important;
+
+  background:
+    rgba(212, 175, 106, 0.09);
+
+  border:
+    1px solid rgba(212, 175, 106, 0.20);
+}
+
+
+/* Soft */
+
+.dr-badge--soft {
+  color: #d8cdbc !important;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* Method */
+
+.dr-badge--method {
+  color: #b8d4ff !important;
+
+  background:
+    rgba(59, 130, 246, 0.10);
+
+  border:
+    1px solid rgba(59, 130, 246, 0.18);
+}
+
+
+/* Neutral */
+
+.dr-badge--neutral {
+  color: #d5ccbf !important;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  font-size: 0.7rem;
+
+  letter-spacing: 0.03em;
+}
+
+
+/* Success */
+
+.dr-badge--success {
+  color: #82d59b !important;
+
+  background:
+    rgba(112, 194, 138, 0.10);
+
+  border:
+    1px solid rgba(112, 194, 138, 0.20);
+}
+
+
+/* ============================================================
+   ACTION ZONE
+============================================================ */
+
+.dr-action-zone {
+  margin-top: auto;
+
+  padding-top: 16px;
+
+  border-top:
+    1px dashed rgba(212, 175, 106, 0.20);
+}
+
+
+.dr-action-row {
+  display: flex;
+
+  gap: 10px;
+}
+
+
+.dr-btn {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 11px 16px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.88rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+
+/* ============================================================
+   ACCEPT
+============================================================ */
+
+.dr-btn--accept {
+  flex: 1;
+
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #28c76f,
+      #159447
+    );
+}
+
+
+.dr-btn--accept:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(34, 197, 94, 0.25);
+
+  filter: brightness(1.05);
+}
+
+
+/* ============================================================
+   REJECT
+============================================================ */
+
+.dr-btn--reject {
+  flex: 1;
+
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e95c52,
+      #b92f2f
+    );
+}
+
+
+.dr-btn--reject:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(239, 68, 68, 0.25);
+
+  filter: brightness(1.05);
+}
+
+
+/* ============================================================
+   ASSIGN VOLUNTEER
+============================================================ */
+
+.dr-btn--assign {
+  width: 100%;
+
+  margin-top: 12px;
+
+  color: #160c1f !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e6c477,
+      #c99a4d
+    );
+}
+
+
+.dr-btn--assign:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(212, 175, 106, 0.25);
+}
+
+
+.dr-btn--assign:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* ============================================================
+   NOTICES
+============================================================ */
+
+.dr-notice {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 12px 14px;
+
+  border-radius: 10px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.85rem;
+}
+
+
+.dr-notice--info {
+  color: #a9c9ff !important;
+
+  background:
+    rgba(59, 130, 246, 0.08);
+
+  border:
+    1px solid rgba(59, 130, 246, 0.16);
+}
+
+
+.dr-notice--warning {
+  color: #e8c478 !important;
+
+  background:
+    rgba(224, 181, 98, 0.08);
+
+  border:
+    1px solid rgba(224, 181, 98, 0.16);
+}
+
+
+.dr-notice--danger {
+  color: #ed8a7d !important;
+
+  background:
+    rgba(223, 121, 108, 0.08);
+
+  border:
+    1px solid rgba(223, 121, 108, 0.16);
+}
+
+
+/* ============================================================
+   VOLUNTEER SECTION
+============================================================ */
+
+.dr-subheading {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 12px;
+
+  color: #fff8eb !important;
+
+  font-family: "Fraunces", serif;
+
+  font-size: 1rem;
+}
+
+
+.dr-subheading i {
+  color: #d4af6a !important;
+}
+
+
+/* ============================================================
+   VOLUNTEER GRID
+============================================================ */
+
+.dr-volunteer-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+}
+
+
+/* ============================================================
+   VOLUNTEER CARD
+============================================================ */
+
+.dr-volunteer-card {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  padding: 14px;
+
+  text-align: left;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.16);
+
+  border-radius: 12px;
+
+  background:
+    rgba(18, 9, 30, 0.42) !important;
+
+  color: #f7f0e3 !important;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.dr-volunteer-card:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(212, 175, 106, 0.38);
+
+  background:
+    rgba(212, 175, 106, 0.06) !important;
+}
+
+
+.dr-volunteer-card.is-selected {
+  border-color:
+    #d4af6a;
+
+  background:
+    rgba(212, 175, 106, 0.10) !important;
+
+  box-shadow:
+    0 0 0 3px rgba(212, 175, 106, 0.08);
+}
+
+
+/* ============================================================
+   VOLUNTEER CHECK
+============================================================ */
+
+.dr-volunteer-check {
+  position: absolute;
+
+  top: 10px;
+
+  right: 10px;
+
+  color: #d4af6a !important;
+
+  font-size: 1.1rem;
+}
+
+
+/* ============================================================
+   VOLUNTEER NAME
+============================================================ */
+
+.dr-volunteer-name {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding-right: 20px;
+
+  color: #fff8eb !important;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.92rem;
+
+  font-weight: 700;
+}
+
+
+.dr-volunteer-name i {
+  color: #d4af6a !important;
+}
+
+
+/* ============================================================
+   VOLUNTEER DETAILS
+============================================================ */
+
+.dr-volunteer-rows {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  color: #cfc4b5 !important;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.78rem;
+}
+
+
+.dr-volunteer-rows span {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #cfc4b5 !important;
+}
+
+
+.dr-volunteer-rows i {
+  flex-shrink: 0;
+
+  color: #a99b89 !important;
+
+  font-size: 0.8rem;
+}
+
+
+/* ============================================================
+   VOLUNTEER VEHICLE
+============================================================ */
+
+.dr-volunteer-vehicle {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding-top: 8px;
+
+  border-top:
+    1px dashed rgba(212, 175, 106, 0.14);
+
+  color: #cfc4b5 !important;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.76rem;
+}
+
+
+.dr-volunteer-vehicle span {
+  color: #cfc4b5 !important;
+}
+
+
+.dr-volunteer-vehicle i {
+  color: #d4af6a !important;
+}
+
+
+/* ============================================================
+   ASSIGNED VOLUNTEER
+============================================================ */
+
+.dr-confirm-card {
+  padding: 16px;
+
+  border:
+    1px solid rgba(112, 194, 138, 0.30);
+
+  border-radius: 12px;
+
+  background:
+    rgba(46, 122, 70, 0.07) !important;
+
+  color: #f7f0e3 !important;
+}
+
+
+.dr-confirm-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 10px;
+
+  color: #7fd49a !important;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.9rem;
+
+  font-weight: 700;
+}
+
+
+.dr-confirm-rows {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 8px 14px;
+
+  margin-bottom: 10px;
+
+  color: #eee5d7 !important;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.82rem;
+}
+
+
+.dr-confirm-rows strong {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: #a99d8e !important;
+
+  font-size: 0.68rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   IMPORTANT TEXT OVERRIDES
+   Prevent Bootstrap/global CSS from making text dark
+============================================================ */
+
+.dr-card p,
+.dr-card span,
+.dr-card small,
+.dr-card label,
+.dr-card div {
+  color: inherit;
+}
+
+
+.dr-card .text-muted {
+  color: #c9beaf !important;
+}
+
+
+.dr-card strong {
+  color: #fff8eb !important;
+}
+
+
+.dr-card h1,
+.dr-card h2,
+.dr-card h3,
+.dr-card h4,
+.dr-card h5,
+.dr-card h6 {
+  color: #fff8eb !important;
+}
+
+
+/* ============================================================
+   BOOTSTRAP CARD OVERRIDE
+============================================================ */
+
+.dr-card.card,
+.dr-card .card,
+.dr-card .card-body {
+  background:
+    transparent !important;
+
+  color: #f7f0e3 !important;
+}
+
+
+/* Remove Bootstrap white backgrounds */
+
+.dr-card .bg-light,
+.dr-card .bg-white {
+  background:
+    rgba(18, 9, 30, 0.38) !important;
+
+  color: #f7f0e3 !important;
+}
+
+
+/* ============================================================
+   PAGE HEADER TEXT
+============================================================ */
+
+.dr-page h1,
+.dr-page h2 {
+  color: #fff8eb !important;
+}
+
+
+/* If PageHeader doesn't have dr-page wrapper */
+
+.dr-grid ~ * h1,
+.dr-grid ~ * h2 {
+  color: #fff8eb !important;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 900px) {
+
+  .dr-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 560px) {
+
+  .dr-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dr-card {
+    padding: 18px;
+
+    min-height: auto;
+  }
+
+  .dr-docket-rows {
+    grid-template-columns: 1fr;
+  }
+
+  .dr-meta-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dr-volunteer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dr-confirm-rows {
+    grid-template-columns: 1fr;
+  }
+
+  .dr-action-row {
+    flex-direction: column;
+  }
+
+  .dr-btn--accept,
+  .dr-btn--reject {
+    width: 100%;
+  }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .dr-card,
+  .dr-btn,
+  .dr-volunteer-card {
+    transition: none;
+  }
+
+}

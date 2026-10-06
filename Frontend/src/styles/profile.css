@@ -1,0 +1,1184 @@
+/* ============================================================
+   KifuBridge — Profile
+   Dark Indigo / Navy + Gold Dashboard Theme
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap");
+
+
+/* ============================================================
+   COLOR SYSTEM
+   ============================================================ */
+
+:root {
+  --profile-bg: #111126;
+
+  --profile-card: #191936;
+  --profile-card-2: #1d1b3d;
+  --profile-card-raised: #242247;
+
+  --profile-input: #12132b;
+  --profile-input-hover: #171735;
+
+  --profile-border: rgba(161, 151, 211, 0.20);
+  --profile-border-light: rgba(190, 181, 229, 0.14);
+
+  --profile-gold: #e8b45c;
+  --profile-gold-bright: #ffd477;
+  --profile-gold-soft: rgba(232, 180, 92, 0.12);
+
+  --profile-text: #f7f4ed;
+  --profile-text-soft: #ddd9e8;
+  --profile-text-muted: #aaa6bf;
+
+  --profile-success: #63d39a;
+  --profile-danger: #ef7777;
+  --profile-blue: #76b8ec;
+  --profile-purple: #ad91e9;
+
+  --profile-radius: 16px;
+}
+
+
+/* ============================================================
+   MAIN PROFILE WRAPPER
+   ============================================================ */
+
+.profile-wrap {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 4px 0 45px;
+
+  font-family: "Manrope", sans-serif;
+
+  color: var(--profile-text);
+}
+
+
+/* ============================================================
+   LOADING
+   ============================================================ */
+
+.profile-loading {
+  min-height: 260px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.95rem;
+
+  color: var(--profile-text-muted);
+}
+
+
+/* ============================================================
+   COMMON DASHBOARD CARD
+   ============================================================ */
+
+.profile-wrap .dashboard-card {
+  position: relative;
+
+  margin-bottom: 20px;
+
+  padding: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #1e1c40 0%,
+      #191836 52%,
+      #15142e 100%
+    );
+
+  border: 1px solid var(--profile-border);
+
+  border-radius: var(--profile-radius);
+
+  box-shadow:
+    0 14px 35px rgba(4, 4, 18, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+  color: var(--profile-text);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* subtle top glow */
+
+.profile-wrap .dashboard-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 10%;
+  right: 10%;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(232, 180, 92, 0.55),
+      transparent
+    );
+
+  opacity: 0.5;
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   IDENTITY CARD
+   ============================================================ */
+
+.profile-identity {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  padding: 32px 24px !important;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(110, 92, 180, 0.22),
+      transparent 55%
+    ),
+    linear-gradient(
+      145deg,
+      #211f46,
+      #181734
+    ) !important;
+
+  border-top:
+    2px solid var(--profile-gold) !important;
+}
+
+
+/* ============================================================
+   AVATAR
+   ============================================================ */
+
+.profile-avatar {
+  width: 105px;
+  height: 105px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 16px;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #3c386c,
+      #242148
+    );
+
+  border:
+    3px solid rgba(255, 212, 119, 0.75);
+
+  box-shadow:
+    0 0 0 5px rgba(232, 180, 92, 0.08),
+    0 12px 28px rgba(0, 0, 0, 0.35);
+
+  color: var(--profile-gold-bright);
+
+  font-family: "Fraunces", serif;
+
+  font-size: 2.2rem;
+  font-weight: 600;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.profile-avatar:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 0 6px rgba(232, 180, 92, 0.10),
+    0 15px 32px rgba(0, 0, 0, 0.40);
+}
+
+
+/* Avatar image */
+
+.profile-avatar-img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* Name */
+
+.profile-identity h3 {
+  margin: 0 0 9px;
+
+  font-family: "Fraunces", serif;
+
+  font-size: 1.45rem;
+  font-weight: 600;
+
+  color: var(--profile-text);
+
+  letter-spacing: 0.01em;
+}
+
+
+/* ============================================================
+   ROLE BADGE
+   ============================================================ */
+
+.profile-role-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 28px;
+
+  padding: 5px 13px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(232, 180, 92, 0.11);
+
+  border:
+    1px solid rgba(232, 180, 92, 0.32);
+
+  color: var(--profile-gold-bright);
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.70rem;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* ============================================================
+   MESSAGE
+   ============================================================ */
+
+.profile-message {
+  width: 100%;
+
+  max-width: 620px;
+
+  margin-top: 18px;
+
+  padding: 11px 14px;
+
+  border-radius: 10px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.82rem;
+  line-height: 1.5;
+
+  text-align: left;
+
+  border-left: 3px solid;
+}
+
+
+/* Success */
+
+.profile-message.success {
+  color: #d9f5e5;
+
+  background:
+    rgba(99, 211, 154, 0.09);
+
+  border-color:
+    rgba(99, 211, 154, 0.28);
+
+  border-left-color:
+    var(--profile-success);
+}
+
+
+/* Error */
+
+.profile-message.error {
+  color: #ffe0e0;
+
+  background:
+    rgba(239, 119, 119, 0.09);
+
+  border-color:
+    rgba(239, 119, 119, 0.28);
+
+  border-left-color:
+    var(--profile-danger);
+}
+
+
+/* ============================================================
+   SECTION
+   ============================================================ */
+
+.profile-section {
+  animation:
+    profile-section-in 0.4s ease both;
+}
+
+
+@keyframes profile-section-in {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* ============================================================
+   SECTION TITLE
+   ============================================================ */
+
+.profile-section-title {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  margin: 0 0 22px;
+
+  padding-bottom: 13px;
+
+  font-family: "Fraunces", serif;
+
+  font-size: 1.18rem;
+  font-weight: 600;
+
+  color: var(--profile-gold-bright);
+
+  letter-spacing: 0.01em;
+
+  border-bottom:
+    1px solid rgba(232, 180, 92, 0.15);
+}
+
+
+/* Gold line */
+
+.profile-section-title::before {
+  content: "";
+
+  width: 4px;
+  height: 22px;
+
+  margin-right: 10px;
+
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--profile-gold-bright),
+      var(--profile-gold)
+    );
+
+  box-shadow:
+    0 0 10px rgba(232, 180, 92, 0.20);
+}
+
+
+/* ============================================================
+   FORM ROW
+   ============================================================ */
+
+.profile-row {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 18px;
+}
+
+
+/* ============================================================
+   FORM FIELD
+   ============================================================ */
+
+.profile-field {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  margin-bottom: 18px;
+}
+
+
+/* Remove bottom margin for fields inside rows */
+
+.profile-row .profile-field {
+  margin-bottom: 0;
+}
+
+
+/* ============================================================
+   LABEL
+   ============================================================ */
+
+.profile-field label {
+  margin-bottom: 7px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  color: var(--profile-text-soft);
+
+  letter-spacing: 0.015em;
+}
+
+
+/* ============================================================
+   INPUT / SELECT / TEXTAREA
+   ============================================================ */
+
+.profile-field input,
+.profile-field select,
+.profile-field textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 11px 13px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.86rem;
+  font-weight: 500;
+
+  line-height: 1.45;
+
+  color: var(--profile-text);
+
+  background:
+    rgba(10, 11, 31, 0.72);
+
+  border:
+    1px solid rgba(166, 157, 211, 0.20);
+
+  border-radius: 9px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+
+/* Placeholder */
+
+.profile-field input::placeholder,
+.profile-field textarea::placeholder {
+  color:
+    rgba(190, 185, 210, 0.43);
+}
+
+
+/* Focus */
+
+.profile-field input:focus,
+.profile-field select:focus,
+.profile-field textarea:focus {
+  border-color:
+    rgba(232, 180, 92, 0.72);
+
+  background:
+    rgba(16, 16, 39, 0.95);
+
+  box-shadow:
+    0 0 0 3px rgba(232, 180, 92, 0.10),
+    0 5px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Hover */
+
+.profile-field input:hover,
+.profile-field select:hover,
+.profile-field textarea:hover {
+  border-color:
+    rgba(166, 157, 211, 0.34);
+}
+
+
+/* ============================================================
+   TEXTAREA
+   ============================================================ */
+
+.profile-field textarea {
+  min-height: 90px;
+
+  resize: vertical;
+}
+
+
+/* ============================================================
+   SELECT
+   ============================================================ */
+
+.profile-field select {
+  cursor: pointer;
+
+  appearance: auto;
+}
+
+
+/* Select options */
+
+.profile-field select option {
+  background: #181733;
+
+  color: var(--profile-text);
+}
+
+
+/* ============================================================
+   DISABLED INPUT
+   ============================================================ */
+
+.profile-field input:disabled,
+.profile-field select:disabled {
+  color:
+    rgba(232, 228, 239, 0.62) !important;
+
+  background:
+    rgba(10, 10, 27, 0.52) !important;
+
+  border-color:
+    rgba(151, 144, 188, 0.13) !important;
+
+  cursor: not-allowed;
+
+  opacity: 1;
+}
+
+
+/* ============================================================
+   INVALID INPUT
+   ============================================================ */
+
+.profile-field input.invalid,
+.profile-field select.invalid,
+.profile-field textarea.invalid {
+  border-color:
+    rgba(239, 119, 119, 0.70);
+
+  background:
+    rgba(80, 26, 36, 0.20);
+
+  box-shadow:
+    0 0 0 3px rgba(239, 119, 119, 0.07);
+}
+
+
+/* ============================================================
+   ERROR TEXT
+   ============================================================ */
+
+.profile-error {
+  display: block;
+
+  margin-top: 6px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.72rem;
+  font-weight: 600;
+
+  line-height: 1.4;
+
+  color:
+    #f18a8a;
+}
+
+
+/* ============================================================
+   DOCUMENT GRID
+   ============================================================ */
+
+.profile-doc-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+
+/* ============================================================
+   DOCUMENT SLOT
+   ============================================================ */
+
+.profile-doc-slot {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(37, 34, 70, 0.78),
+      rgba(20, 19, 43, 0.82)
+    );
+
+  border:
+    1px solid var(--profile-border);
+
+  border-radius: 12px;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.profile-doc-slot:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(232, 180, 92, 0.34);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.20);
+}
+
+
+/* ============================================================
+   DOCUMENT LABEL
+   ============================================================ */
+
+.profile-doc-label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.80rem;
+  font-weight: 700;
+
+  color: var(--profile-text-soft);
+
+  line-height: 1.4;
+}
+
+
+/* ============================================================
+   DOCUMENT PREVIEW
+   ============================================================ */
+
+.profile-doc-preview-area {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  min-height: 125px;
+
+  margin-bottom: 12px;
+
+  overflow: hidden;
+
+  background:
+    rgba(8, 8, 25, 0.55);
+
+  border:
+    1px solid rgba(163, 154, 207, 0.14);
+
+  border-radius: 9px;
+}
+
+
+/* Image */
+
+.profile-doc-preview {
+  display: block;
+
+  width: 100%;
+  height: 125px;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+
+.profile-doc-preview:hover {
+  transform: scale(1.025);
+
+  filter: brightness(1.08);
+}
+
+
+/* ============================================================
+   PDF LINK
+   ============================================================ */
+
+.profile-doc-pdf-link {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 42px;
+
+  padding: 9px 15px;
+
+  color:
+    var(--profile-gold-bright) !important;
+
+  background:
+    rgba(232, 180, 92, 0.09);
+
+  border:
+    1px solid rgba(232, 180, 92, 0.25);
+
+  border-radius: 8px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.80rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.profile-doc-pdf-link:hover {
+  color:
+    #ffe09a !important;
+
+  background:
+    rgba(232, 180, 92, 0.15);
+
+  border-color:
+    rgba(232, 180, 92, 0.45);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* ============================================================
+   UPLOAD / REPLACE BUTTON
+   ============================================================ */
+
+.profile-doc-upload {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  min-height: 39px;
+
+  box-sizing: border-box;
+
+  padding: 8px 12px;
+
+  color:
+    var(--profile-text-soft);
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  border:
+    1px dashed rgba(171, 162, 211, 0.30);
+
+  border-radius: 8px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.77rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.profile-doc-upload:hover {
+  color:
+    var(--profile-gold-bright);
+
+  background:
+    rgba(232, 180, 92, 0.07);
+
+  border-color:
+    rgba(232, 180, 92, 0.50);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* ============================================================
+   SAVE BUTTON
+   ============================================================ */
+
+.profile-save {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  min-height: 48px;
+
+  margin-top: 4px;
+
+  padding: 12px 20px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  font-family: "Manrope", sans-serif;
+
+  font-size: 0.88rem;
+  font-weight: 700;
+
+  letter-spacing: 0.01em;
+
+  color: #241c26;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffd477 0%,
+      #e8b45c 100%
+    );
+
+  box-shadow:
+    0 9px 24px rgba(232, 180, 92, 0.16);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+
+.profile-save:hover:not(:disabled) {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 13px 28px rgba(232, 180, 92, 0.25);
+
+  filter:
+    brightness(1.04);
+}
+
+
+.profile-save:active:not(:disabled) {
+  transform:
+    translateY(0);
+}
+
+
+.profile-save:disabled {
+  color:
+    rgba(36, 28, 38, 0.65);
+
+  background:
+    linear-gradient(
+      135deg,
+      #c7b27f,
+      #a89161
+    );
+
+  cursor:
+    not-allowed;
+
+  box-shadow:
+    none;
+
+  opacity: 0.65;
+}
+
+
+/* ============================================================
+   BOOTSTRAP OVERRIDES
+   ============================================================ */
+
+.profile-wrap .form-control,
+.profile-wrap .form-select {
+  color: var(--profile-text) !important;
+
+  background-color:
+    var(--profile-input) !important;
+
+  border-color:
+    var(--profile-border) !important;
+}
+
+
+.profile-wrap .form-control:focus,
+.profile-wrap .form-select:focus {
+  color: var(--profile-text) !important;
+
+  background-color:
+    var(--profile-input-hover) !important;
+
+  border-color:
+    rgba(232, 180, 92, 0.65) !important;
+
+  box-shadow:
+    0 0 0 3px rgba(232, 180, 92, 0.10) !important;
+}
+
+
+/* ============================================================
+   LINKS
+   ============================================================ */
+
+.profile-wrap a {
+  color: var(--profile-gold-bright);
+}
+
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+.profile-wrap ::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.profile-wrap ::-webkit-scrollbar-track {
+  background: #121229;
+}
+
+.profile-wrap ::-webkit-scrollbar-thumb {
+  background:
+    rgba(170, 157, 211, 0.28);
+
+  border-radius: 10px;
+}
+
+.profile-wrap ::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(232, 180, 92, 0.45);
+}
+
+
+/* ============================================================
+   RESPONSIVE — TABLET
+   ============================================================ */
+
+@media (max-width: 800px) {
+
+  .profile-wrap {
+    max-width: 100%;
+
+    padding:
+      0 4px 35px;
+  }
+
+  .profile-wrap .dashboard-card {
+    padding: 20px;
+  }
+
+  .profile-row {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-row .profile-field {
+    margin-bottom: 18px;
+  }
+
+  .profile-row .profile-field:last-child {
+    margin-bottom: 0;
+  }
+
+  .profile-doc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+
+@media (max-width: 520px) {
+
+  .profile-wrap {
+    padding:
+      0 2px 30px;
+  }
+
+  .profile-wrap .dashboard-card {
+    padding: 17px;
+
+    border-radius: 13px;
+  }
+
+
+  /* Identity */
+
+  .profile-identity {
+    padding:
+      25px 17px !important;
+  }
+
+
+  .profile-avatar {
+    width: 88px;
+    height: 88px;
+
+    font-size: 1.9rem;
+  }
+
+
+  .profile-identity h3 {
+    font-size: 1.25rem;
+  }
+
+
+  /* Section title */
+
+  .profile-section-title {
+    font-size: 1.05rem;
+
+    margin-bottom: 18px;
+  }
+
+
+  /* Inputs */
+
+  .profile-field input,
+  .profile-field select,
+  .profile-field textarea {
+    font-size: 0.82rem;
+
+    padding:
+      10px 11px;
+  }
+
+
+  /* Documents */
+
+  .profile-doc-slot {
+    padding: 12px;
+  }
+
+
+  .profile-doc-preview,
+  .profile-doc-preview-area {
+    min-height: 110px;
+
+    height: 110px;
+  }
+
+
+  /* Save */
+
+  .profile-save {
+    min-height: 46px;
+
+    font-size: 0.84rem;
+  }
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .profile-wrap *,
+  .profile-wrap *::before,
+  .profile-wrap *::after {
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+}

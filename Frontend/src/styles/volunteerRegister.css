@@ -1,0 +1,1249 @@
+/* =========================================================
+   KIFUBRIDGE — VOLUNTEER REGISTRATION
+   =========================================================
+   VISUAL SYSTEM
+   ---------------------------------------------------------
+   Matches:
+   - Donor Registration
+   - NGO Registration
+
+   Design:
+   - Full-page gradient
+   - Small independent Back button
+   - Centered KifuBridge branding
+   - 760px content width
+   - Clean 2-column form
+   - Glass-style inputs
+   - Coral / blue / cyan accents
+   - Responsive mobile layout
+
+   IMPORTANT:
+   Everything is scoped under .volunteer-register-page
+   so this page does NOT affect:
+   - Login
+   - Donor Registration
+   - NGO Registration
+   - Role Selection
+   ========================================================= */
+
+
+/* =========================================================
+   SCOPED RESET
+   ========================================================= */
+
+.volunteer-register-page,
+.volunteer-register-page *,
+.volunteer-register-page *::before,
+.volunteer-register-page *::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ROOT PAGE
+   ========================================================= */
+
+.volunteer-register-page {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  color: #e5e7eb;
+
+  overflow-x: hidden;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 8% 8%,
+      rgba(59, 130, 246, 0.14),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 88%,
+      rgba(201, 106, 78, 0.14),
+      transparent 30%
+    ),
+    linear-gradient(
+      160deg,
+      #1b1f3b 0%,
+      #2d2f5e 40%,
+      #6b3f5c 75%,
+      #c96a4e 100%
+    );
+}
+
+
+/* =========================================================
+   BACKGROUND GLOW
+   ========================================================= */
+
+.volunteer-register-page .auth-glow {
+  position: absolute;
+
+  width: 440px;
+  height: 440px;
+
+  top: -210px;
+  right: -150px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(96, 165, 250, 0.15),
+      rgba(201, 106, 78, 0.08),
+      transparent 70%
+    );
+
+  filter: blur(110px);
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  animation:
+    volunteerGlowFloat 12s ease-in-out infinite;
+}
+
+@keyframes volunteerGlowFloat {
+  0%,
+  100% {
+    transform:
+      translate(0, 0)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate(-35px, 30px)
+      scale(1.08);
+  }
+}
+
+
+/* =========================================================
+   SECONDARY BACKGROUND GLOW
+   ========================================================= */
+
+.volunteer-register-page::before {
+  content: "";
+
+  position: absolute;
+
+  width: 360px;
+  height: 360px;
+
+  left: -160px;
+  bottom: -180px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(107, 63, 92, 0.24);
+
+  filter: blur(100px);
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+
+/* =========================================================
+   MAIN CONTENT SURFACE
+   ---------------------------------------------------------
+   Full page.
+   NO floating card.
+   ========================================================= */
+
+.volunteer-register-page .auth-card.wide {
+  position: relative;
+
+  z-index: 1;
+
+  width: 100%;
+  max-width: none;
+
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 56px 24px 72px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: transparent;
+
+  border: none;
+  border-radius: 0;
+
+  box-shadow: none;
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
+  overflow: visible;
+}
+
+
+/* =========================================================
+   TOP HAIRLINE
+   ========================================================= */
+
+.volunteer-register-page .auth-card.wide::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 8%;
+
+  width: 84%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   SOFT CENTER GLOW
+   ========================================================= */
+
+.volunteer-register-page .auth-card.wide::after {
+  content: "";
+
+  position: absolute;
+
+  width: 320px;
+  height: 320px;
+
+  top: -60px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  filter: blur(90px);
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+
+/* =========================================================
+   CONTENT WIDTH
+   ---------------------------------------------------------
+   IMPORTANT:
+   Back button is intentionally NOT included here.
+   ========================================================= */
+
+.volunteer-register-page .auth-brand,
+.volunteer-register-page .auth-subtitle,
+.volunteer-register-page .auth-alert,
+.volunteer-register-page .auth-card.wide > form,
+.volunteer-register-page .auth-footer {
+  width: 100%;
+  max-width: 760px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ---------------------------------------------------------
+   Small.
+   Independent.
+   Does NOT inherit 760px width.
+   ========================================================= */
+
+.volunteer-register-page .auth-back {
+  position: absolute;
+
+  top: 20px;
+  left: 20px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  max-width: max-content;
+  min-width: 0;
+
+  margin: 0;
+  padding: 4px 8px;
+
+  gap: 4px;
+
+  color:
+    rgba(226, 232, 240, 0.68);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 6px;
+
+  text-decoration: none;
+
+  font-family: inherit;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  z-index: 20;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.volunteer-register-page .auth-back:hover {
+  color: #ffffff;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  border-color:
+    rgba(255, 255, 255, 0.15);
+
+  transform:
+    translateX(-2px);
+}
+
+
+.volunteer-register-page .auth-back:focus-visible {
+  outline:
+    2px solid rgba(94, 234, 212, 0.5);
+
+  outline-offset: 2px;
+}
+
+
+.volunteer-register-page .auth-back > * {
+  flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.volunteer-register-page .auth-brand {
+  position: relative;
+
+  text-align: center;
+
+  margin-top: -5px;
+  margin-bottom: 4px;
+}
+
+
+.volunteer-register-page .auth-brand h2 {
+  margin: 0;
+
+  color:
+    #f8fafc;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 28px;
+
+  line-height: 1.2;
+
+  font-weight: 800;
+
+  letter-spacing: -0.6px;
+
+  text-shadow:
+    0 3px 18px rgba(0, 0, 0, 0.16);
+}
+
+
+/* Brand underline */
+
+.volunteer-register-page .auth-brand h2::after {
+  content: "";
+
+  display: block;
+
+  width: 42px;
+  height: 3px;
+
+  margin:
+    9px auto 0;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #60a5fa,
+      #22d3ee
+    );
+
+  box-shadow:
+    0 0 12px rgba(34, 211, 238, 0.18);
+}
+
+
+/* Hide unused brand mark */
+
+.volunteer-register-page .auth-brand-mark {
+  display: none;
+}
+
+
+/* =========================================================
+   SUBTITLE
+   ========================================================= */
+
+.volunteer-register-page .auth-subtitle {
+  margin:
+    10px auto 30px;
+
+  text-align: center;
+
+  color:
+    rgba(203, 213, 225, 0.72);
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.2px;
+}
+
+
+/* =========================================================
+   ALERT
+   ========================================================= */
+
+.volunteer-register-page .auth-alert {
+  padding:
+    11px 14px;
+
+  margin-bottom:
+    22px;
+
+  border-radius:
+    9px;
+
+  font-size:
+    12.5px;
+
+  line-height:
+    1.5;
+}
+
+
+.volunteer-register-page .auth-alert.info {
+  color:
+    #dbeafe;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.volunteer-register-page .auth-card.wide form {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  column-gap:
+    24px;
+
+  row-gap:
+    0;
+}
+
+
+/* =========================================================
+   FIELD
+   ========================================================= */
+
+.volunteer-register-page .auth-field {
+  width: 100%;
+
+  margin-bottom:
+    18px;
+}
+
+
+.volunteer-register-page .auth-field > label {
+  display: block;
+
+  margin-bottom:
+    7px;
+
+  color:
+    rgba(226, 232, 240, 0.86);
+
+  font-size:
+    11.5px;
+
+  font-weight:
+    650;
+}
+
+
+/* =========================================================
+   FIELD HEADER
+   ========================================================= */
+
+.volunteer-register-page .auth-field-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 7px;
+}
+
+
+.volunteer-register-page .auth-field-header label {
+  margin: 0;
+}
+
+
+/* =========================================================
+   INPUTS / SELECT / TEXTAREA
+   ========================================================= */
+
+.volunteer-register-page .auth-field input,
+.volunteer-register-page .auth-field select,
+.volunteer-register-page .auth-field textarea {
+  width: 100%;
+
+  padding:
+    11px 13px;
+
+  color:
+    #f8fafc;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.11);
+
+  border-radius:
+    8px;
+
+  outline:
+    none;
+
+  font-family:
+    inherit;
+
+  font-size:
+    13px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* Placeholder */
+
+.volunteer-register-page .auth-field input::placeholder,
+.volunteer-register-page .auth-field textarea::placeholder {
+  color:
+    rgba(203, 213, 225, 0.38);
+}
+
+
+/* Hover */
+
+.volunteer-register-page .auth-field input:hover,
+.volunteer-register-page .auth-field select:hover,
+.volunteer-register-page .auth-field textarea:hover {
+  border-color:
+    rgba(255, 255, 255, 0.18);
+
+  background:
+    rgba(255, 255, 255, 0.055);
+}
+
+
+/* Focus */
+
+.volunteer-register-page .auth-field input:focus,
+.volunteer-register-page .auth-field select:focus,
+.volunteer-register-page .auth-field textarea:focus {
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  border-color:
+    rgba(201, 106, 78, 0.55);
+
+  box-shadow:
+    0 0 0 3px rgba(201, 106, 78, 0.09);
+}
+
+
+/* =========================================================
+   SELECT
+   ========================================================= */
+
+.volunteer-register-page .auth-field select {
+  height:
+    41px;
+
+  cursor:
+    pointer;
+}
+
+
+.volunteer-register-page .auth-field select option {
+  color:
+    #f8fafc;
+
+  background:
+    #2d2f5e;
+}
+
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+.volunteer-register-page .auth-field textarea {
+  min-height:
+    80px;
+
+  resize:
+    vertical;
+
+  line-height:
+    1.55;
+}
+
+
+/* =========================================================
+   INVALID
+   ========================================================= */
+
+.volunteer-register-page .auth-field input.invalid,
+.volunteer-register-page .auth-field select.invalid,
+.volunteer-register-page .auth-field textarea.invalid {
+  border-color:
+    rgba(248, 113, 113, 0.72);
+
+  box-shadow:
+    0 0 0 3px rgba(248, 113, 113, 0.08);
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.volunteer-register-page .auth-error {
+  margin-top:
+    6px;
+
+  color:
+    #fca5a5;
+
+  font-size:
+    11px;
+
+  line-height:
+    1.4;
+}
+
+
+/* =========================================================
+   PASSWORD
+   ========================================================= */
+
+.volunteer-register-page .auth-password-group {
+  position:
+    relative;
+
+  width:
+    100%;
+}
+
+
+.volunteer-register-page .auth-password-group input {
+  padding-right:
+    44px;
+}
+
+
+/* =========================================================
+   PASSWORD VISIBILITY
+   ========================================================= */
+
+.volunteer-register-page .auth-toggle-visibility {
+  position:
+    absolute;
+
+  top:
+    50%;
+
+  right:
+    8px;
+
+  width:
+    30px;
+
+  height:
+    30px;
+
+  transform:
+    translateY(-50%);
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    0;
+
+  border:
+    none;
+
+  border-radius:
+    6px;
+
+  background:
+    transparent;
+
+  color:
+    rgba(203, 213, 225, 0.62);
+
+  cursor:
+    pointer;
+
+  font-size:
+    13px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+
+.volunteer-register-page .auth-toggle-visibility:hover {
+  color:
+    #ffffff;
+
+  background:
+    rgba(255, 255, 255, 0.07);
+}
+
+
+/* =========================================================
+   FILE INPUT
+   ========================================================= */
+
+.volunteer-register-page .auth-field input[type="file"] {
+  min-height:
+    41px;
+
+  padding:
+    6px 7px;
+
+  cursor:
+    pointer;
+
+  color:
+    rgba(203, 213, 225, 0.58);
+}
+
+
+.volunteer-register-page
+.auth-field
+input[type="file"]::file-selector-button {
+  margin-right:
+    9px;
+
+  padding:
+    7px 11px;
+
+  border:
+    none;
+
+  border-radius:
+    6px;
+
+  color:
+    #e0f2fe;
+
+  background:
+    #3b4a91;
+
+  font-family:
+    inherit;
+
+  font-size:
+    10.5px;
+
+  font-weight:
+    650;
+
+  cursor:
+    pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.volunteer-register-page
+.auth-field
+input[type="file"]::file-selector-button:hover {
+  background:
+    #4c63b6;
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   MAP LINK
+   ========================================================= */
+
+.volunteer-register-page .auth-link-button {
+  padding:
+    5px 8px;
+
+  border:
+    1px solid rgba(6, 182, 212, 0.12);
+
+  border-radius:
+    6px;
+
+  background:
+    rgba(6, 182, 212, 0.07);
+
+  color:
+    #67e8f9;
+
+  font-family:
+    inherit;
+
+  font-size:
+    10px;
+
+  font-weight:
+    650;
+
+  cursor:
+    pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.volunteer-register-page .auth-link-button:hover {
+  color:
+    #cffafe;
+
+  background:
+    rgba(6, 182, 212, 0.13);
+
+  border-color:
+    rgba(6, 182, 212, 0.22);
+}
+
+
+/* =========================================================
+   MAP
+   ========================================================= */
+
+.volunteer-register-page .auth-map-wrap {
+  margin-top:
+    10px;
+
+  padding:
+    9px;
+
+  background:
+    rgba(255, 255, 255, 0.03);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius:
+    9px;
+
+  overflow:
+    hidden;
+}
+
+
+/* =========================================================
+   ADDRESS ROW
+   ========================================================= */
+
+.volunteer-register-page .auth-row {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap:
+    24px;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+   ========================================================= */
+
+.volunteer-register-page .auth-submit {
+  grid-column:
+    1 / -1;
+
+  width:
+    100%;
+
+  margin-top:
+    6px;
+
+  padding:
+    13px 18px;
+
+  border:
+    none;
+
+  border-radius:
+    8px;
+
+  color:
+    #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6b3f5c 0%,
+      #a85255 55%,
+      #c96a4e 100%
+    );
+
+  font-family:
+    inherit;
+
+  font-size:
+    13px;
+
+  font-weight:
+    750;
+
+  cursor:
+    pointer;
+
+  box-shadow:
+    0 8px 24px rgba(107, 63, 92, 0.24);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+
+.volunteer-register-page .auth-submit:hover:not(:disabled) {
+  transform:
+    translateY(-1px);
+
+  filter:
+    brightness(1.07);
+
+  box-shadow:
+    0 12px 30px rgba(201, 106, 78, 0.28);
+}
+
+
+.volunteer-register-page .auth-submit:active:not(:disabled) {
+  transform:
+    translateY(0);
+}
+
+
+.volunteer-register-page .auth-submit:disabled {
+  opacity:
+    0.6;
+
+  cursor:
+    not-allowed;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.volunteer-register-page .auth-footer {
+  margin:
+    20px auto 0;
+
+  text-align:
+    center;
+
+  color:
+    rgba(203, 213, 225, 0.48);
+
+  font-size:
+    11px;
+}
+
+
+.volunteer-register-page .auth-footer a {
+  margin-left:
+    4px;
+
+  color:
+    #7dd3fc;
+
+  text-decoration:
+    none;
+
+  font-weight:
+    650;
+
+  transition:
+    color 0.2s ease;
+}
+
+
+.volunteer-register-page .auth-footer a:hover {
+  color:
+    #ffffff;
+
+  text-decoration:
+    underline;
+}
+
+
+.volunteer-register-page .auth-footer.mt-2 {
+  margin-top:
+    8px !important;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .volunteer-register-page .auth-card.wide {
+    padding:
+      44px 22px 48px;
+  }
+
+  .volunteer-register-page .auth-card.wide form {
+    grid-template-columns:
+      1fr;
+  }
+
+  .volunteer-register-page .auth-row {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      0;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .volunteer-register-page .auth-card.wide {
+    padding:
+      32px 16px 36px;
+  }
+
+  .volunteer-register-page .auth-back {
+    top:
+      16px;
+
+    left:
+      16px;
+
+    padding:
+      4px 7px;
+
+    font-size:
+      9px;
+  }
+
+  .volunteer-register-page .auth-brand h2 {
+    font-size:
+      24px;
+  }
+
+  .volunteer-register-page .auth-subtitle {
+    margin-bottom:
+      22px;
+  }
+
+  .volunteer-register-page .auth-field {
+    margin-bottom:
+      16px;
+  }
+
+  .volunteer-register-page .auth-field input,
+  .volunteer-register-page .auth-field select,
+  .volunteer-register-page .auth-field textarea {
+    font-size:
+      12px;
+  }
+
+  .volunteer-register-page .auth-submit {
+    padding:
+      11px 14px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .volunteer-register-page .auth-card.wide {
+    padding:
+      26px 13px 30px;
+  }
+
+  .volunteer-register-page .auth-back {
+    top:
+      12px;
+
+    left:
+      12px;
+
+    padding:
+      4px 7px;
+
+    font-size:
+      9px;
+  }
+
+  .volunteer-register-page .auth-field > label {
+    font-size:
+      10px;
+  }
+
+  .volunteer-register-page .auth-field input,
+  .volunteer-register-page .auth-field select,
+  .volunteer-register-page .auth-field textarea {
+    padding:
+      9px 10px;
+
+    font-size:
+      11px;
+  }
+
+  .volunteer-register-page .auth-field select {
+    height:
+      38px;
+  }
+
+  .volunteer-register-page .auth-brand h2 {
+    font-size:
+      22px;
+  }
+
+  .volunteer-register-page .auth-file-name {
+    font-size:
+      9px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .volunteer-register-page *,
+  .volunteer-register-page *::before,
+  .volunteer-register-page *::after {
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+  }
+}

@@ -1,0 +1,2176 @@
+/* ==========================================================
+   USER MANAGEMENT — "Gate & Dossier"
+   ----------------------------------------------------------
+   KifuBridge Admin User Management
+   Concept:
+   - Dark glass administration interface
+   - Role-based filter lanes
+   - Dossier-style user cards
+   - Colored verification rail
+   - Rubber-stamp style account status
+========================================================== */
+
+
+/* ==========================================================
+   GOOGLE FONTS
+========================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+
+/* ==========================================================
+   VARIABLES
+========================================================== */
+
+:root {
+  --um-bg: #0b1120;
+
+  --um-panel: rgba(24, 31, 51, 0.62);
+  --um-panel-solid: #131b2e;
+
+  --um-border: rgba(255, 255, 255, 0.08);
+
+  --um-ink: #f1f5f9;
+  --um-ink-dim: #93a0b8;
+
+  /* Role colors */
+  --um-donor: #3b82f6;
+  --um-ngo: #8b5cf6;
+  --um-volunteer: #06b6d4;
+
+  /* Accent */
+  --um-gold: #e8a33d;
+
+  /* Status */
+  --um-approved: #22c55e;
+  --um-pending: #f59e0b;
+  --um-blocked: #ef4444;
+
+  /* Fonts */
+  --um-font-display:
+    "Space Grotesk",
+    "Segoe UI",
+    sans-serif;
+
+  --um-font-body:
+    "Inter",
+    "Segoe UI",
+    sans-serif;
+
+  --um-font-mono:
+    "JetBrains Mono",
+    "Courier New",
+    monospace;
+}
+
+
+/* ==========================================================
+   PAGE SHELL
+========================================================== */
+
+.um {
+  position: relative;
+
+  width: 100%;
+
+  font-family: var(--um-font-body);
+  color: var(--um-ink);
+
+  padding: 0 0 40px;
+
+  box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   BACKGROUND GRID
+========================================================== */
+
+.um::before {
+  content: "";
+
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 38px 38px;
+
+  z-index: 0;
+
+  mask-image:
+    radial-gradient(
+      circle at 30% 0%,
+      #000 0%,
+      transparent 70%
+    );
+}
+
+
+/* ==========================================================
+   TOOLBAR
+   Search + Sort
+========================================================== */
+
+.um-toolbar {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  width: 100%;
+
+  margin: 0 0 18px;
+}
+
+
+/* ==========================================================
+   SEARCH
+========================================================== */
+
+.um-search {
+  position: relative;
+
+  z-index: 1;
+
+  width: 100%;
+
+  max-width: 480px;
+
+  height: 46px;
+
+  display: block;
+
+  margin: 0;
+
+  padding: 0 18px 0 44px;
+
+  box-sizing: border-box;
+
+  font-family: var(--um-font-body);
+
+  font-size: 14px;
+
+  color: var(--um-ink);
+
+  background:
+    var(--um-panel)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2393A0B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E")
+    no-repeat 16px center;
+
+  border: 1px solid var(--um-border);
+
+  border-radius: 14px;
+
+  backdrop-filter: blur(16px);
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.um-search::placeholder {
+  color: var(--um-ink-dim);
+}
+
+.um-search:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.um-search:focus {
+  outline: none;
+
+  border-color: var(--um-donor);
+
+  background-color: rgba(24, 31, 51, 0.78);
+
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.15),
+    0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ==========================================================
+   SORT SELECT
+========================================================== */
+
+.um-sort {
+  width: 175px;
+
+  height: 46px;
+
+  flex-shrink: 0;
+
+  padding: 0 38px 0 14px;
+
+  font-family: var(--um-font-display);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  color: var(--um-ink);
+
+  background-color: var(--um-panel-solid);
+
+  border: 1px solid var(--um-border);
+
+  border-radius: 14px;
+
+  outline: none;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.um-sort:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+
+  background-color: #182238;
+}
+
+.um-sort:focus {
+  border-color: var(--um-donor);
+
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.12);
+}
+
+.um-sort option {
+  background: var(--um-panel-solid);
+
+  color: var(--um-ink);
+}
+
+
+/* ==========================================================
+   OPTIONAL RESULT INFORMATION
+========================================================== */
+
+.um-result-info {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin: 0 2px 16px;
+
+  font-size: 12px;
+
+  color: var(--um-ink-dim);
+}
+
+.um-result-info strong {
+  color: var(--um-ink);
+}
+
+.um-sort-info {
+  padding: 5px 10px;
+
+  border: 1px solid var(--um-border);
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  font-family: var(--um-font-mono);
+
+  font-size: 10px;
+
+  color: var(--um-ink-dim);
+}
+
+
+/* ==========================================================
+   FILTER LANES
+========================================================== */
+
+.um-filters {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  width: fit-content;
+
+  max-width: 100%;
+
+  margin-bottom: 30px;
+
+  padding: 6px;
+
+  background: var(--um-panel);
+
+  border: 1px solid var(--um-border);
+
+  border-radius: 14px;
+
+  backdrop-filter: blur(16px);
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+}
+
+.um-filters::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* ==========================================================
+   FILTER BUTTON
+========================================================== */
+
+.um-filter-btn {
+  position: relative;
+
+  min-width: 88px;
+
+  padding: 9px 20px;
+
+  font-family: var(--um-font-display);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+
+  color: var(--um-ink-dim);
+
+  background: transparent;
+
+  border: none;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.um-filter-btn:hover {
+  color: var(--um-ink);
+
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.um-filter-btn:active {
+  transform: scale(0.97);
+}
+
+.um-filter-btn.is-active {
+  color: #fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--um-donor),
+      var(--um-ngo)
+    );
+
+  box-shadow:
+    0 6px 18px rgba(59, 130, 246, 0.35);
+}
+
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.um-empty {
+  position: relative;
+
+  z-index: 1;
+
+  min-height: 240px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 50px 20px;
+
+  text-align: center;
+
+  font-family: var(--um-font-display);
+
+  font-size: 15px;
+
+  color: var(--um-ink-dim);
+
+  background: var(--um-panel);
+
+  border: 1px dashed var(--um-border);
+
+  border-radius: 18px;
+
+  backdrop-filter: blur(14px);
+}
+
+
+/* ==========================================================
+   USER GRID
+========================================================== */
+
+.um-grid {
+  position: relative;
+
+  z-index: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(320px, 1fr)
+    );
+
+  gap: 22px;
+
+  width: 100%;
+}
+
+
+/* ==========================================================
+   DOSSIER CARD
+========================================================== */
+
+.um-card {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding: 24px 22px 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(24, 31, 51, 0.70),
+      rgba(18, 25, 43, 0.64)
+    );
+
+  border: 1px solid var(--um-border);
+
+  border-left: 4px solid var(--um-donor);
+
+  border-radius: 16px;
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.28);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s cubic-bezier(.23, 1, .32, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* subtle top shine */
+
+.um-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.14),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+
+.um-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.36);
+
+  border-color:
+    rgba(255, 255, 255, 0.12);
+}
+
+
+/* ==========================================================
+   ROLE COLORED RAIL
+========================================================== */
+
+.um-card:has(.um-badge--role-ngo) {
+  border-left-color: var(--um-ngo);
+}
+
+.um-card:has(.um-badge--role-volunteer) {
+  border-left-color: var(--um-volunteer);
+}
+
+.um-card:has(.um-badge--role-donor) {
+  border-left-color: var(--um-donor);
+}
+
+
+/* ==========================================================
+   PROFILE IMAGE
+========================================================== */
+
+.um-profile-image {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: 0 0 13px;
+}
+
+.um-profile-image a {
+  display: block;
+
+  line-height: 0;
+}
+
+.um-profile-photo,
+.um-profile-placeholder {
+  width: 76px;
+
+  height: 76px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 2px solid rgba(232, 163, 61, 0.45);
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.28);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.um-profile-image a:hover .um-profile-photo {
+  transform: scale(1.04);
+
+  border-color: var(--um-gold);
+}
+
+.um-profile-placeholder {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.03)
+    );
+
+  color: var(--um-ink-dim);
+
+  font-size: 25px;
+}
+
+
+/* ==========================================================
+   CARD NAME
+========================================================== */
+
+.um-heading.um-card-name {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: 0 0 15px;
+
+  font-family: var(--um-font-display);
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  color: var(--um-ink);
+
+  line-height: 1.35;
+
+  text-align: center;
+
+  word-break: break-word;
+}
+
+
+/* ==========================================================
+   CARD ICON
+========================================================== */
+
+.um-card-icon {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 30px;
+
+  height: 30px;
+
+  flex-shrink: 0;
+
+  font-size: 14px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 9px;
+}
+
+
+/* ==========================================================
+   NORMAL CARD INFORMATION
+========================================================== */
+
+.um-card-row {
+  margin: 0 0 8px;
+
+  font-family: var(--um-font-mono);
+
+  font-size: 12.5px;
+
+  line-height: 1.5;
+
+  color: #cbd5e1;
+
+  word-break: break-word;
+}
+
+.um-card-row strong {
+  color: var(--um-ink);
+
+  font-family: var(--um-font-body);
+
+  font-weight: 600;
+}
+
+.um-card-row a {
+  color: #7fb1ff;
+
+  text-decoration: none;
+
+  font-family: var(--um-font-body);
+
+  font-weight: 500;
+
+  transition: color 0.2s ease;
+}
+
+.um-card-row a:hover {
+  color: #b9d4ff;
+
+  text-decoration: underline;
+}
+
+
+/* ==========================================================
+   ORGANIZATION BLOCK
+========================================================== */
+
+.um-card-orgblock {
+  margin: 2px 0 12px;
+
+  padding: 11px 13px;
+
+  background:
+    rgba(232, 163, 61, 0.05);
+
+  border:
+    1px solid rgba(232, 163, 61, 0.16);
+
+  border-radius: 10px;
+}
+
+.um-card-orgblock .um-card-row {
+  margin-bottom: 5px;
+}
+
+.um-card-orgblock .um-card-row:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ==========================================================
+   CARD META
+========================================================== */
+
+.um-card-meta {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 10px 0 0;
+
+  padding-top: 12px;
+
+  border-top: 1px solid var(--um-border);
+
+  font-family: var(--um-font-body);
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  color: var(--um-ink-dim);
+}
+
+.um-card-meta > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.um-card-meta strong {
+  color: var(--um-ink);
+
+  font-weight: 600;
+}
+
+
+/* ==========================================================
+   VEHICLE BLOCK
+========================================================== */
+
+.um-card-vehicle {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 2px;
+
+  margin-top: 12px;
+
+  padding: 12px 14px;
+
+  background:
+    rgba(6, 182, 212, 0.045);
+
+  border:
+    1px solid rgba(6, 182, 212, 0.13);
+
+  border-radius: 10px;
+}
+
+.um-card-vehicle h6 {
+  width: 100%;
+
+  margin: 2px 0 7px;
+
+  font-family: var(--um-font-display);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+
+  color: var(--um-volunteer) !important;
+}
+
+.um-card-vehicle .um-card-row {
+  width: 100%;
+
+  margin-bottom: 5px;
+}
+
+.um-card-vehicle .um-card-row:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ==========================================================
+   BADGES
+========================================================== */
+
+.um-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 23px;
+
+  padding: 3px 10px;
+
+  font-family: var(--um-font-display);
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.03em;
+
+  text-transform: uppercase;
+
+  border-radius: 999px;
+
+  border: 1px solid transparent;
+
+  white-space: nowrap;
+}
+
+
+/* ==========================================================
+   ROLE BADGES
+========================================================== */
+
+.um-badge--role-donor {
+  color: var(--um-donor);
+
+  background:
+    rgba(59, 130, 246, 0.14);
+
+  border-color:
+    rgba(59, 130, 246, 0.30);
+}
+
+.um-badge--role-ngo {
+  color: var(--um-ngo);
+
+  background:
+    rgba(139, 92, 246, 0.14);
+
+  border-color:
+    rgba(139, 92, 246, 0.30);
+}
+
+.um-badge--role-volunteer {
+  color: var(--um-volunteer);
+
+  background:
+    rgba(6, 182, 212, 0.14);
+
+  border-color:
+    rgba(6, 182, 212, 0.30);
+}
+
+
+/* ==========================================================
+   DONOR TYPE
+========================================================== */
+
+.um-badge--donortype {
+  color: var(--um-gold);
+
+  background:
+    rgba(232, 163, 61, 0.14);
+
+  border-color:
+    rgba(232, 163, 61, 0.30);
+}
+
+
+/* ==========================================================
+   BOOTSTRAP BADGE OVERRIDES
+========================================================== */
+
+.um-card .badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  font-family: var(--um-font-display);
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.03em;
+}
+
+.um-card .badge.bg-primary {
+  background:
+    rgba(139, 92, 246, 0.18) !important;
+
+  color: var(--um-ngo) !important;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.25);
+}
+
+.um-card .badge.bg-success {
+  background:
+    rgba(34, 197, 94, 0.18) !important;
+
+  color: var(--um-approved) !important;
+
+  border:
+    1px solid rgba(34, 197, 94, 0.25);
+}
+
+
+/* ==========================================================
+   STATUS SECTION
+========================================================== */
+
+.um-status-line {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 16px 0 0;
+
+  padding-top: 14px;
+
+  border-top: 1px solid var(--um-border);
+
+  font-family: var(--um-font-display);
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+
+  color: var(--um-ink-dim);
+}
+
+
+/* ==========================================================
+   STATUS STAMP
+========================================================== */
+
+.um-status-line .um-badge--approved,
+.um-status-line .um-badge--pending,
+.um-status-line .um-badge--blocked {
+  padding: 4px 11px;
+
+  font-family: var(--um-font-mono);
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+  border-radius: 4px;
+
+  border-width: 1.5px;
+
+  border-style: dashed;
+
+  transform: rotate(-4deg);
+}
+
+
+/* Approved */
+
+.um-badge--approved {
+  color: var(--um-approved);
+
+  background:
+    rgba(34, 197, 94, 0.08);
+
+  border-color:
+    var(--um-approved);
+}
+
+
+/* Pending */
+
+.um-badge--pending {
+  color: var(--um-pending);
+
+  background:
+    rgba(245, 158, 11, 0.08);
+
+  border-color:
+    var(--um-pending);
+}
+
+
+/* Blocked */
+
+.um-badge--blocked {
+  color: var(--um-blocked);
+
+  background:
+    rgba(239, 68, 68, 0.08);
+
+  border-color:
+    var(--um-blocked);
+
+  transform: rotate(3deg);
+}
+
+
+/* ==========================================================
+   ACTION BUTTONS
+========================================================== */
+
+.um-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 17px;
+}
+
+.um-btn {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  min-height: 35px;
+
+  padding: 8px 13px;
+
+  box-sizing: border-box;
+
+  font-family: var(--um-font-body);
+
+  font-size: 11.5px;
+
+  font-weight: 600;
+
+  color: var(--um-ink);
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  border:
+    1px solid var(--um-border);
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.um-btn:hover {
+  transform: translateY(-2px);
+}
+
+.um-btn:active {
+  transform: translateY(0);
+}
+
+
+/* ==========================================================
+   APPROVE
+========================================================== */
+
+.um-btn--approve {
+  color: #fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--um-approved),
+      #16a34a
+    );
+
+  border-color: transparent;
+
+  box-shadow:
+    0 5px 15px rgba(34, 197, 94, 0.18);
+}
+
+.um-btn--approve:hover {
+  box-shadow:
+    0 8px 20px rgba(34, 197, 94, 0.28);
+}
+
+
+/* ==========================================================
+   BLOCK
+========================================================== */
+
+.um-btn--block {
+  color: var(--um-blocked);
+
+  background:
+    rgba(239, 68, 68, 0.05);
+
+  border-color:
+    rgba(239, 68, 68, 0.35);
+}
+
+.um-btn--block:hover {
+  background:
+    rgba(239, 68, 68, 0.12);
+}
+
+
+/* ==========================================================
+   UNBLOCK
+========================================================== */
+
+.um-btn--unblock {
+  color: var(--um-approved);
+
+  background:
+    rgba(34, 197, 94, 0.05);
+
+  border-color:
+    rgba(34, 197, 94, 0.35);
+}
+
+.um-btn--unblock:hover {
+  background:
+    rgba(34, 197, 94, 0.12);
+}
+
+
+/* ==========================================================
+   DELETE
+========================================================== */
+
+.um-btn--delete {
+  color: var(--um-ink-dim);
+}
+
+.um-btn--delete:hover {
+  color: var(--um-blocked);
+
+  background:
+    rgba(239, 68, 68, 0.10);
+
+  border-color:
+    rgba(239, 68, 68, 0.30);
+}
+
+
+/* ==========================================================
+   EDIT
+========================================================== */
+
+.um-btn--edit {
+  color: var(--um-donor);
+
+  background:
+    rgba(59, 130, 246, 0.04);
+
+  border-color:
+    rgba(59, 130, 246, 0.35);
+}
+
+.um-btn--edit:hover {
+  background:
+    rgba(59, 130, 246, 0.12);
+}
+
+
+/* ==========================================================
+   VIEW PROFILE
+========================================================== */
+
+.um-btn--view {
+  color: #fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--um-donor),
+      var(--um-ngo)
+    );
+
+  border-color: transparent;
+
+  box-shadow:
+    0 6px 18px rgba(59, 130, 246, 0.22);
+}
+
+.um-btn--view:hover {
+  color: #fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4f91ff,
+      #9b6cff
+    );
+
+  box-shadow:
+    0 9px 23px rgba(59, 130, 246, 0.32);
+}
+
+
+/* ==========================================================
+   CANCEL
+========================================================== */
+
+.um-btn--cancel {
+  color: var(--um-ink-dim);
+}
+
+.um-btn--cancel:hover {
+  background:
+    rgba(255, 255, 255, 0.08);
+}
+
+
+/* ==========================================================
+   SAVE
+========================================================== */
+
+.um-btn--save {
+  color: #fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--um-donor),
+      var(--um-ngo)
+    );
+
+  border-color: transparent;
+
+  box-shadow:
+    0 7px 20px rgba(59, 130, 246, 0.25);
+}
+
+.um-btn--save:hover {
+  box-shadow:
+    0 10px 26px rgba(59, 130, 246, 0.35);
+}
+
+
+/* ==========================================================
+   EDIT MODAL BACKDROP
+========================================================== */
+
+.um-modal-backdrop {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+  background:
+    rgba(6, 10, 20, 0.76);
+
+  backdrop-filter: blur(7px);
+
+  animation:
+    um-fade 0.2s ease-out;
+}
+
+
+/* ==========================================================
+   MODAL
+========================================================== */
+
+.um-modal {
+  width: 100%;
+
+  max-width: 700px;
+
+  max-height: 90vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  background:
+    linear-gradient(
+      145deg,
+      #182238,
+      #101827
+    );
+
+  border:
+    1px solid var(--um-border);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.55);
+
+  overflow: hidden;
+
+  animation:
+    um-rise 0.28s cubic-bezier(.23, 1, .32, 1);
+}
+
+
+/* ==========================================================
+   MODAL ANIMATIONS
+========================================================== */
+
+@keyframes um-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes um-rise {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(24px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* ==========================================================
+   MODAL HEADER
+========================================================== */
+
+.um-modal-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 19px 24px;
+
+  border-bottom:
+    1px solid var(--um-border);
+}
+
+.um-modal-title {
+  margin: 0;
+
+  font-family: var(--um-font-display);
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  color: var(--um-ink);
+}
+
+
+/* ==========================================================
+   MODAL CLOSE
+========================================================== */
+
+.um-modal-close {
+  width: 34px;
+
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  color: var(--um-ink-dim);
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  border:
+    1px solid var(--um-border);
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.um-modal-close:hover {
+  color: #fff;
+
+  background:
+    rgba(239, 68, 68, 0.25);
+
+  transform: rotate(90deg);
+}
+
+
+/* ==========================================================
+   MODAL BODY
+========================================================== */
+
+.um-modal-body {
+  padding: 22px 24px;
+
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    rgba(139, 92, 246, 0.45)
+    transparent;
+}
+
+.um-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.um-modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.um-modal-body::-webkit-scrollbar-thumb {
+  background:
+    rgba(139, 92, 246, 0.45);
+
+  border-radius: 999px;
+}
+
+
+/* ==========================================================
+   MODAL PROFILE IMAGE
+========================================================== */
+
+.um-modal-body .um-profile-image {
+  margin-bottom: 20px;
+}
+
+
+/* ==========================================================
+   FORM GRID
+========================================================== */
+
+.um-form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 16px 18px;
+}
+
+.um-form-grid--thirds {
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+}
+
+.um-field {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.um-field--full {
+  grid-column: 1 / -1;
+}
+
+
+/* ==========================================================
+   LABELS
+========================================================== */
+
+.um-label {
+  font-family: var(--um-font-display);
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+
+  color: var(--um-ink-dim);
+}
+
+
+/* ==========================================================
+   INPUTS
+========================================================== */
+
+.um-input,
+.um-select,
+.um-textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px 12px;
+
+  font-family: var(--um-font-body);
+
+  font-size: 13px;
+
+  color: var(--um-ink);
+
+  background:
+    rgba(11, 17, 32, 0.75);
+
+  border:
+    1px solid var(--um-border);
+
+  border-radius: 10px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.um-input,
+.um-select {
+  height: 43px;
+}
+
+.um-textarea {
+  min-height: 80px;
+
+  resize: vertical;
+
+  font-family: var(--um-font-mono);
+}
+
+.um-input::placeholder,
+.um-textarea::placeholder {
+  color:
+    rgba(147, 160, 184, 0.5);
+}
+
+.um-input:focus,
+.um-select:focus,
+.um-textarea:focus {
+  outline: none;
+
+  border-color:
+    var(--um-donor);
+
+  background:
+    rgba(11, 17, 32, 0.9);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(59, 130, 246, 0.18);
+}
+
+.um-select {
+  cursor: pointer;
+}
+
+.um-select option {
+  background:
+    var(--um-panel-solid);
+
+  color:
+    var(--um-ink);
+}
+
+
+/* ==========================================================
+   FORM ERRORS
+========================================================== */
+
+.um-error {
+  font-family: var(--um-font-body);
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  color: var(--um-blocked);
+}
+
+
+/* ==========================================================
+   CHECKBOX
+========================================================== */
+
+.um-checkbox-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 9px 2px;
+}
+
+.um-checkbox {
+  width: 17px;
+
+  height: 17px;
+
+  accent-color:
+    var(--um-donor);
+
+  cursor: pointer;
+}
+
+.um-checkbox-label {
+  font-family: var(--um-font-body);
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  color: var(--um-ink);
+
+  cursor: pointer;
+}
+
+
+/* ==========================================================
+   MODAL FOOTER
+========================================================== */
+
+.um-modal-footer {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding: 17px 24px;
+
+  border-top:
+    1px solid var(--um-border);
+
+  background:
+    rgba(0, 0, 0, 0.08);
+}
+
+
+/* ==========================================================
+   FOCUS ACCESSIBILITY
+========================================================== */
+
+.um-filter-btn:focus-visible,
+.um-btn:focus-visible,
+.um-search:focus-visible,
+.um-sort:focus-visible,
+.um-modal-close:focus-visible,
+.um-input:focus-visible,
+.um-select:focus-visible,
+.um-textarea:focus-visible {
+  outline:
+    2px solid var(--um-donor);
+
+  outline-offset: 2px;
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .um-card,
+  .um-btn,
+  .um-modal,
+  .um-modal-backdrop,
+  .um-modal-close,
+  .um-search,
+  .um-sort {
+    animation: none !important;
+
+    transition: none !important;
+  }
+}
+
+
+/* ==========================================================
+   LARGE SCREEN
+========================================================== */
+
+@media (min-width: 1400px) {
+  .um-grid {
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(320px, 1fr)
+      );
+  }
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width: 1000px) {
+  .um-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(300px, 1fr)
+      );
+  }
+
+  .um-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .um-search {
+    max-width: none;
+
+    flex: 1;
+  }
+}
+
+
+/* ==========================================================
+   SMALL TABLET
+========================================================== */
+
+@media (max-width: 760px) {
+  .um-toolbar {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .um-search {
+    max-width: none;
+
+    width: 100%;
+  }
+
+  .um-sort {
+    width: 100%;
+  }
+
+  .um-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .um-form-grid,
+  .um-form-grid--thirds {
+    grid-template-columns: 1fr;
+  }
+
+  .um-field--full {
+    grid-column: auto;
+  }
+
+  .um-result-info {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 600px) {
+  .um {
+    padding-bottom: 25px;
+  }
+
+  .um-filters {
+    width: 100%;
+
+    margin-bottom: 22px;
+  }
+
+  .um-filter-btn {
+    min-width: 82px;
+
+    padding:
+      9px 14px;
+
+    font-size: 11px;
+  }
+
+  .um-card {
+    padding:
+      21px 18px 18px;
+  }
+
+  .um-actions {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+  .um-btn {
+    width: 100%;
+  }
+
+  .um-modal-backdrop {
+    align-items: flex-end;
+
+    padding: 0;
+  }
+
+  .um-modal {
+    max-height: 93vh;
+
+    max-width: 100%;
+
+    border-radius:
+      20px 20px 0 0;
+  }
+
+  .um-modal-body {
+    padding:
+      20px 18px;
+  }
+
+  .um-modal-header {
+    padding:
+      17px 18px;
+  }
+
+  .um-modal-footer {
+    padding:
+      14px 18px;
+  }
+}
+
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width: 400px) {
+  .um-card {
+    padding:
+      18px 15px;
+  }
+
+  .um-profile-photo,
+  .um-profile-placeholder {
+    width: 68px;
+
+    height: 68px;
+  }
+
+  .um-heading.um-card-name {
+    font-size: 16px;
+  }
+
+  .um-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .um-card-row {
+    font-size: 11.5px;
+  }
+}
+
+/* ==========================================================
+   FONT SIZE BOOST
+   ----------------------------------------------------------
+   Makes User Management information easier to read
+========================================================== */
+
+/* Main user card information */
+.um-card-row {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+
+/* User name */
+.um-heading.um-card-name {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+
+/* Card icon */
+.um-card-icon {
+  width: 34px;
+  height: 34px;
+  font-size: 16px;
+}
+
+
+/* Role / donor type labels */
+.um-card-meta {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* Role badges */
+.um-badge {
+  min-height: 26px;
+  padding: 4px 11px;
+  font-size: 11px;
+}
+
+
+/* NGO category / availability badges */
+.um-card .badge {
+  padding: 5px 11px;
+  font-size: 11px;
+}
+
+
+/* Vehicle section heading */
+.um-card-vehicle h6 {
+  font-size: 13px;
+}
+
+
+/* Status text */
+.um-status-line {
+  font-size: 13px;
+}
+
+
+/* Status badges */
+.um-status-line .um-badge--approved,
+.um-status-line .um-badge--pending,
+.um-status-line .um-badge--blocked {
+  font-size: 11px;
+  padding: 5px 12px;
+}
+
+
+/* Action buttons */
+.um-btn {
+  min-height: 38px;
+  padding: 9px 14px;
+  font-size: 13px;
+}
+
+
+/* Search box */
+.um-search {
+  font-size: 15px;
+}
+
+
+/* Sort dropdown */
+.um-sort {
+  font-size: 13px;
+}
+
+
+/* Filter buttons */
+.um-filter-btn {
+  font-size: 13px;
+  padding: 10px 21px;
+}
+
+
+/* Empty message */
+.um-empty {
+  font-size: 17px;
+}
+
+
+/* Organization block text */
+.um-card-orgblock .um-card-row {
+  font-size: 14px;
+}
+
+
+/* Vehicle information */
+.um-card-vehicle .um-card-row {
+  font-size: 14px;
+}
+
+
+/* Modal labels */
+.um-label {
+  font-size: 12px;
+}
+
+
+/* Modal inputs */
+.um-input,
+.um-select,
+.um-textarea {
+  font-size: 14px;
+}
+
+
+/* Modal error messages */
+.um-error {
+  font-size: 12px;
+}
+
+
+/* Checkbox label */
+.um-checkbox-label {
+  font-size: 14px;
+}
+
+
+/* Modal title */
+.um-modal-title {
+  font-size: 20px;
+}
+
+
+/* ==========================================================
+   MOBILE FONT SIZE
+========================================================== */
+
+@media (max-width: 600px) {
+
+  .um-card-row {
+    font-size: 14px;
+  }
+
+  .um-heading.um-card-name {
+    font-size: 19px;
+  }
+
+  .um-card-meta {
+    font-size: 13.5px;
+  }
+
+  .um-btn {
+    font-size: 12.5px;
+  }
+
+  .um-filter-btn {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,580 @@
+/* ============================================================
+   CAMPAIGN DETAILS — dusk & gold system
+   Matches MyDonations.css / AvailableDonations.css so the whole
+   app reads as one dark, gold-accented product. No white panels.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+.cd-card {
+  --dusk-950: #150c22;
+  --dusk-900: #1f1430;
+  --dusk-800: #2b1b3d;
+  --dusk-700: #392750;
+  --dusk-600: #4a3468;
+  --hairline: rgba(212, 175, 106, 0.16);
+
+  --gold: #d4af6a;
+  --gold-soft: #e6cd97;
+  --gold-dim: rgba(212, 175, 106, 0.35);
+
+  --cream: #f5eee0;
+  --cream-dim: rgba(245, 238, 224, 0.62);
+  --cream-faint: rgba(245, 238, 224, 0.4);
+
+  --success: #7fb88f;
+  --warning: #e0b562;
+  --danger: #d97b6c;
+  --info: #8fb3d9;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Manrope', sans-serif;
+
+  font-family: var(--font-body);
+  color: var(--cream);
+  max-width: 940px;
+  margin: 1.5rem auto 5rem;
+  background: linear-gradient(165deg, var(--dusk-800) 0%, var(--dusk-900) 100%);
+  border: 1px solid var(--hairline);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
+}
+
+.cd-card * {
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   LOADING / ERROR STATUS
+   ============================================================ */
+
+.cd-status {
+  font-family: var(--font-body);
+  color: var(--cream-dim);
+  text-align: center;
+  padding: 5rem 1.5rem;
+  max-width: 640px;
+  margin: 2rem auto;
+  border: 1px dashed var(--hairline);
+  border-radius: 16px;
+  background: rgba(43, 27, 61, 0.4);
+}
+
+.cd-status-error {
+  color: var(--danger);
+  border-color: rgba(217, 123, 108, 0.35);
+}
+
+/* ============================================================
+   HERO / CAROUSEL
+   ============================================================ */
+
+.cd-hero {
+  position: relative;
+  background: var(--dusk-950);
+  min-height: 220px;
+}
+
+.cd-hero img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.cd-hero-fade {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent, var(--dusk-900) 92%);
+  pointer-events: none;
+}
+
+.cd-hero .carousel-control-prev,
+.cd-hero .carousel-control-next {
+  width: 10%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cd-hero:hover .carousel-control-prev,
+.cd-hero:hover .carousel-control-next {
+  opacity: 1;
+}
+
+.cd-hero .carousel-control-prev-icon,
+.cd-hero .carousel-control-next-icon {
+  width: 2.1rem;
+  height: 2.1rem;
+  background-color: rgba(21, 12, 34, 0.6);
+  border-radius: 50%;
+  padding: 0.4rem;
+  background-size: 1.15rem;
+}
+
+/* ============================================================
+   BODY
+   ============================================================ */
+
+.cd-body {
+  padding: 2rem clamp(1.25rem, 4vw, 2.5rem) 2.5rem;
+  position: relative;
+  margin-top: -1px;
+}
+
+/* ============================================================
+   TITLE ROW
+   ============================================================ */
+
+.cd-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cd-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: var(--cream);
+  margin: 0 0 0.35rem;
+  line-height: 1.2;
+}
+
+.cd-org {
+  font-size: 0.88rem;
+  color: var(--cream-dim);
+  margin: 0;
+}
+
+.cd-badge {
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  padding: 0.42rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.cd-badge-active {
+  background: rgba(127, 184, 143, 0.16);
+  color: var(--success);
+  border-color: rgba(127, 184, 143, 0.4);
+}
+
+.cd-badge-completed {
+  background: rgba(143, 179, 217, 0.16);
+  color: var(--info);
+  border-color: rgba(143, 179, 217, 0.4);
+}
+
+.cd-badge-expired {
+  background: rgba(217, 123, 108, 0.16);
+  color: var(--danger);
+  border-color: rgba(217, 123, 108, 0.4);
+}
+
+.cd-badge-pending {
+  background: rgba(224, 181, 98, 0.16);
+  color: var(--warning);
+  border-color: rgba(224, 181, 98, 0.4);
+}
+
+.cd-badge-rejected {
+  background: rgba(217, 123, 108, 0.1);
+  color: var(--danger);
+  border-color: rgba(217, 123, 108, 0.3);
+}
+
+.cd-badge-default {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--cream-dim);
+  border-color: var(--hairline);
+}
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+
+.cd-divider {
+  height: 1px;
+  background: var(--hairline);
+  margin: 1.75rem 0;
+  border: none;
+}
+
+/* ============================================================
+   METRIC GRID
+   ============================================================ */
+
+.cd-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.85rem;
+}
+
+.cd-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+}
+
+.cd-metric-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+.cd-metric-value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--cream);
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+/* ============================================================
+   PROGRESS SUMMARY
+   ============================================================ */
+
+.cd-progress-summary {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 1.25rem 1.35rem;
+  margin-top: 1.5rem;
+}
+
+.cd-progress-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.cd-progress-header strong {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--cream);
+}
+
+.cd-progress-header span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--gold-soft);
+}
+
+.cd-progress-track {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.cd-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+  transition: width 0.4s ease;
+}
+
+.cd-progress-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+  margin-top: 0.85rem;
+  font-size: 0.82rem;
+  color: var(--cream-dim);
+}
+
+.cd-progress-numbers strong {
+  color: var(--cream);
+  font-weight: 700;
+}
+
+/* ============================================================
+   SECTION HEADING
+   ============================================================ */
+
+.cd-section-heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--cream);
+  margin: 0 0 1rem;
+}
+
+/* ============================================================
+   REQUIREMENTS
+   ============================================================ */
+
+.cd-requirements {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.cd-requirement {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  transition: border-color 0.2s ease;
+}
+
+.cd-requirement:hover {
+  border-color: var(--gold-dim);
+}
+
+.cd-requirement-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.65rem;
+}
+
+.cd-requirement-top > div {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.cd-requirement-top strong {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--cream);
+}
+
+.cd-requirement-number {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(150deg, rgba(212, 175, 106, 0.28), rgba(212, 175, 106, 0.08));
+  color: var(--gold-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.cd-requirement-percent {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gold-soft);
+}
+
+.cd-requirement-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-size: 0.8rem;
+  color: var(--cream-dim);
+  margin-bottom: 0.75rem;
+}
+
+.cd-requirement-info strong {
+  color: var(--cream);
+  font-weight: 700;
+}
+
+.cd-requirement .cd-progress-track {
+  height: 7px;
+}
+
+/* ============================================================
+   ALERT (empty states)
+   ============================================================ */
+
+.cd-alert {
+  background: rgba(224, 181, 98, 0.08);
+  border: 1px dashed rgba(224, 181, 98, 0.35);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  color: var(--cream-dim);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* ============================================================
+   STAT ROW (supporters / days left)
+   ============================================================ */
+
+.cd-stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.85rem;
+  margin: 1.75rem 0;
+}
+
+.cd-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+}
+
+.cd-stat-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.15rem;
+}
+
+.cd-stat strong {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--cream);
+}
+
+.cd-stat-caption {
+  font-size: 0.72rem;
+  color: var(--cream-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   BODY TEXT
+   ============================================================ */
+
+.cd-text {
+  font-size: 0.9rem;
+  color: var(--cream-dim);
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+/* ============================================================
+   IMPACT REPORT
+   ============================================================ */
+
+.cd-impact-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--gold-soft);
+  margin: 0 0 0.5rem;
+}
+
+.cd-impact-image {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--hairline);
+  margin-top: 0.75rem;
+}
+
+/* ============================================================
+   DONATE CTA
+   ============================================================ */
+
+.cd-cta {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.cd-donate-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2.25rem;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--dusk-950);
+  background: linear-gradient(135deg, var(--gold), #b8905a);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.cd-donate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -10px rgba(212, 175, 106, 0.6);
+  color: var(--dusk-950);
+}
+
+.cd-closed-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2.25rem;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--cream-faint);
+  background: var(--dusk-700);
+  border: 1px solid var(--hairline);
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .cd-card {
+    margin: 0.75rem 0.75rem 3rem;
+    border-radius: 16px;
+  }
+
+  .cd-hero img {
+    height: 200px;
+  }
+
+  .cd-body {
+    padding: 1.5rem 1.1rem 2rem;
+  }
+
+  .cd-title {
+    font-size: 1.4rem;
+  }
+
+  .cd-title-row {
+    flex-direction: column;
+  }
+
+  .cd-requirement-top {
+    flex-wrap: wrap;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .cd-progress-fill,
+  .cd-requirement,
+  .cd-donate-btn,
+  .cd-hero .carousel-control-prev,
+  .cd-hero .carousel-control-next {
+    transition: none;
+  }
+}

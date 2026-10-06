@@ -1,0 +1,789 @@
+/* =========================================================
+   ADMIN CAMPAIGN DETAILS
+   KifuBridge — Dusk / Gold Admin Theme
+   ========================================================= */
+
+.acd-page {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 28px 60px;
+  font-family: "Manrope", sans-serif;
+  color: #fdf8f0;
+}
+
+/* =========================================================
+   LOADING / ERROR
+   ========================================================= */
+
+.acd-status,
+.acd-error {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 15px;
+  color: rgba(253, 248, 240, 0.65);
+}
+
+.acd-error {
+  color: #ef8b87;
+}
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.acd-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.acd-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 17px;
+  border-radius: 999px;
+  border: 1px solid rgba(253, 248, 240, 0.15);
+  background: rgba(253, 248, 240, 0.05);
+  color: rgba(253, 248, 240, 0.82);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.acd-back-btn:hover {
+  background: rgba(232, 163, 61, 0.1);
+  border-color: rgba(232, 163, 61, 0.45);
+  color: #e8a33d;
+  transform: translateX(-2px);
+}
+
+/* =========================================================
+   GENERAL CARD
+   ========================================================= */
+
+.acd-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(35, 23, 45, 0.98),
+      rgba(26, 17, 34, 0.98)
+    );
+  border: 1px solid rgba(232, 163, 61, 0.13);
+  border-radius: 18px;
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.acd-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 21px 24px;
+  border-bottom: 1px solid rgba(232, 163, 61, 0.11);
+}
+
+.acd-card-header h4 {
+  margin: 0 0 5px;
+  font-family: "Fraunces", serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fdf8f0;
+}
+
+.acd-card-header p {
+  margin: 0;
+  color: rgba(253, 248, 240, 0.5);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   CAMPAIGN HERO
+   ========================================================= */
+
+.acd-hero {
+  display: grid;
+  grid-template-columns: minmax(300px, 43%) 1fr;
+  min-height: 330px;
+}
+
+.acd-image-wrapper {
+  position: relative;
+  min-height: 330px;
+  overflow: hidden;
+  background: #150e1c;
+}
+
+.acd-image-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 55%,
+      rgba(26, 17, 34, 0.35)
+    );
+  pointer-events: none;
+}
+
+.acd-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  min-height: 330px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.acd-hero:hover .acd-image-wrapper img {
+  transform: scale(1.025);
+}
+
+.acd-hero-content {
+  padding: 35px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.acd-category {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 13px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: rgba(232, 163, 61, 0.11);
+  border: 1px solid rgba(232, 163, 61, 0.2);
+  color: #e8a33d;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.acd-hero-content h2 {
+  margin: 0 0 12px;
+  font-family: "Fraunces", serif;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.12;
+  font-weight: 600;
+  color: #fdf8f0;
+}
+
+.acd-hero-content p {
+  max-width: 700px;
+  margin: 0;
+  color: rgba(253, 248, 240, 0.62);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.acd-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: auto;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(253, 248, 240, 0.12);
+  background: rgba(253, 248, 240, 0.07);
+  color: rgba(253, 248, 240, 0.75);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.acd-status-pending {
+  color: #f2a53e;
+  background: rgba(232, 163, 61, 0.12);
+  border-color: rgba(232, 163, 61, 0.25);
+}
+
+.acd-status-active,
+.acd-status-approved {
+  color: #65c78e;
+  background: rgba(74, 179, 111, 0.11);
+  border-color: rgba(74, 179, 111, 0.25);
+}
+
+.acd-status-completed {
+  color: #73b7e8;
+  background: rgba(93, 169, 233, 0.11);
+  border-color: rgba(93, 169, 233, 0.25);
+}
+
+.acd-status-rejected,
+.acd-status-cancelled {
+  color: #ef7771;
+  background: rgba(214, 82, 82, 0.11);
+  border-color: rgba(214, 82, 82, 0.25);
+}
+
+.acd-status-expired {
+  color: #c992e8;
+  background: rgba(201, 146, 232, 0.11);
+  border-color: rgba(201, 146, 232, 0.25);
+}
+
+/* =========================================================
+   HERO META
+   ========================================================= */
+
+.acd-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(232, 163, 61, 0.12);
+}
+
+.acd-meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.acd-meta span,
+.acd-info span {
+  color: rgba(253, 248, 240, 0.42);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.acd-meta strong {
+  color: #fdf8f0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   NGO INFORMATION
+   ========================================================= */
+
+.acd-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(232, 163, 61, 0.08);
+}
+
+.acd-info {
+  padding: 22px;
+  background: #1e1428;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.acd-info strong {
+  color: #fdf8f0;
+  font-size: 14px;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+/* =========================================================
+   STAT CARDS
+   ========================================================= */
+
+.acd-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.acd-stat-card {
+  position: relative;
+  overflow: hidden;
+  padding: 25px 20px;
+  text-align: center;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(35, 23, 45, 0.98),
+      rgba(26, 17, 34, 0.98)
+    );
+  border: 1px solid rgba(232, 163, 61, 0.13);
+  border-radius: 16px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.acd-stat-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    #d19029,
+    #e8a33d
+  );
+  opacity: 0.8;
+}
+
+.acd-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232, 163, 61, 0.27);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.27);
+}
+
+.acd-stat-card span {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 24px;
+}
+
+.acd-stat-card strong {
+  display: block;
+  margin-bottom: 5px;
+  font-family: "Fraunces", serif;
+  font-size: 30px;
+  font-weight: 600;
+  color: #e8a33d;
+}
+
+.acd-stat-card small {
+  color: rgba(253, 248, 240, 0.45);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   REQUIREMENTS
+   ========================================================= */
+
+.acd-requirements {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 22px;
+}
+
+.acd-requirement {
+  padding: 20px;
+  border-radius: 14px;
+  background: rgba(253, 248, 240, 0.025);
+  border: 1px solid rgba(232, 163, 61, 0.11);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.acd-requirement:hover {
+  transform: translateY(-2px);
+  background: rgba(232, 163, 61, 0.035);
+  border-color: rgba(232, 163, 61, 0.23);
+}
+
+.acd-requirement-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.acd-requirement-top small {
+  display: block;
+  margin-bottom: 5px;
+  color: rgba(253, 248, 240, 0.4);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.acd-requirement-top h5 {
+  margin: 0;
+  color: #fdf8f0;
+  font-family: "Fraunces", serif;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.acd-requirement-top > strong {
+  flex-shrink: 0;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(232, 163, 61, 0.11);
+  color: #e8a33d;
+  font-size: 12px;
+}
+
+.acd-requirement-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 17px;
+}
+
+.acd-requirement-stats span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: rgba(253, 248, 240, 0.42);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.acd-requirement-stats b {
+  color: rgba(253, 248, 240, 0.85);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+.acd-progress {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(253, 248, 240, 0.07);
+}
+
+.acd-progress div {
+  height: 100%;
+  min-width: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    #d19029,
+    #e8a33d
+  );
+  box-shadow: 0 0 12px rgba(232, 163, 61, 0.25);
+  transition: width 0.5s ease;
+}
+
+.acd-empty {
+  padding: 40px 24px;
+  text-align: center;
+  color: rgba(253, 248, 240, 0.45);
+  font-size: 13px;
+}
+
+/* =========================================================
+   DONATION TABLE
+   ========================================================= */
+
+.acd-count {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(232, 163, 61, 0.1);
+  border: 1px solid rgba(232, 163, 61, 0.16);
+  color: #e8a33d;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.acd-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.acd-table {
+  width: 100%;
+  min-width: 950px;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.acd-table thead th {
+  padding: 13px 18px;
+  text-align: left;
+  white-space: nowrap;
+  color: rgba(253, 248, 240, 0.4);
+  background: rgba(253, 248, 240, 0.025);
+  border-bottom: 1px solid rgba(232, 163, 61, 0.11);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.acd-table tbody td {
+  padding: 15px 18px;
+  white-space: nowrap;
+  color: rgba(253, 248, 240, 0.7);
+  border-bottom: 1px solid rgba(253, 248, 240, 0.055);
+}
+
+.acd-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.acd-table tbody tr:hover {
+  background: rgba(232, 163, 61, 0.045);
+}
+
+.acd-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.acd-table tbody td strong {
+  color: #fdf8f0;
+  font-weight: 600;
+}
+
+/* =========================================================
+   DONATION STATUS
+   ========================================================= */
+
+.acd-donation-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(253, 248, 240, 0.07);
+  color: rgba(253, 248, 240, 0.7);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.acd-table-wrapper::-webkit-scrollbar {
+  height: 7px;
+}
+
+.acd-table-wrapper::-webkit-scrollbar-track {
+  background: rgba(253, 248, 240, 0.04);
+}
+
+.acd-table-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(232, 163, 61, 0.3);
+}
+
+.acd-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 163, 61, 0.5);
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .acd-page {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .acd-hero {
+    grid-template-columns: 38% 1fr;
+  }
+
+  .acd-hero-content {
+    padding: 28px;
+  }
+
+  .acd-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .acd-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .acd-requirements {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .acd-page {
+    padding: 0 14px 40px;
+  }
+
+  .acd-topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .acd-back-btn {
+    align-self: flex-start;
+  }
+
+  .acd-topbar .acd-status {
+    align-self: flex-start;
+  }
+
+  .acd-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .acd-image-wrapper {
+    min-height: 230px;
+  }
+
+  .acd-image-wrapper img {
+    min-height: 230px;
+    max-height: 300px;
+  }
+
+  .acd-hero-content {
+    padding: 25px 22px;
+  }
+
+  .acd-hero-content h2 {
+    font-size: 29px;
+  }
+
+  .acd-meta {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .acd-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px;
+  }
+
+  .acd-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .acd-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .acd-stat-card {
+    padding: 20px 14px;
+  }
+
+  .acd-stat-card strong {
+    font-size: 26px;
+  }
+
+  .acd-requirements {
+    padding: 15px;
+  }
+
+  .acd-requirement-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .acd-page {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .acd-hero-content {
+    padding: 22px 18px;
+  }
+
+  .acd-hero-content h2 {
+    font-size: 25px;
+  }
+
+  .acd-meta {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .acd-stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .acd-stat-card span {
+    font-size: 20px;
+  }
+
+  .acd-stat-card strong {
+    font-size: 23px;
+  }
+
+  .acd-stat-card small {
+    font-size: 9px;
+  }
+
+  .acd-requirement-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .acd-requirement {
+    padding: 16px;
+  }
+
+  .acd-requirement-top h5 {
+    font-size: 17px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.acd-back-btn:focus-visible {
+  outline: 2px solid #e8a33d;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .acd-card,
+  .acd-stat-card,
+  .acd-requirement,
+  .acd-back-btn,
+  .acd-image-wrapper img {
+    transition: none;
+  }
+}

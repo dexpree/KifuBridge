@@ -1,0 +1,822 @@
+/* =========================================================
+   KIFUBRIDGE — NGO REGISTRATION PAGE
+   =========================================================
+   IMPORTANT:
+   Every selector is scoped under .ngo-register-page.
+
+   This prevents NGO registration styles from affecting:
+   - Login
+   - Volunteer Registration
+   - Donor Registration
+   - Other pages using generic class names
+
+   CHANGE IN THIS PASS (matches donor registration):
+   The card used to be a padded, bordered panel sitting inside
+   the page's own padding, so it only ever filled roughly the
+   top portion of the viewport. The card is now the full page:
+   full width, full viewport height, no border/radius/shadow
+   of its own — the page gradient carries straight through it.
+   Readability is kept by centering the form content in a
+   fixed-width column inside that full-page surface.
+   ========================================================= */
+
+/* =========================================================
+   SCOPED RESET
+   ========================================================= */
+
+.ngo-register-page,
+.ngo-register-page *,
+.ngo-register-page *::before,
+.ngo-register-page *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   ROOT PAGE
+   ========================================================= */
+
+.ngo-register-page {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 0;
+
+  color: #e5e7eb;
+
+  overflow-x: hidden;
+
+  background:
+    radial-gradient(
+      circle at 8% 10%,
+      rgba(59, 130, 246, 0.13),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 88%,
+      rgba(201, 106, 78, 0.13),
+      transparent 30%
+    ),
+    linear-gradient(
+      160deg,
+      #1b1f3b 0%,
+      #2d2f5e 40%,
+      #6b3f5c 75%,
+      #c96a4e 100%
+    );
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+/* =========================================================
+   BACKGROUND GLOW
+   ---------------------------------------------------------
+   absolute (not fixed) so it stays locked to this page
+   regardless of what wraps it in the router/layout.
+   ========================================================= */
+
+.ngo-register-page .auth-glow {
+  position: absolute;
+
+  width: 430px;
+  height: 430px;
+
+  top: -210px;
+  right: -140px;
+
+  border-radius: 50%;
+
+  background: rgba(59, 130, 246, 0.16);
+
+  filter: blur(100px);
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  animation: ngoGlowFloat 10s ease-in-out infinite;
+}
+
+@keyframes ngoGlowFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-40px, 35px) scale(1.1);
+  }
+}
+
+/* =========================================================
+   MAIN CARD — now the full page
+   ========================================================= */
+
+.ngo-register-page .auth-card.wide {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: none;
+  min-height: 100vh;
+
+  margin: 0;
+
+  padding: 56px 24px 72px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border: none;
+  border-radius: 0;
+
+  /* no separate surface — the page gradient shows straight through */
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
+  overflow: visible;
+}
+
+/* faint top hairline in place of the old card border, so
+   there's still a quiet sense of "page start" without boxing
+   the content in */
+.ngo-register-page .auth-card.wide::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 8%;
+  width: 84%;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+
+  pointer-events: none;
+}
+
+.ngo-register-page .auth-card.wide::after {
+  content: "";
+
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.06);
+  filter: blur(90px);
+
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* =========================================================
+   CENTERED CONTENT COLUMN
+   ---------------------------------------------------------
+   Every direct child of the card shares this max-width so the
+   form reads as one clean column even though the surface
+   behind it now spans the full page.
+   ========================================================= */
+
+
+.ngo-register-page .auth-brand,
+.ngo-register-page .auth-subtitle,
+.ngo-register-page .auth-alert,
+.ngo-register-page .auth-card.wide > form,
+.ngo-register-page .auth-footer {
+  width: 100%;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.ngo-register-page .auth-back {
+  position: absolute;
+
+  top: 20px;
+  left: 20px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  max-width: max-content;
+  min-width: 0;
+
+  margin: 0;
+  padding: 4px 8px;
+
+  gap: 4px;
+
+  color: rgba(226, 232, 240, 0.68);
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 6px;
+
+  text-decoration: none;
+
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  z-index: 20;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.ngo-register-page .auth-back:hover {
+  color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  border-color: rgba(255, 255, 255, 0.15);
+
+  transform: translateX(-2px);
+}
+
+.ngo-register-page .auth-back:focus-visible {
+  outline: 2px solid rgba(94, 234, 212, 0.5);
+  outline-offset: 2px;
+}
+
+.ngo-register-page .auth-back > * {
+  flex: 0 0 auto;
+}
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.ngo-register-page .auth-brand {
+  text-align: center;
+
+  margin-top: -5px;
+  margin-bottom: 4px;
+}
+
+.ngo-register-page .auth-brand h2 {
+  margin: 0;
+
+  color: #f8fafc;
+
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+
+.ngo-register-page .auth-brand h2::after {
+  content: "";
+
+  display: block;
+  width: 42px;
+  height: 3px;
+
+  margin: 9px auto 0;
+
+  border-radius: 20px;
+
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+}
+
+/* =========================================================
+   SUBTITLE
+   ========================================================= */
+
+.ngo-register-page .auth-subtitle {
+  margin: 10px auto 30px;
+
+  text-align: center;
+
+  color: rgba(148, 163, 184, 0.85);
+
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.15px;
+}
+
+/* =========================================================
+   ALERT
+   ========================================================= */
+
+.ngo-register-page .auth-alert {
+  padding: 11px 14px;
+  margin-bottom: 22px;
+
+  border-radius: 9px;
+
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.ngo-register-page .auth-alert.info {
+  color: #bae6fd;
+
+  background: rgba(6, 182, 212, 0.07);
+  border: 1px solid rgba(6, 182, 212, 0.18);
+}
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.ngo-register-page .auth-card.wide form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  column-gap: 24px;
+  row-gap: 0;
+}
+
+/* =========================================================
+   FIELD
+   ========================================================= */
+
+.ngo-register-page .auth-field {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.ngo-register-page .auth-field > label {
+  display: block;
+  margin-bottom: 7px;
+
+  color: rgba(203, 213, 225, 0.9);
+
+  font-size: 11.5px;
+  font-weight: 650;
+}
+
+/* =========================================================
+   FIELD HEADER
+   ========================================================= */
+
+.ngo-register-page .auth-field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  margin-bottom: 7px;
+}
+
+.ngo-register-page .auth-field-header label {
+  margin: 0;
+}
+
+/* =========================================================
+   INPUT / SELECT / TEXTAREA
+   ========================================================= */
+
+.ngo-register-page .auth-field input,
+.ngo-register-page .auth-field select,
+.ngo-register-page .auth-field textarea {
+  width: 100%;
+
+  padding: 11px 13px;
+
+  color: #f8fafc;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 8px;
+
+  outline: none;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ngo-register-page .auth-field input::placeholder,
+.ngo-register-page .auth-field textarea::placeholder {
+  color: rgba(100, 116, 139, 0.85);
+}
+
+.ngo-register-page .auth-field input:hover,
+.ngo-register-page .auth-field select:hover,
+.ngo-register-page .auth-field textarea:hover {
+  border-color: rgba(148, 163, 184, 0.25);
+}
+
+.ngo-register-page .auth-field input:focus,
+.ngo-register-page .auth-field select:focus,
+.ngo-register-page .auth-field textarea:focus {
+  background: rgba(15, 23, 42, 0.72);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.09);
+}
+
+/* =========================================================
+   SELECT
+   ========================================================= */
+
+.ngo-register-page .auth-field select {
+  height: 41px;
+  cursor: pointer;
+}
+
+.ngo-register-page .auth-field select option {
+  color: #f8fafc;
+  background: #0f172a;
+}
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+.ngo-register-page .auth-field textarea {
+  min-height: 80px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   DISABLED ORGANIZATION TYPE
+   ========================================================= */
+
+.ngo-register-page .auth-field input:disabled {
+  color: rgba(148, 163, 184, 0.65);
+  background: rgba(15, 23, 42, 0.35);
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   INVALID FIELD
+   ========================================================= */
+
+.ngo-register-page .auth-field input.invalid,
+.ngo-register-page .auth-field select.invalid,
+.ngo-register-page .auth-field textarea.invalid {
+  border-color: rgba(239, 68, 68, 0.72);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
+}
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
+
+.ngo-register-page .auth-error {
+  margin-top: 6px;
+
+  color: #fca5a5;
+
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   PASSWORD GROUP
+   ========================================================= */
+
+.ngo-register-page .auth-password-group {
+  position: relative;
+  width: 100%;
+}
+
+.ngo-register-page .auth-password-group input {
+  padding-right: 44px;
+}
+
+/* =========================================================
+   PASSWORD VISIBILITY
+   ========================================================= */
+
+.ngo-register-page .auth-toggle-visibility {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+
+  width: 30px;
+  height: 30px;
+
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+
+  background: transparent;
+  color: rgba(148, 163, 184, 0.7);
+
+  cursor: pointer;
+  font-size: 13px;
+
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ngo-register-page .auth-toggle-visibility:hover {
+  color: #ffffff;
+  background: rgba(148, 163, 184, 0.09);
+}
+
+/* =========================================================
+   FILE INPUT
+   ========================================================= */
+
+.ngo-register-page .auth-field input[type="file"] {
+  min-height: 41px;
+
+  padding: 6px 7px;
+
+  cursor: pointer;
+
+  color: rgba(148, 163, 184, 0.8);
+}
+
+.ngo-register-page .auth-field input[type="file"]::file-selector-button {
+  margin-right: 9px;
+
+  padding: 7px 11px;
+
+  border: none;
+  border-radius: 6px;
+
+  color: #dbeafe;
+  background: #1e3a8a;
+
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.ngo-register-page .auth-field input[type="file"]::file-selector-button:hover {
+  background: #2563eb;
+}
+
+/* =========================================================
+   MAP LINK BUTTON
+   ========================================================= */
+
+.ngo-register-page .auth-link-button {
+  padding: 5px 8px;
+
+  border: 1px solid rgba(6, 182, 212, 0.1);
+  border-radius: 6px;
+
+  background: rgba(6, 182, 212, 0.07);
+  color: #67e8f9;
+
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.ngo-register-page .auth-link-button:hover {
+  color: #cffafe;
+  background: rgba(6, 182, 212, 0.13);
+  border-color: rgba(6, 182, 212, 0.22);
+}
+
+/* =========================================================
+   MAP
+   ========================================================= */
+
+.ngo-register-page .auth-map-wrap {
+  margin-top: 10px;
+  padding: 9px;
+
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(148, 163, 184, 0.13);
+  border-radius: 9px;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   ADDRESS ROW
+   ========================================================= */
+
+.ngo-register-page .auth-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* =========================================================
+   SUBMIT BUTTON
+   ========================================================= */
+
+.ngo-register-page .auth-submit {
+  grid-column: 1 / -1;
+
+  width: 100%;
+  margin-top: 6px;
+
+  padding: 13px 18px;
+
+  border: none;
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  background: linear-gradient(135deg, #2563eb 0%, #1685d4 48%, #0891b2 100%);
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.ngo-register-page .auth-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.07);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.28);
+}
+
+.ngo-register-page .auth-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.ngo-register-page .auth-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.ngo-register-page .auth-footer {
+  margin: 20px auto 0;
+
+  text-align: center;
+
+  color: rgba(100, 116, 139, 0.9);
+  font-size: 11px;
+}
+
+.ngo-register-page .auth-footer a {
+  margin-left: 4px;
+
+  color: #60a5fa;
+  text-decoration: none;
+  font-weight: 650;
+
+  transition: color 0.2s ease;
+}
+
+.ngo-register-page .auth-footer a:hover {
+  color: #93c5fd;
+  text-decoration: underline;
+}
+
+.ngo-register-page .auth-footer.mt-2 {
+  margin-top: 8px !important;
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .ngo-register-page .auth-card.wide {
+    padding: 44px 22px 48px;
+  }
+
+  .ngo-register-page .auth-card.wide form {
+    grid-template-columns: 1fr;
+  }
+
+  .ngo-register-page .auth-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .ngo-register-page .auth-card.wide {
+    padding: 32px 16px 36px;
+  }
+
+  .ngo-register-page .auth-back {
+    margin-bottom: 18px;
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+
+  .ngo-register-page .auth-brand h2 {
+    font-size: 24px;
+  }
+
+  .ngo-register-page .auth-subtitle {
+    margin-bottom: 22px;
+  }
+
+  .ngo-register-page .auth-field {
+    margin-bottom: 16px;
+  }
+
+  .ngo-register-page .auth-field input,
+  .ngo-register-page .auth-field select,
+  .ngo-register-page .auth-field textarea {
+    font-size: 12px;
+  }
+
+  .ngo-register-page .auth-submit {
+    padding: 11px 14px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+  .ngo-register-page .auth-card.wide {
+    padding: 26px 13px 30px;
+  }
+
+  .ngo-register-page .auth-field > label {
+    font-size: 10px;
+  }
+
+  .ngo-register-page .auth-field input,
+  .ngo-register-page .auth-field select,
+  .ngo-register-page .auth-field textarea {
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+
+  .ngo-register-page .auth-field select {
+    height: 38px;
+  }
+
+  .ngo-register-page .auth-brand h2 {
+    font-size: 22px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .ngo-register-page *,
+  .ngo-register-page *::before,
+  .ngo-register-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

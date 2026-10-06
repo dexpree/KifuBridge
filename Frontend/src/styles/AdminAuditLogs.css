@@ -1,0 +1,352 @@
+/* ==========================================================
+   ADMIN AUDIT LOGS — "Gate & Dossier" ledger
+   ----------------------------------------------------------
+   Same dark-glass system as the other admin pages. The log
+   table becomes a security ledger: a stat strip shows what
+   kinds of actions have happened at a glance, filter chips
+   (derived from the data, with live counts) replace scrolling
+   through raw text, a date range and sort narrow the window,
+   and a CSV export lets an admin take exactly what they're
+   looking at out of the app.
+========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root{
+  --aud-bg:            #0B1120;
+  --aud-panel:         rgba(24,31,51,.62);
+  --aud-panel-solid:   #131b2e;
+  --aud-border:        rgba(255,255,255,.08);
+  --aud-ink:           #F1F5F9;
+  --aud-ink-dim:       #93A0B8;
+
+  --aud-success:       #22C55E;
+  --aud-danger:        #EF4444;
+  --aud-dark:          #94A3B8;
+  --aud-primary:       #3B82F6;
+  --aud-warning:       #F59E0B;
+  --aud-secondary:     #8B5CF6;
+  --aud-gold:          #e8a33d;
+
+  --aud-font-display:  'Space Grotesk', 'Segoe UI', sans-serif;
+  --aud-font-body:     'Inter', 'Segoe UI', sans-serif;
+  --aud-font-mono:     'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* ==========================================================
+   PAGE SHELL
+========================================================== */
+
+.aud-page{
+  position:relative;
+  font-family:var(--aud-font-body);
+  color:var(--aud-ink);
+  padding-bottom:40px;
+}
+
+.aud-page::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size:38px 38px;
+  z-index:0;
+  mask-image:radial-gradient(circle at 30% 0%, #000 0%, transparent 70%);
+}
+
+/* ==========================================================
+   STAT STRIP
+========================================================== */
+
+.aud-stats{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:22px;
+}
+
+.aud-stat{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  padding:12px 18px;
+  background:var(--aud-panel);
+  border:1px solid var(--aud-border);
+  border-left:3px solid var(--aud-ink-dim);
+  border-radius:12px;
+  backdrop-filter:blur(14px);
+  min-width:120px;
+}
+
+.aud-stat-count{
+  font-family:var(--aud-font-display);
+  font-size:20px;
+  font-weight:700;
+  color:var(--aud-ink);
+}
+
+.aud-stat-label{
+  font-family:var(--aud-font-mono);
+  font-size:10.5px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--aud-ink-dim);
+}
+
+.aud-stat--success{ border-left-color:var(--aud-success); }
+.aud-stat--danger{ border-left-color:var(--aud-danger); }
+.aud-stat--dark{ border-left-color:var(--aud-dark); }
+.aud-stat--primary{ border-left-color:var(--aud-primary); }
+.aud-stat--warning{ border-left-color:var(--aud-warning); }
+.aud-stat--secondary{ border-left-color:var(--aud-secondary); }
+
+/* ==========================================================
+   TOOLBAR
+========================================================== */
+
+.aud-toolbar{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:12px;
+  margin-bottom:22px;
+}
+
+.aud-search{
+  flex:1 1 100%;
+  padding:12px 16px 12px 42px;
+  font-family:var(--aud-font-body);
+  font-size:14px;
+  color:var(--aud-ink);
+  background:var(--aud-panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2393A0B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") no-repeat 14px center;
+  border:1px solid var(--aud-border);
+  border-radius:12px;
+  backdrop-filter:blur(14px);
+  transition:border-color .2s, box-shadow .2s;
+}
+.aud-search::placeholder{ color:var(--aud-ink-dim); }
+.aud-search:focus{
+  outline:none;
+  border-color:var(--aud-primary);
+  box-shadow:0 0 0 4px rgba(59,130,246,.15);
+}
+
+.aud-chip-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  flex:1 1 auto;
+}
+
+.aud-chip{
+  padding:7px 15px;
+  font-family:var(--aud-font-display);
+  font-size:11.5px;
+  font-weight:600;
+  letter-spacing:.03em;
+  color:var(--aud-ink-dim);
+  background:var(--aud-panel);
+  border:1px solid var(--aud-border);
+  border-radius:999px;
+  cursor:pointer;
+  transition:color .2s, background .2s, border-color .2s;
+}
+.aud-chip:hover{ color:var(--aud-ink); }
+
+.aud-chip.is-active{ color:#fff; border-color:transparent; }
+.aud-chip--success.is-active{ background:var(--aud-success); }
+.aud-chip--danger.is-active{ background:var(--aud-danger); }
+.aud-chip--dark.is-active{ background:var(--aud-dark); color:#0B1120; }
+.aud-chip--primary.is-active{ background:var(--aud-primary); }
+.aud-chip--warning.is-active{ background:var(--aud-warning); color:#1b1200; }
+.aud-chip--secondary.is-active{ background:var(--aud-secondary); }
+.aud-chip:not([class*="aud-chip--"]).is-active,
+.aud-chip.is-active:not([class*="--"]){ background:var(--aud-gold); color:#1b1200; }
+
+.aud-toolbar-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-left:auto;
+  flex-wrap:wrap;
+}
+
+.aud-date-select{
+  padding:9px 32px 9px 14px;
+  font-family:var(--aud-font-body);
+  font-size:13px;
+  color:var(--aud-ink);
+  background:var(--aud-panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2393A0B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 12px center;
+  appearance:none;
+  border:1px solid var(--aud-border);
+  border-radius:10px;
+  backdrop-filter:blur(14px);
+  cursor:pointer;
+}
+.aud-date-select option{ background:var(--aud-panel-solid); color:var(--aud-ink); }
+
+.aud-sort{
+  display:flex;
+  gap:4px;
+  padding:4px;
+  background:var(--aud-panel);
+  border:1px solid var(--aud-border);
+  border-radius:10px;
+}
+.aud-sort-btn{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  padding:6px 11px;
+  font-family:var(--aud-font-display);
+  font-size:10.5px;
+  font-weight:600;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  color:var(--aud-ink-dim);
+  background:transparent;
+  border:none;
+  border-radius:7px;
+  cursor:pointer;
+  transition:color .2s, background .2s;
+}
+.aud-sort-btn:hover{ color:var(--aud-ink); }
+.aud-sort-btn.is-active{ color:var(--aud-gold); background:rgba(232,163,61,.14); }
+
+.aud-export-btn{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:9px 16px;
+  font-family:var(--aud-font-display);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.03em;
+  color:#fff;
+  background:linear-gradient(135deg, var(--aud-primary), var(--aud-secondary));
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(59,130,246,.28);
+  transition:transform .15s, box-shadow .2s, opacity .2s;
+}
+.aud-export-btn:hover:not(:disabled){ transform:translateY(-2px); box-shadow:0 12px 24px rgba(59,130,246,.36); }
+.aud-export-btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
+
+/* ==========================================================
+   TABLE CARD
+========================================================== */
+
+.aud-table-card{
+  position:relative;
+  z-index:1;
+  background:var(--aud-panel);
+  border:1px solid var(--aud-border);
+  border-radius:16px;
+  overflow:hidden;
+  backdrop-filter:blur(18px);
+  box-shadow:0 12px 30px rgba(0,0,0,.28);
+}
+
+.aud-table-wrap{
+  overflow-x:auto;
+}
+
+.aud-table{
+  width:100%;
+  border-collapse:collapse;
+  font-family:var(--aud-font-body);
+  font-size:13.5px;
+}
+
+.aud-table thead th{
+  position:sticky;
+  top:0;
+  padding:14px 20px;
+  text-align:left;
+  font-family:var(--aud-font-display);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--aud-ink-dim);
+  background:rgba(11,17,32,.85);
+  border-bottom:1px solid var(--aud-border);
+  white-space:nowrap;
+}
+
+.aud-table tbody tr{
+  border-bottom:1px dashed var(--aud-border);
+  transition:background .15s;
+}
+.aud-table tbody tr:last-child{ border-bottom:none; }
+.aud-table tbody tr:hover{ background:rgba(255,255,255,.03); }
+
+.aud-table td{
+  padding:13px 20px;
+  color:var(--aud-ink);
+  vertical-align:middle;
+}
+
+.aud-empty-cell{
+  text-align:center;
+  padding:50px 20px !important;
+  color:var(--aud-ink-dim);
+  font-family:var(--aud-font-display);
+}
+
+.aud-admin{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  white-space:nowrap;
+}
+.aud-admin i{ color:var(--aud-gold); font-size:13px; }
+
+.aud-description{
+  color:var(--aud-ink-dim);
+  max-width:280px;
+}
+
+.aud-date{
+  font-family:var(--aud-font-mono);
+  font-size:12px;
+  color:var(--aud-ink-dim);
+  white-space:nowrap;
+}
+
+/* ---- action badges: dashed stamp language, consistent with other pages ---- */
+.aud-badge{
+  display:inline-block;
+  padding:4px 11px;
+  font-family:var(--aud-font-mono);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.02em;
+  border-radius:6px;
+  border:1.5px dashed;
+  white-space:nowrap;
+}
+
+.aud-badge--success{ color:var(--aud-success); border-color:var(--aud-success); background:rgba(34,197,94,.08); }
+.aud-badge--danger{ color:var(--aud-danger); border-color:var(--aud-danger); background:rgba(239,68,68,.08); }
+.aud-badge--dark{ color:var(--aud-ink-dim); border-color:var(--aud-ink-dim); background:rgba(148,163,184,.08); }
+.aud-badge--primary{ color:var(--aud-primary); border-color:var(--aud-primary); background:rgba(59,130,246,.08); }
+.aud-badge--warning{ color:var(--aud-warning); border-color:var(--aud-warning); background:rgba(245,158,11,.08); }
+.aud-badge--secondary{ color:var(--aud-secondary); border-color:var(--aud-secondary); background:rgba(139,92,246,.08); }
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width:768px){
+  .aud-toolbar-right{ margin-left:0; width:100%; justify-content:space-between; }
+  .aud-description{ max-width:160px; }
+}

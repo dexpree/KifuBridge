@@ -1,0 +1,232 @@
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(
+    160deg,
+    #1b1f3b 0%,
+    #2d2f5e 40%,
+    #6b3f5c 75%,
+    #c96a4e 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fdf8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(closest-side, rgba(232, 163, 61, 0.2), transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.hero-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #fdf8f0;
+  opacity: 0.5;
+  animation: hero-twinkle 4s ease-in-out infinite;
+}
+.hs1 { width: 3px; height: 3px; top: 14%; left: 10%; animation-delay: 0s; }
+.hs2 { width: 2px; height: 2px; top: 10%; left: 85%; animation-delay: 1s; }
+.hs3 { width: 4px; height: 4px; top: 22%; left: 92%; animation-delay: 1.8s; }
+.hs4 { width: 2px; height: 2px; top: 8%; left: 20%; animation-delay: 2.5s; }
+
+@keyframes hero-twinkle {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.7; }
+}
+
+.hero-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 140px 32px 100px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 22px;
+  border-radius: 50px;
+
+  background: rgba(232, 163, 61, 0.12);
+  border: 1px solid rgba(232, 163, 61, 0.4);
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #f2c98c;
+}
+
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e8a33d;
+  box-shadow: 0 0 6px #e8a33d;
+}
+
+.hero-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 1.12;
+  margin: 28px 0 26px;
+  letter-spacing: 0.2px;
+}
+
+.hero-title-accent {
+  background: linear-gradient(100deg, #f2c98c, #e8a33d 60%, #f2c98c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* The mission line — sits between headline and description, italic
+   serif so it reads as a quiet conviction rather than marketing copy */
+.hero-quote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.5;
+  color: #f2c98c;
+  max-width: 480px;
+  margin: 0 0 22px;
+}
+
+.hero-description {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.75;
+  color: rgba(253, 248, 240, 0.75);
+  max-width: 500px;
+  margin-bottom: 40px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 56px;
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #facc15, #e8a33d);
+  border: none;
+  color: #1b1200;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.btn-warning:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(250, 204, 21, 0.35);
+}
+
+.btn-outline-light {
+  border: 1px solid rgba(253, 248, 240, 0.4);
+  color: #fdf8f0;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.btn-outline-light:hover {
+  background: #fdf8f0;
+  color: #1b1f3b;
+  border-color: #fdf8f0;
+}
+
+.stats {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
+.stat-card {
+  background: rgba(253, 248, 240, 0.07);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(253, 248, 240, 0.1);
+  padding: 18px 26px;
+  border-radius: 16px;
+  min-width: 110px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  background: rgba(232, 163, 61, 0.14);
+  border-color: rgba(232, 163, 61, 0.3);
+}
+
+.stat-card h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 26px;
+  color: #f2c98c;
+  margin-bottom: 2px;
+}
+
+.stat-card p {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+/* Closing mark — a thin gold line instead of an illustration,
+   just enough to give the section a deliberate end */
+.hero-divider {
+  width: 60px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #e8a33d, transparent);
+  opacity: 0.6;
+}
+
+@media (max-width: 640px) {
+  .hero-container {
+    padding: 120px 24px 80px;
+  }
+
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .hero-quote {
+    font-size: 18px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-star {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,1262 @@
+/* =========================================================
+   ADMIN COMPLAINT MANAGEMENT
+   KifuBridge Dark Glass Theme
+========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+  --ac-bg: #0b1120;
+
+  --ac-card: #151e32;
+  --ac-card-2: #111a2d;
+
+  --ac-border: rgba(255, 255, 255, 0.10);
+  --ac-border-hover: rgba(255, 255, 255, 0.18);
+
+  --ac-white: #ffffff;
+  --ac-text: #f1f5f9;
+  --ac-text-main: #e2e8f0;
+  --ac-text-soft: #cbd5e1;
+  --ac-muted: #94a3b8;
+  --ac-muted-dark: #64748b;
+
+  --ac-blue: #3b82f6;
+  --ac-purple: #8b5cf6;
+  --ac-green: #22c55e;
+  --ac-yellow: #f59e0b;
+  --ac-red: #ef4444;
+
+  --ac-font-display:
+    "Space Grotesk",
+    "Segoe UI",
+    sans-serif;
+
+  --ac-font-body:
+    "Inter",
+    "Segoe UI",
+    sans-serif;
+
+  --ac-font-mono:
+    "JetBrains Mono",
+    "Courier New",
+    monospace;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.ac-page {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 5px 0 50px;
+
+  box-sizing: border-box;
+
+  font-family: var(--ac-font-body);
+
+  color: var(--ac-text) !important;
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+========================================================= */
+
+.ac-page::before {
+  content: "";
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 38px 38px;
+
+  mask-image:
+    radial-gradient(
+      circle at 30% 0%,
+      #000 0%,
+      transparent 75%
+    );
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.ac-container {
+  position: relative;
+
+  z-index: 1;
+
+  width: 100%;
+
+  max-width: 1450px;
+
+  margin: 0 auto;
+
+  padding: 0 24px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   COMPLAINT GRID
+========================================================= */
+
+.ac-complaint-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 22px;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   COMPLAINT CARD
+========================================================= */
+
+.ac-complaint-card {
+  position: relative;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(25, 35, 57, 0.96),
+      rgba(14, 22, 39, 0.96)
+    ) !important;
+
+  border: 1px solid var(--ac-border);
+
+  border-left: 4px solid var(--ac-blue);
+
+  border-radius: 17px;
+
+  color: var(--ac-text) !important;
+
+  box-shadow:
+    0 14px 35px rgba(0, 0, 0, 0.38);
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* =========================================================
+   TOP SHINE
+========================================================= */
+
+.ac-complaint-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.20),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.ac-complaint-card:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    var(--ac-border-hover);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.48);
+}
+
+
+/* =========================================================
+   PRIORITY RAIL
+========================================================= */
+
+.ac-complaint-card.priority-high {
+  border-left-color: var(--ac-red);
+}
+
+.ac-complaint-card.priority-medium {
+  border-left-color: var(--ac-yellow);
+}
+
+.ac-complaint-card.priority-low {
+  border-left-color: var(--ac-green);
+}
+
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.ac-complaint-body {
+  position: relative;
+
+  padding: 25px;
+
+  color: var(--ac-text) !important;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.ac-complaint-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   TITLE WRAPPER
+========================================================= */
+
+.ac-complaint-title-wrapper {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+}
+
+
+/* =========================================================
+   COMPLAINT ICON
+========================================================= */
+
+.ac-complaint-icon {
+  width: 42px;
+
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 19px;
+
+  color: #fecaca !important;
+
+  background:
+    rgba(239, 68, 68, 0.13);
+
+  border:
+    1px solid rgba(239, 68, 68, 0.28);
+
+  border-radius: 11px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.ac-complaint-title {
+  margin: 0;
+
+  color: #ffffff !important;
+
+  font-family: var(--ac-font-display);
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  line-height: 1.35;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.ac-complaint-description {
+  margin: 0 0 20px;
+
+  color: #cbd5e1 !important;
+
+  font-family: var(--ac-font-body);
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  line-height: 1.7;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.ac-divider {
+  width: 100%;
+
+  height: 1px;
+
+  margin: 18px 0;
+
+  background:
+    rgba(255, 255, 255, 0.09);
+}
+
+
+/* =========================================================
+   USER INFORMATION
+========================================================= */
+
+.ac-user-info {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 13px;
+
+  margin-bottom: 20px;
+}
+
+
+.ac-user-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  min-width: 0;
+}
+
+
+.ac-user-icon {
+  width: 32px;
+
+  height: 32px;
+
+  flex: 0 0 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #c4b5fd !important;
+
+  background:
+    rgba(139, 92, 246, 0.12);
+
+  border:
+    1px solid rgba(139, 92, 246, 0.20);
+
+  border-radius: 8px;
+
+  font-size: 14px;
+}
+
+
+.ac-user-content {
+  min-width: 0;
+}
+
+
+.ac-user-label {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #94a3b8 !important;
+
+  font-family: var(--ac-font-display);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.07em;
+}
+
+
+.ac-user-name {
+  display: block;
+
+  color: #f1f5f9 !important;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  line-height: 1.4;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   INFORMATION GRID
+========================================================= */
+
+.ac-complaint-info {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   INFO ITEM
+========================================================= */
+
+.ac-info-item {
+  min-width: 0;
+
+  padding: 14px;
+
+  background:
+    rgba(255, 255, 255, 0.045) !important;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 11px;
+}
+
+
+.ac-info-label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #94a3b8 !important;
+
+  font-family: var(--ac-font-display);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.06em;
+}
+
+
+.ac-info-value {
+  display: block;
+
+  color: #f1f5f9 !important;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  line-height: 1.4;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.ac-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 26px;
+
+  padding: 4px 11px;
+
+  box-sizing: border-box;
+
+  border-radius: 999px;
+
+  font-family: var(--ac-font-display);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   PRIORITY BADGES
+========================================================= */
+
+.ac-badge.priority-high {
+  color: #fecaca !important;
+
+  background:
+    rgba(239, 68, 68, 0.15) !important;
+
+  border:
+    1px solid rgba(239, 68, 68, 0.40);
+}
+
+
+.ac-badge.priority-medium {
+  color: #fde68a !important;
+
+  background:
+    rgba(245, 158, 11, 0.15) !important;
+
+  border:
+    1px solid rgba(245, 158, 11, 0.40);
+}
+
+
+.ac-badge.priority-low {
+  color: #bbf7d0 !important;
+
+  background:
+    rgba(34, 197, 94, 0.15) !important;
+
+  border:
+    1px solid rgba(34, 197, 94, 0.40);
+}
+
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.ac-badge.status-resolved {
+  color: #bbf7d0 !important;
+
+  background:
+    rgba(34, 197, 94, 0.15) !important;
+
+  border:
+    1px solid rgba(34, 197, 94, 0.38);
+}
+
+
+.ac-badge.status-progress {
+  color: #bfdbfe !important;
+
+  background:
+    rgba(59, 130, 246, 0.15) !important;
+
+  border:
+    1px solid rgba(59, 130, 246, 0.38);
+}
+
+
+.ac-badge.status-pending {
+  color: #fde68a !important;
+
+  background:
+    rgba(245, 158, 11, 0.15) !important;
+
+  border:
+    1px solid rgba(245, 158, 11, 0.38);
+}
+
+
+/* =========================================================
+   REPLY SECTION
+========================================================= */
+
+.ac-reply-section {
+  margin-top: 20px;
+
+  padding-top: 19px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.09);
+}
+
+
+/* =========================================================
+   REPLY LABEL
+========================================================= */
+
+.ac-reply-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #cbd5e1 !important;
+
+  font-family: var(--ac-font-display);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.06em;
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+.ac-reply-textarea {
+  display: block;
+
+  width: 100%;
+
+  min-height: 95px;
+
+  padding: 13px 14px;
+
+  box-sizing: border-box;
+
+  resize: vertical;
+
+  color: #f8fafc !important;
+
+  caret-color: #ffffff;
+
+  background:
+    #0d1628 !important;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.12) !important;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  font-family: var(--ac-font-body);
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.ac-reply-textarea::placeholder {
+  color:
+    #64748b !important;
+
+  opacity: 1;
+}
+
+
+.ac-reply-textarea:hover {
+  border-color:
+    rgba(255, 255, 255, 0.20) !important;
+}
+
+
+.ac-reply-textarea:focus {
+  color: #ffffff !important;
+
+  background:
+    #0a1324 !important;
+
+  border-color:
+    var(--ac-blue) !important;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(59, 130, 246, 0.15);
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.ac-actions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 10px;
+
+  margin-top: 13px;
+}
+
+
+.ac-action-button {
+  min-height: 42px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 9px 14px;
+
+  border:
+    1px solid transparent;
+
+  border-radius: 9px;
+
+  font-family: var(--ac-font-body);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+
+.ac-action-button:hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.08);
+}
+
+
+.ac-action-button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   REPLY BUTTON
+========================================================= */
+
+.ac-reply-button {
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #3b82f6,
+      #7c5cff
+    ) !important;
+
+  box-shadow:
+    0 6px 18px
+    rgba(59, 130, 246, 0.22);
+}
+
+
+.ac-reply-button:hover {
+  color: #ffffff !important;
+
+  box-shadow:
+    0 9px 25px
+    rgba(59, 130, 246, 0.35);
+}
+
+
+/* =========================================================
+   RESOLVE BUTTON
+========================================================= */
+
+.ac-resolve-button {
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #22c55e,
+      #16a34a
+    ) !important;
+
+  box-shadow:
+    0 6px 18px
+    rgba(34, 197, 94, 0.20);
+}
+
+
+.ac-resolve-button:hover {
+  color: #ffffff !important;
+
+  box-shadow:
+    0 9px 25px
+    rgba(34, 197, 94, 0.32);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.ac-empty {
+  min-height: 260px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 45px 20px;
+
+  text-align: center;
+
+  color: var(--ac-text) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(24, 31, 51, 0.90),
+      rgba(15, 23, 42, 0.90)
+    ) !important;
+
+  border:
+    1px dashed rgba(255, 255, 255, 0.13);
+
+  border-radius: 17px;
+
+  backdrop-filter: blur(14px);
+}
+
+
+.ac-empty-icon {
+  margin-bottom: 12px;
+
+  font-size: 42px;
+}
+
+
+.ac-empty h3 {
+  margin: 0 0 7px;
+
+  color: #ffffff !important;
+
+  font-family: var(--ac-font-display);
+
+  font-size: 20px;
+
+  font-weight: 700;
+}
+
+
+.ac-empty p {
+  margin: 0;
+
+  color: #94a3b8 !important;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.ac-loading {
+  min-height: 400px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  color: #cbd5e1 !important;
+}
+
+
+.ac-loading p {
+  margin: 0;
+
+  color: #94a3b8 !important;
+
+  font-size: 14px;
+}
+
+
+.ac-spinner {
+  width: 42px;
+
+  height: 42px;
+
+  border:
+    4px solid
+    rgba(255, 255, 255, 0.08);
+
+  border-top-color:
+    var(--ac-blue);
+
+  border-right-color:
+    var(--ac-purple);
+
+  border-radius: 50%;
+
+  animation:
+    ac-spin 0.8s linear infinite;
+}
+
+
+@keyframes ac-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.ac-error {
+  max-width: 650px;
+
+  margin: 50px auto;
+
+  padding: 35px;
+
+  text-align: center;
+
+  color: var(--ac-text) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30, 25, 42, 0.95),
+      rgba(18, 20, 35, 0.95)
+    ) !important;
+
+  border:
+    1px solid rgba(239, 68, 68, 0.25);
+
+  border-left:
+    4px solid var(--ac-red);
+
+  border-radius: 16px;
+}
+
+
+.ac-error-icon {
+  margin-bottom: 12px;
+
+  font-size: 38px;
+}
+
+
+.ac-error h3 {
+  margin: 0 0 8px;
+
+  color: #ffffff !important;
+
+  font-family: var(--ac-font-display);
+
+  font-size: 19px;
+}
+
+
+.ac-error p {
+  margin: 0 0 20px;
+
+  color: #94a3b8 !important;
+
+  font-size: 13px;
+}
+
+
+.ac-error-button {
+  min-height: 40px;
+
+  padding: 9px 17px;
+
+  color: #ffffff !important;
+
+  background:
+    rgba(239, 68, 68, 0.16) !important;
+
+  border:
+    1px solid rgba(239, 68, 68, 0.35);
+
+  border-radius: 9px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   FORCE TEXT VISIBILITY
+   Prevent Bootstrap / global styles from overriding
+========================================================= */
+
+.ac-page h1,
+.ac-page h2,
+.ac-page h3,
+.ac-page h4,
+.ac-page h5,
+.ac-page h6,
+.ac-page p,
+.ac-page span,
+.ac-page strong,
+.ac-page label {
+  opacity: 1 !important;
+}
+
+
+/* Complaint title */
+.ac-page .ac-complaint-title {
+  color: #ffffff !important;
+}
+
+
+/* Description */
+.ac-page .ac-complaint-description {
+  color: #cbd5e1 !important;
+}
+
+
+/* User names */
+.ac-page .ac-user-name {
+  color: #f1f5f9 !important;
+}
+
+
+/* Labels */
+.ac-page .ac-user-label,
+.ac-page .ac-info-label,
+.ac-page .ac-reply-label {
+  color: #94a3b8 !important;
+}
+
+
+/* Category */
+.ac-page .ac-info-value {
+  color: #f1f5f9 !important;
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.ac-action-button:focus-visible,
+.ac-reply-textarea:focus-visible,
+.ac-error-button:focus-visible {
+  outline:
+    2px solid var(--ac-blue);
+
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .ac-complaint-card,
+  .ac-action-button,
+  .ac-reply-textarea,
+  .ac-error-button,
+  .ac-spinner {
+    animation: none !important;
+
+    transition: none !important;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .ac-complaint-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .ac-container {
+    padding-left: 14px;
+
+    padding-right: 14px;
+  }
+
+
+  .ac-complaint-body {
+    padding: 20px;
+  }
+
+
+  .ac-complaint-header {
+    flex-direction: column;
+  }
+
+
+  .ac-complaint-title {
+    font-size: 18px;
+  }
+
+
+  .ac-complaint-info {
+    grid-template-columns: 1fr;
+  }
+
+
+  .ac-actions {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .ac-container {
+    padding-left: 10px;
+
+    padding-right: 10px;
+  }
+
+
+  .ac-complaint-body {
+    padding: 17px;
+  }
+
+
+  .ac-complaint-title {
+    font-size: 17px;
+  }
+
+
+  .ac-complaint-description {
+    font-size: 13px;
+  }
+
+
+  .ac-user-name {
+    font-size: 13px;
+  }
+
+}

@@ -1,0 +1,719 @@
+/* ============================================================
+   NGO PAYMENTS PAGE
+   ============================================================ */
+
+.ngo-payments-page {
+  width: 100%;
+  padding-bottom: 40px;
+  color: #f5f1e8;
+}
+
+/* ============================================================
+   ALERT
+   ============================================================ */
+
+.ngo-payments-alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0;
+  padding: 14px 18px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  background: rgba(127, 29, 29, 0.18);
+  color: #fca5a5;
+  font-size: 13px;
+}
+
+.ngo-payments-alert i {
+  font-size: 17px;
+}
+
+.ngo-payments-alert span {
+  flex: 1;
+}
+
+.ngo-payments-alert button {
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 8px;
+  padding: 7px 14px;
+  background: transparent;
+  color: #fbbf24;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.ngo-payments-alert button:hover {
+  background: rgba(251, 191, 36, 0.1);
+}
+
+/* ============================================================
+   LOADING / STATE
+   ============================================================ */
+
+.ngo-payments-state {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(38, 28, 58, 0.72);
+}
+
+.ngo-payments-state .spinner-border {
+  width: 34px;
+  height: 34px;
+  margin-bottom: 18px;
+  color: #fbbf24;
+  border-width: 3px;
+}
+
+.ngo-payments-state h5 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  color: #f5f1e8;
+}
+
+.ngo-payments-state p {
+  margin: 0;
+  color: #9690a8;
+  font-size: 13px;
+}
+
+/* ============================================================
+   STATISTICS
+   ============================================================ */
+
+.ngo-payment-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 22px 0;
+}
+
+.ngo-payment-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 105px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: linear-gradient(
+    145deg,
+    rgba(43, 31, 65, 0.95),
+    rgba(31, 23, 49, 0.95)
+  );
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.ngo-payment-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(251, 191, 36, 0.22);
+}
+
+.ngo-payment-stat-icon {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  font-size: 20px;
+}
+
+.ngo-payment-stat-content {
+  min-width: 0;
+}
+
+.ngo-payment-stat-content span {
+  display: block;
+  margin-bottom: 5px;
+  color: #9891aa;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.ngo-payment-stat-content strong {
+  display: block;
+  color: #f5f1e8;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* ============================================================
+   PAYMENT METHOD SUMMARY
+   ============================================================ */
+
+.ngo-payment-method-summary {
+  margin-bottom: 22px;
+  padding: 20px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: rgba(36, 27, 56, 0.76);
+}
+
+.method-summary-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 18px;
+  color: #f5f1e8;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.method-summary-title i {
+  color: #fbbf24;
+}
+
+.method-summary-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.method-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.method-summary-item > i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 9px;
+  background: rgba(251, 191, 36, 0.08);
+  color: #fbbf24;
+}
+
+.method-summary-item div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.method-summary-item span {
+  color: #9690a8;
+  font-size: 11px;
+}
+
+.method-summary-item strong {
+  color: #f5f1e8;
+  font-size: 15px;
+}
+
+/* ============================================================
+   MAIN PAYMENTS CARD
+   ============================================================ */
+
+.ngo-payments-card {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  background: linear-gradient(
+    145deg,
+    rgba(40, 29, 61, 0.97),
+    rgba(27, 20, 43, 0.98)
+  );
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
+}
+
+/* ============================================================
+   CARD HEADER
+   ============================================================ */
+
+.ngo-payments-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.ngo-payments-kicker {
+  display: block;
+  margin-bottom: 6px;
+  color: #fbbf24;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+}
+
+.ngo-payments-card-header h3 {
+  margin: 0;
+  color: #f5f1e8;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.ngo-refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(251, 191, 36, 0.22);
+  border-radius: 9px;
+  padding: 9px 14px;
+  background: rgba(251, 191, 36, 0.05);
+  color: #d4cfdc;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ngo-refresh-btn i {
+  color: #fbbf24;
+}
+
+.ngo-refresh-btn:hover {
+  border-color: rgba(251, 191, 36, 0.5);
+  background: rgba(251, 191, 36, 0.1);
+  color: #f5f1e8;
+}
+
+/* ============================================================
+   FILTERS
+   ============================================================ */
+
+.ngo-payment-filters {
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) 180px 180px;
+  gap: 12px;
+  padding: 20px 24px 12px;
+}
+
+.ngo-payment-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ngo-payment-search > i {
+  position: absolute;
+  left: 14px;
+  color: #777083;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.ngo-payment-search input {
+  width: 100%;
+  height: 42px;
+  padding: 0 40px 0 38px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 9px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.035);
+  color: #f5f1e8;
+  font-size: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.ngo-payment-search input::placeholder {
+  color: #716b7c;
+}
+
+.ngo-payment-search input:focus {
+  border-color: rgba(251, 191, 36, 0.45);
+}
+
+.ngo-payment-search > button {
+  position: absolute;
+  right: 9px;
+  width: 25px;
+  height: 25px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #888091;
+  cursor: pointer;
+}
+
+.ngo-payment-search > button:hover {
+  color: #f5f1e8;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.ngo-payment-filters select {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 9px;
+  outline: none;
+  background: #251c38;
+  color: #d8d2df;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ngo-payment-filters select:focus {
+  border-color: rgba(251, 191, 36, 0.45);
+}
+
+.ngo-payment-filters select option {
+  background: #251c38;
+  color: #f5f1e8;
+}
+
+/* ============================================================
+   RESULTS COUNT
+   ============================================================ */
+
+.ngo-payment-results {
+  padding: 4px 24px 16px;
+  color: #777183;
+  font-size: 11px;
+}
+
+.ngo-payment-results strong {
+  color: #bcb5c7;
+}
+
+/* ============================================================
+   TABLE WRAPPER
+   ============================================================ */
+
+.ngo-payments-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+
+.ngo-payments-table {
+  width: 100%;
+  min-width: 950px;
+  border-collapse: collapse;
+}
+
+.ngo-payments-table thead {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.ngo-payments-table th {
+  padding: 13px 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  color: #827b8d;
+  font-size: 9px;
+  font-weight: 700;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+}
+
+.ngo-payments-table td {
+  padding: 15px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+  color: #d5cfdb;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.ngo-payments-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.ngo-payments-table tbody tr:hover {
+  background: rgba(251, 191, 36, 0.025);
+}
+
+.ngo-payments-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ============================================================
+   DONOR CELL
+   ============================================================ */
+
+.ngo-donor-cell {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 190px;
+}
+
+.ngo-donor-avatar {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 10px;
+  background: rgba(251, 191, 36, 0.08);
+  color: #fbbf24;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ngo-donor-cell > div:last-child {
+  min-width: 0;
+}
+
+.ngo-donor-cell strong {
+  display: block;
+  max-width: 180px;
+  overflow: hidden;
+  color: #e8e3eb;
+  font-size: 12px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ngo-donor-cell span {
+  display: block;
+  max-width: 180px;
+  margin-top: 3px;
+  overflow: hidden;
+  color: #777183;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   AMOUNT
+   ============================================================ */
+
+.ngo-payment-amount {
+  color: #fbbf24;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   PAYMENT METHOD
+   ============================================================ */
+
+.ngo-method-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 110px;
+  padding: 6px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.025);
+  color: #bdb6c7;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.ngo-method-badge i {
+  color: #fbbf24;
+  font-size: 12px;
+}
+
+/* ============================================================
+   TRANSACTION ID
+   ============================================================ */
+
+.ngo-transaction-id {
+  display: inline-block;
+  max-width: 145px;
+  overflow: hidden;
+  color: #8f889b;
+  font-family: "Courier New", monospace;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   DATE
+   ============================================================ */
+
+.ngo-payment-date {
+  display: inline-block;
+  min-width: 125px;
+  color: #9c95a7;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+
+.ngo-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 9px;
+  border: 1px solid rgba(34, 197, 94, 0.16);
+  border-radius: 7px;
+  background: rgba(34, 197, 94, 0.06);
+  color: #86d6a0;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ngo-status-badge i {
+  font-size: 10px;
+}
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.ngo-payments-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 330px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.ngo-payments-empty-icon {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 17px;
+  border: 1px solid rgba(251, 191, 36, 0.16);
+  border-radius: 18px;
+  background: rgba(251, 191, 36, 0.06);
+  color: #fbbf24;
+  font-size: 25px;
+}
+
+.ngo-payments-empty h4 {
+  margin: 0 0 7px;
+  color: #e6e0e9;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+}
+
+.ngo-payments-empty p {
+  max-width: 400px;
+  margin: 0;
+  color: #777183;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   RESPONSIVE — TABLET
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+  .ngo-payment-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ngo-payment-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ngo-payment-search {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+  .ngo-payment-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .ngo-payment-method-summary {
+    padding: 16px;
+  }
+
+  .method-summary-items {
+    grid-template-columns: 1fr;
+  }
+
+  .ngo-payments-card-header {
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px 16px;
+  }
+
+  .ngo-payments-card-header h3 {
+    font-size: 19px;
+  }
+
+  .ngo-refresh-btn {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .ngo-payment-filters {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .ngo-payment-search {
+    grid-column: auto;
+  }
+
+  .ngo-payment-results {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .ngo-payments-table th,
+  .ngo-payments-table td {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+}
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 450px) {
+
+  .ngo-payment-stat-card {
+    padding: 15px;
+  }
+
+  .ngo-payment-stat-content strong {
+    font-size: 17px;
+  }
+
+  .ngo-payments-card-header {
+    flex-direction: column;
+  }
+
+  .ngo-refresh-btn {
+    align-self: flex-start;
+  }
+}

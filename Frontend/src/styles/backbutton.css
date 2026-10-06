@@ -1,0 +1,10 @@
+.back-btn{
+    border-radius:12px;
+    padding:10px 20px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    transform:translateX(-5px);
+}

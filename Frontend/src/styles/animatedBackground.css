@@ -1,0 +1,62 @@
+.animated-bg{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+}
+
+.gradient-overlay{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top,#3b82f622 0%,transparent 45%),
+    radial-gradient(circle at bottom right,#06b6d433 0%,transparent 40%);
+    z-index:1;
+}
+
+.blur{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(140px);
+    animation:float 18s ease-in-out infinite;
+    z-index:1;
+}
+
+.blur1{
+    width:350px;
+    height:350px;
+    background:#2563eb44;
+    top:-100px;
+    left:-80px;
+}
+
+.blur2{
+    width:450px;
+    height:450px;
+    background:#06b6d433;
+    bottom:-180px;
+    right:-150px;
+    animation-delay:4s;
+}
+
+.blur3{
+    width:300px;
+    height:300px;
+    background:#3b82f633;
+    top:40%;
+    left:45%;
+    animation-delay:8s;
+}
+
+@keyframes float{
+
+0%,100%{
+transform:translate(0,0);
+}
+
+50%{
+transform:translate(70px,-60px);
+}
+
+}

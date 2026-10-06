@@ -1,0 +1,146 @@
+/* ===========================
+   HERO BANNER — glass card with a pulsing signature heart
+=========================== */
+
+.hero-banner {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  padding: 32px 34px;
+  border-radius: 24px;
+
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01)),
+    linear-gradient(135deg, rgba(27, 31, 59, 0.75), rgba(45, 47, 94, 0.65));
+
+  border: 1px solid rgba(232, 163, 61, 0.16);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  color: #fdf8f0 !important;
+}
+
+.hero-banner-glow {
+  position: absolute;
+  top: -60%;
+  right: -10%;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(232, 163, 61, 0.18), transparent 70%);
+  pointer-events: none;
+}
+
+.hero-banner-body {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #e8a33d !important;
+}
+
+.hero-greeting {
+  margin: 0 0 10px;
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: 0.2px;
+  background: linear-gradient(100deg, #fdf8f0 20%, #e8a33d 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-message {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(253, 248, 240, 0.75) !important;
+}
+
+/* signature element — a soft pulsing ring behind the heart,
+   the one piece of motion this card spends its attention on */
+.hero-icon {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, rgba(232, 163, 61, 0.22), rgba(232, 163, 61, 0.06));
+  border: 1px solid rgba(232, 163, 61, 0.3);
+  color: #facc15 !important;
+}
+
+.hero-icon-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 163, 61, 0.35);
+  animation: hero-pulse 2.6s ease-out infinite;
+}
+
+.hero-heart {
+  filter: drop-shadow(0 0 6px rgba(232, 163, 61, 0.5));
+}
+
+@keyframes hero-pulse {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  70% { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-icon-ring {
+    animation: none;
+    opacity: 0.4;
+  }
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 640px) {
+  .hero-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 26px 22px;
+    gap: 18px;
+  }
+
+  .hero-greeting {
+    font-size: 22px;
+  }
+
+  .hero-icon {
+    width: 56px;
+    height: 56px;
+    align-self: flex-end;
+    margin-top: -48px;
+  }
+}

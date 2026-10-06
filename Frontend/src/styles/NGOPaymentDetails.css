@@ -1,0 +1,1364 @@
+/* ============================================================
+   KIFUBRIDGE — NGO PAYMENT DETAILS
+   DARK GLASSMORPHISM / PREMIUM DASHBOARD
+============================================================ */
+
+.ngo-payment-page {
+  --payment-primary: #f5b91b;
+  --payment-primary-light: #ffd45a;
+  --payment-primary-dark: #d99b08;
+
+  --payment-bg: #0d1024;
+  --payment-bg-soft: #12152d;
+
+  --payment-glass: rgba(255, 255, 255, 0.055);
+  --payment-glass-strong: rgba(255, 255, 255, 0.075);
+
+  --payment-border: rgba(255, 255, 255, 0.10);
+  --payment-border-soft: rgba(255, 255, 255, 0.065);
+
+  --payment-text: #f3f0e8;
+  --payment-text-soft: #d9d7d0;
+  --payment-muted: #9da1b6;
+  --payment-muted-dark: #777c95;
+
+  color: var(--payment-text);
+
+  padding-bottom: 50px;
+
+  position: relative;
+}
+
+
+/* ============================================================
+   SOFT BACKGROUND GLOW
+============================================================ */
+
+.ngo-payment-page::before {
+  content: "";
+
+  position: fixed;
+
+  width: 420px;
+  height: 420px;
+
+  top: 80px;
+  right: 8%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(245, 185, 27, 0.08) 0%,
+      rgba(245, 185, 27, 0.025) 40%,
+      transparent 72%
+    );
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+
+.ngo-payment-page::after {
+  content: "";
+
+  position: fixed;
+
+  width: 500px;
+  height: 500px;
+
+  bottom: -180px;
+  left: 5%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(100, 75, 180, 0.09) 0%,
+      rgba(100, 75, 180, 0.025) 45%,
+      transparent 72%
+    );
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+
+/* ============================================================
+   KEEP CONTENT ABOVE BACKGROUND
+============================================================ */
+
+.ngo-payment-page > * {
+  position: relative;
+
+  z-index: 1;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+============================================================ */
+
+.ngo-payment-page .page-header {
+  margin-bottom: 28px;
+}
+
+
+/* If PageHeader uses common heading elements */
+
+.ngo-payment-page .page-header h1,
+.ngo-payment-page .page-header h2,
+.ngo-payment-page .page-header h3 {
+  color: var(--payment-text);
+}
+
+
+.ngo-payment-page .page-header p {
+  color: var(--payment-muted);
+}
+
+
+/* ============================================================
+   STATUS CARD
+============================================================ */
+
+.ngo-payment-status {
+  position: relative;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 20px;
+
+  padding: 24px 26px;
+
+  margin-bottom: 24px;
+
+  border-radius: 18px;
+
+  border: 1px solid var(--payment-border);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.075),
+      rgba(255, 255, 255, 0.035)
+    );
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.ngo-payment-status:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(245, 185, 27, 0.22);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.24),
+    0 0 30px rgba(245, 185, 27, 0.035);
+}
+
+
+/* ============================================================
+   STATUS DECORATIVE LINE
+============================================================ */
+
+.ngo-payment-status::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 4px;
+
+  background: var(--payment-primary);
+
+  border-radius: 18px 0 0 18px;
+
+  box-shadow:
+    0 0 15px rgba(245, 185, 27, 0.35);
+}
+
+
+/* ============================================================
+   STATUS ICON
+============================================================ */
+
+.ngo-payment-status-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 56px;
+  height: 56px;
+
+  flex-shrink: 0;
+
+  border-radius: 15px;
+
+  background:
+    rgba(245, 185, 27, 0.10);
+
+  border:
+    1px solid
+    rgba(245, 185, 27, 0.16);
+
+  color:
+    var(--payment-primary-light);
+
+  font-size: 23px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+
+/* ============================================================
+   STATUS CONTENT
+============================================================ */
+
+.ngo-payment-status-content {
+  flex: 1;
+
+  min-width: 0;
+}
+
+
+.ngo-payment-status-label {
+  margin-bottom: 4px;
+
+  color:
+    var(--payment-muted);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.2px;
+
+  text-transform: uppercase;
+}
+
+
+.ngo-payment-status-content h4 {
+  margin: 0;
+
+  color:
+    var(--payment-text);
+
+  font-size: 21px;
+
+  font-weight: 700;
+}
+
+
+.ngo-payment-status-content p {
+  margin: 7px 0 0;
+
+  max-width: 850px;
+
+  color:
+    var(--payment-muted);
+
+  font-size: 14px;
+
+  line-height: 1.65;
+}
+
+
+.ngo-payment-status-content small {
+  display: inline-block;
+
+  margin-top: 8px;
+
+  color: #69d49a;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   STATUS COLORS
+============================================================ */
+
+/* -------------------------
+   NOT SUBMITTED
+------------------------- */
+
+.ngo-payment-status.status-not-submitted::before {
+  background: #8b90a4;
+
+  box-shadow:
+    0 0 12px rgba(139, 144, 164, 0.25);
+}
+
+
+.ngo-payment-status.status-not-submitted
+.ngo-payment-status-icon {
+  color: #aeb2c2;
+
+  background:
+    rgba(139, 144, 164, 0.09);
+
+  border-color:
+    rgba(139, 144, 164, 0.14);
+}
+
+
+/* -------------------------
+   PENDING
+------------------------- */
+
+.ngo-payment-status.status-pending::before {
+  background: #e7a917;
+
+  box-shadow:
+    0 0 15px rgba(231, 169, 23, 0.3);
+}
+
+
+.ngo-payment-status.status-pending
+.ngo-payment-status-icon {
+  color: #ffc84a;
+
+  background:
+    rgba(231, 169, 23, 0.10);
+
+  border-color:
+    rgba(231, 169, 23, 0.16);
+}
+
+
+/* -------------------------
+   VERIFIED
+------------------------- */
+
+.ngo-payment-status.status-verified::before {
+  background: #31b875;
+
+  box-shadow:
+    0 0 15px rgba(49, 184, 117, 0.3);
+}
+
+
+.ngo-payment-status.status-verified
+.ngo-payment-status-icon {
+  color: #61d89b;
+
+  background:
+    rgba(49, 184, 117, 0.10);
+
+  border-color:
+    rgba(49, 184, 117, 0.16);
+}
+
+
+/* -------------------------
+   REJECTED
+------------------------- */
+
+.ngo-payment-status.status-rejected::before {
+  background: #e45b5b;
+
+  box-shadow:
+    0 0 15px rgba(228, 91, 91, 0.28);
+}
+
+
+.ngo-payment-status.status-rejected
+.ngo-payment-status-icon {
+  color: #ff7c7c;
+
+  background:
+    rgba(228, 91, 91, 0.10);
+
+  border-color:
+    rgba(228, 91, 91, 0.16);
+}
+
+
+/* ============================================================
+   REJECTION MESSAGE
+============================================================ */
+
+.ngo-payment-rejection {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin-top: 14px;
+
+  padding: 12px 14px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(228, 91, 91, 0.20);
+
+  background:
+    rgba(228, 91, 91, 0.075);
+
+  color:
+    #f09a9a;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+.ngo-payment-rejection strong {
+  color: #ffb0b0;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   SECURITY NOTICE
+============================================================ */
+
+.ngo-payment-security {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 20px;
+
+  padding: 15px 18px;
+
+  border:
+    1px solid
+    rgba(78, 145, 224, 0.18) !important;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(62, 121, 200, 0.10),
+      rgba(62, 121, 200, 0.045)
+    ) !important;
+
+  color:
+    #9db9d8 !important;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.025);
+}
+
+
+.ngo-payment-security i {
+  color: #71a8df;
+
+  font-size: 17px;
+}
+
+
+.ngo-payment-security strong {
+  color: #c0d6ed;
+}
+
+
+/* ============================================================
+   SUCCESS / ERROR ALERTS
+============================================================ */
+
+.ngo-payment-page > .alert {
+  display: flex;
+
+  align-items: center;
+
+  margin-bottom: 20px;
+
+  padding: 13px 16px;
+
+  border-radius: 12px;
+
+  font-size: 13px;
+
+  box-shadow: none;
+}
+
+
+/* SUCCESS */
+
+.ngo-payment-page > .alert-success {
+  border:
+    1px solid
+    rgba(49, 184, 117, 0.20);
+
+  background:
+    rgba(49, 184, 117, 0.075);
+
+  color:
+    #8ce0b4;
+}
+
+
+/* ERROR */
+
+.ngo-payment-page > .alert-danger {
+  border:
+    1px solid
+    rgba(228, 91, 91, 0.20);
+
+  background:
+    rgba(228, 91, 91, 0.075);
+
+  color:
+    #f29b9b;
+}
+
+
+/* ============================================================
+   MAIN FORM
+============================================================ */
+
+.ngo-payment-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 22px;
+}
+
+
+/* ============================================================
+   FORM SECTIONS
+============================================================ */
+
+.ngo-payment-section {
+  padding: 28px;
+
+  border:
+    1px solid
+    var(--payment-border);
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.065),
+      rgba(255, 255, 255, 0.028)
+    );
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.ngo-payment-section:hover {
+  border-color:
+    rgba(255, 255, 255, 0.13);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+
+/* ============================================================
+   SECTION HEADING
+============================================================ */
+
+.ngo-payment-section-heading {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 15px;
+
+  padding-bottom: 22px;
+
+  margin-bottom: 24px;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+}
+
+
+.ngo-payment-section-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  border-radius: 13px;
+
+  background:
+    rgba(245, 185, 27, 0.10);
+
+  border:
+    1px solid
+    rgba(245, 185, 27, 0.14);
+
+  color:
+    var(--payment-primary-light);
+
+  font-size: 20px;
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.12);
+}
+
+
+.ngo-payment-section-heading h4 {
+  margin: 1px 0 5px;
+
+  color:
+    var(--payment-text);
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+
+.ngo-payment-section-heading p {
+  margin: 0;
+
+  color:
+    var(--payment-muted);
+
+  font-size: 13px;
+
+  line-height: 1.55;
+}
+
+
+/* ============================================================
+   FORM LABEL
+============================================================ */
+
+.ngo-payment-form .form-label {
+  margin-bottom: 8px;
+
+  color:
+    #dedde0;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+.ngo-payment-form .text-danger {
+  color:
+    #ff7373 !important;
+}
+
+
+/* ============================================================
+   INPUTS
+============================================================ */
+
+.ngo-payment-form .form-control,
+.ngo-payment-form .form-select {
+  min-height: 48px;
+
+  padding:
+    11px
+    14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.11);
+
+  border-radius: 11px;
+
+  background:
+    rgba(7, 9, 25, 0.40);
+
+  color:
+    #eeeef1;
+
+  font-size: 14px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* Hover */
+
+.ngo-payment-form .form-control:hover,
+.ngo-payment-form .form-select:hover {
+  border-color:
+    rgba(255, 255, 255, 0.17);
+
+  background:
+    rgba(7, 9, 25, 0.50);
+}
+
+
+/* Focus */
+
+.ngo-payment-form .form-control:focus,
+.ngo-payment-form .form-select:focus {
+  border-color:
+    rgba(245, 185, 27, 0.65);
+
+  background:
+    rgba(7, 9, 25, 0.60);
+
+  color:
+    #ffffff;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(245, 185, 27, 0.10),
+    0 5px 20px
+    rgba(0, 0, 0, 0.12);
+
+  outline: none;
+}
+
+
+/* Placeholder */
+
+.ngo-payment-form .form-control::placeholder {
+  color:
+    #777c91;
+
+  font-size: 13px;
+
+  opacity: 1;
+}
+
+
+/* ============================================================
+   PASSWORD / ACCOUNT NUMBER
+============================================================ */
+
+.ngo-payment-form input[type="password"] {
+  letter-spacing: 1px;
+}
+
+
+/* ============================================================
+   SELECT
+============================================================ */
+
+.ngo-payment-form .form-select {
+  cursor: pointer;
+
+  color:
+    #e5e4e8;
+}
+
+
+/* Bootstrap select arrow visibility */
+
+.ngo-payment-form .form-select option {
+  background:
+    #171a35;
+
+  color:
+    #eeeeef;
+}
+
+
+/* ============================================================
+   SMALL HELPER TEXT
+============================================================ */
+
+.ngo-payment-form .text-muted {
+  display: block;
+
+  margin-top: 7px;
+
+  color:
+    #85899c !important;
+
+  font-size: 11px;
+}
+
+
+/* ============================================================
+   UPI SECTION
+============================================================ */
+
+.ngo-payment-section:nth-of-type(2)
+.ngo-payment-section-icon {
+  color:
+    #b7a8ff;
+
+  background:
+    rgba(108, 86, 199, 0.12);
+
+  border-color:
+    rgba(108, 86, 199, 0.18);
+}
+
+
+/* ============================================================
+   VERIFICATION NOTICE
+============================================================ */
+
+.ngo-payment-review-notice {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 15px;
+
+  padding: 20px 22px;
+
+  border:
+    1px solid
+    rgba(245, 185, 27, 0.20);
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(245, 185, 27, 0.09),
+      rgba(245, 185, 27, 0.035)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.025);
+}
+
+
+.ngo-payment-review-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  background:
+    rgba(245, 185, 27, 0.11);
+
+  border:
+    1px solid
+    rgba(245, 185, 27, 0.16);
+
+  color:
+    var(--payment-primary-light);
+
+  font-size: 19px;
+}
+
+
+.ngo-payment-review-notice h5 {
+  margin:
+    1px
+    0
+    5px;
+
+  color:
+    #f0dfad;
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+
+.ngo-payment-review-notice p {
+  margin: 0;
+
+  color:
+    #aaa38d;
+
+  font-size: 13px;
+
+  line-height: 1.65;
+}
+
+
+/* ============================================================
+   ACTIONS
+============================================================ */
+
+.ngo-payment-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  padding-top: 3px;
+}
+
+
+/* ============================================================
+   SUBMIT BUTTON
+============================================================ */
+
+.ngo-payment-actions .btn-primary {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 235px;
+
+  min-height: 52px;
+
+  padding:
+    12px
+    22px;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e9a914,
+      #ffc928
+    );
+
+  color:
+    #17130a;
+
+  font-size: 13px;
+
+  font-weight: 750;
+
+  box-shadow:
+    0 9px 25px
+    rgba(245, 185, 27, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+
+.ngo-payment-actions .btn-primary:hover {
+  border: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f1b21a,
+      #ffd43e
+    );
+
+  color:
+    #17130a;
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 13px 30px
+    rgba(245, 185, 27, 0.27);
+
+  filter:
+    brightness(1.04);
+}
+
+
+.ngo-payment-actions .btn-primary:active {
+  transform:
+    translateY(0);
+
+  box-shadow:
+    0 6px 15px
+    rgba(245, 185, 27, 0.15);
+}
+
+
+.ngo-payment-actions .btn-primary:focus {
+  box-shadow:
+    0 0 0 4px
+    rgba(245, 185, 27, 0.14),
+    0 9px 25px
+    rgba(245, 185, 27, 0.18);
+}
+
+
+.ngo-payment-actions .btn-primary:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.55;
+
+  transform: none;
+
+  box-shadow: none;
+}
+
+
+/* ============================================================
+   LOADING STATE
+============================================================ */
+
+.ngo-payment-loading {
+  min-height: 65vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  color:
+    var(--payment-muted);
+}
+
+
+.ngo-payment-loading .spinner-border {
+  width: 38px;
+  height: 38px;
+
+  margin-bottom: 18px;
+
+  color:
+    var(--payment-primary);
+}
+
+
+.ngo-payment-loading h5 {
+  margin:
+    0 0 7px;
+
+  color:
+    var(--payment-text);
+
+  font-weight: 700;
+}
+
+
+.ngo-payment-loading p {
+  margin: 0;
+
+  color:
+    var(--payment-muted);
+
+  font-size: 13px;
+}
+
+
+/* ============================================================
+   BOOTSTRAP ROW SPACING
+============================================================ */
+
+.ngo-payment-section .row {
+  margin-left: -10px;
+
+  margin-right: -10px;
+}
+
+
+.ngo-payment-section .row > [class*="col-"] {
+  padding-left: 10px;
+
+  padding-right: 10px;
+}
+
+
+/* ============================================================
+   SCROLLBAR
+============================================================ */
+
+.ngo-payment-page ::-webkit-scrollbar {
+  width: 7px;
+}
+
+
+.ngo-payment-page ::-webkit-scrollbar-track {
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+
+.ngo-payment-page ::-webkit-scrollbar-thumb {
+  background:
+    rgba(255, 255, 255, 0.14);
+
+  border-radius: 10px;
+}
+
+
+.ngo-payment-page ::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(245, 185, 27, 0.35);
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 900px) {
+
+  .ngo-payment-page {
+    padding-bottom: 30px;
+  }
+
+
+  .ngo-payment-status {
+    padding: 21px;
+  }
+
+
+  .ngo-payment-section {
+    padding: 23px;
+  }
+
+
+  .ngo-payment-section-heading {
+    margin-bottom: 21px;
+  }
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 767px) {
+
+  .ngo-payment-status {
+    gap: 14px;
+
+    padding: 19px;
+  }
+
+
+  .ngo-payment-status-icon {
+    width: 48px;
+
+    height: 48px;
+
+    font-size: 20px;
+  }
+
+
+  .ngo-payment-status-content h4 {
+    font-size: 18px;
+  }
+
+
+  .ngo-payment-status-content p {
+    font-size: 13px;
+  }
+
+
+  /* SECURITY */
+
+  .ngo-payment-security {
+    align-items: flex-start;
+
+    padding: 13px 14px;
+
+    font-size: 12px;
+  }
+
+
+  /* SECTIONS */
+
+  .ngo-payment-section {
+    padding: 20px;
+
+    border-radius: 15px;
+  }
+
+
+  .ngo-payment-section-heading {
+    gap: 12px;
+  }
+
+
+  .ngo-payment-section-icon {
+    width: 42px;
+
+    height: 42px;
+
+    font-size: 18px;
+  }
+
+
+  .ngo-payment-section-heading h4 {
+    font-size: 17px;
+  }
+
+
+  /* VERIFICATION */
+
+  .ngo-payment-review-notice {
+    padding: 17px;
+
+    gap: 12px;
+  }
+
+
+  .ngo-payment-review-icon {
+    width: 40px;
+
+    height: 40px;
+  }
+
+
+  /* BUTTON */
+
+  .ngo-payment-actions {
+    justify-content: stretch;
+  }
+
+
+  .ngo-payment-actions .btn-primary {
+    width: 100%;
+
+    min-width: 0;
+  }
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+============================================================ */
+
+@media (max-width: 480px) {
+
+  .ngo-payment-status {
+    flex-direction: column;
+  }
+
+
+  .ngo-payment-status::before {
+    right: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 4px;
+
+    bottom: auto;
+
+    border-radius:
+      18px
+      18px
+      0
+      0;
+  }
+
+
+  .ngo-payment-section {
+    padding: 17px;
+  }
+
+
+  .ngo-payment-section-heading {
+    padding-bottom: 17px;
+  }
+
+
+  .ngo-payment-section-heading p {
+    font-size: 12px;
+  }
+
+
+  .ngo-payment-form .form-control,
+  .ngo-payment-form .form-select {
+    min-height: 46px;
+  }
+
+
+  .ngo-payment-review-notice {
+    flex-direction: column;
+  }
+
+
+  .ngo-payment-rejection {
+    flex-direction: column;
+
+    gap: 3px;
+  }
+
+
+  .ngo-payment-rejection strong {
+    white-space: normal;
+  }
+}
+
+
+/* ============================================================
+   REDUCE MOTION
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .ngo-payment-status,
+  .ngo-payment-section,
+  .ngo-payment-actions .btn-primary,
+  .ngo-payment-form .form-control,
+  .ngo-payment-form .form-select {
+    transition: none;
+  }
+}

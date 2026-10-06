@@ -1,0 +1,732 @@
+/* =========================================================
+   NGO DASHBOARD — Dusk / Gold Theme
+   Recolored off the site's established palette (ink/aubergine
+   + gold + sage) instead of raw Bootstrap primary/success/
+   danger, and pulled in the "route" and "manifest" motifs
+   already used on the landing page and sidebar so this page
+   reads as the same product.
+========================================================= */
+
+:root {
+  --ngo-ink: #120a20;
+  --ngo-dusk-1: #1b1030;
+  --ngo-dusk-2: #2d1b47;
+  --ngo-gold: #e8a33d;
+  --ngo-gold-soft: #f2c98c;
+  --ngo-sage: #7fb685;
+  --ngo-rust: #c9683e;
+  --ngo-teal: #4fb3c9;
+  --ngo-violet: #9c86e0;
+  --ngo-paper: #f7f1e6;
+  --ngo-muted: #b6a7cc;
+  --ngo-hairline: rgba(247, 241, 230, 0.09);
+  --ngo-line: rgba(232, 163, 61, 0.22);
+}
+
+
+/* =========================================================
+   NGO PROFILE STRIP — the "ID tag" treatment: dashed border
+   and punched corner notches, same signature as the sidebar
+   profile card, since this is your org's ID card.
+========================================================= */
+
+.ngo-profile-strip {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 18px 22px;
+  margin-bottom: 24px;
+
+  border: 1px dashed rgba(232, 163, 61, 0.35);
+  border-radius: 18px;
+
+  background:
+    radial-gradient(circle at 1px 1px, rgba(247, 241, 230, 0.04) 1px, transparent 0) 0 0/14px 14px,
+    linear-gradient(135deg, var(--ngo-dusk-2), var(--ngo-dusk-1));
+
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.ngo-profile-strip:hover {
+  border-color: rgba(232, 163, 61, 0.5);
+}
+
+.ngo-profile-strip::before,
+.ngo-profile-strip::after {
+  content: "";
+
+  position: absolute;
+  top: -5px;
+
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: var(--ngo-dusk-1);
+  border: 1px dashed rgba(232, 163, 61, 0.35);
+}
+
+.ngo-profile-strip::before { left: 22px; }
+.ngo-profile-strip::after { right: 22px; }
+
+.ngo-profile-main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.ngo-profile-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: rgba(232, 163, 61, 0.14);
+  border: 1px solid rgba(232, 163, 61, 0.3);
+
+  color: var(--ngo-gold-soft);
+
+  font-size: 20px;
+}
+
+.ngo-profile-main h5 {
+  margin: 0;
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  color: var(--ngo-paper);
+}
+
+.ngo-profile-main p {
+  margin: 4px 0 0;
+  color: var(--ngo-muted);
+  font-size: 12px;
+}
+
+.ngo-profile-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ngo-approved-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 7px 11px;
+
+  border-radius: 999px;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+
+  color: var(--ngo-sage);
+  background: rgba(127, 182, 133, 0.12);
+  border: 1px solid rgba(127, 182, 133, 0.25);
+}
+
+.ngo-profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  color: var(--ngo-gold);
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.ngo-profile-link:hover {
+  color: var(--ngo-gold-soft);
+  gap: 10px;
+}
+
+
+/* =========================================================
+   DASHBOARD PANELS
+========================================================= */
+
+.ngo-dashboard-panel {
+  height: 100%;
+
+  padding: 22px;
+
+  border-radius: 18px;
+
+  border: 1px solid var(--ngo-hairline);
+
+  background: linear-gradient(145deg, rgba(247, 241, 230, 0.05), rgba(247, 241, 230, 0.02));
+
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+
+  transition: border-color 0.3s ease;
+}
+
+.ngo-dashboard-panel:hover {
+  border-color: rgba(232, 163, 61, 0.18);
+}
+
+.ngo-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+.ngo-panel-eyebrow {
+  display: block;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 1.8px;
+
+  color: var(--ngo-gold);
+
+  margin-bottom: 6px;
+}
+
+.ngo-panel-header h4 {
+  margin: 0;
+
+  font-family: 'Fraunces', serif;
+  color: var(--ngo-paper);
+  font-weight: 700;
+}
+
+.ngo-panel-header > i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  font-size: 15px;
+  color: var(--ngo-gold-soft);
+
+  background: rgba(232, 163, 61, 0.1);
+  border: 1px solid rgba(232, 163, 61, 0.22);
+}
+
+
+/* =========================================================
+   ACTION CENTER — rows numbered like route stops, via pure
+   CSS counters, so no markup change is needed.
+========================================================= */
+
+.ngo-action-list {
+  display: flex;
+  flex-direction: column;
+
+  counter-reset: ngo-stop;
+}
+
+.ngo-action-row {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 13px 0 13px 30px;
+
+  color: inherit;
+  text-decoration: none;
+
+  border-bottom: 1px solid var(--ngo-hairline);
+
+  counter-increment: ngo-stop;
+
+  transition: transform 0.2s ease, padding-left 0.2s ease;
+}
+
+.ngo-action-row::before {
+  content: "0" counter(ngo-stop);
+
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  color: rgba(247, 241, 230, 0.28);
+}
+
+.ngo-action-row:last-child {
+  border-bottom: none;
+}
+
+.ngo-action-row:hover {
+  transform: translateX(4px);
+  padding-left: 34px;
+}
+
+.ngo-action-row:hover::before {
+  color: var(--ngo-gold);
+}
+
+.ngo-action-icon {
+  width: 40px;
+  height: 40px;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid transparent;
+}
+
+.ngo-action-primary {
+  background: rgba(232, 163, 61, 0.12);
+  border-color: rgba(232, 163, 61, 0.25);
+  color: var(--ngo-gold-soft);
+}
+
+.ngo-action-warning {
+  background: rgba(201, 104, 62, 0.16);
+  border-color: rgba(201, 104, 62, 0.3);
+  color: #e29a76;
+}
+
+.ngo-action-success {
+  background: rgba(127, 182, 133, 0.14);
+  border-color: rgba(127, 182, 133, 0.28);
+  color: var(--ngo-sage);
+}
+
+.ngo-action-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  flex: 1;
+}
+
+.ngo-action-content strong {
+  color: var(--ngo-paper);
+  font-size: 13px;
+}
+
+.ngo-action-content span {
+  color: var(--ngo-muted);
+  font-size: 11px;
+}
+
+.ngo-action-row > i {
+  color: rgba(247, 241, 230, 0.3);
+}
+
+
+/* =========================================================
+   DELIVERY OVERVIEW — a live tracking pulse, echoing the
+   "TRACKING" indicator on the donation waybill, since this
+   panel is the same idea: a donation in motion.
+========================================================= */
+
+.ngo-delivery-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.ngo-delivery-panel .ngo-panel-header::after {
+  content: "";
+}
+
+.ngo-delivery-stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px 0;
+
+  border-bottom: 1px solid var(--ngo-hairline);
+}
+
+.ngo-delivery-icon {
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: rgba(232, 163, 61, 0.1);
+  border: 1px solid rgba(232, 163, 61, 0.22);
+
+  color: var(--ngo-gold-soft);
+}
+
+.ngo-delivery-stat:first-child .ngo-delivery-icon::after {
+  content: "";
+
+  position: absolute;
+  top: -3px;
+  right: -3px;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: var(--ngo-sage);
+  border: 2px solid var(--ngo-dusk-1);
+  box-shadow: 0 0 6px rgba(127, 182, 133, 0.7);
+
+  animation: ngo-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes ngo-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.ngo-delivery-stat > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ngo-delivery-stat strong {
+  font-family: 'Fraunces', serif;
+  color: var(--ngo-paper);
+  font-size: 22px;
+}
+
+.ngo-delivery-stat span {
+  color: var(--ngo-muted);
+  font-size: 11px;
+}
+
+.ngo-delivery-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: auto;
+  padding-top: 18px;
+
+  color: var(--ngo-gold);
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  transition: color 0.2s ease;
+}
+
+.ngo-delivery-link:hover {
+  color: var(--ngo-gold-soft);
+}
+
+
+/* =========================================================
+   RECENT ACTIVITY HEADER
+========================================================= */
+
+.ngo-recent-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.ngo-recent-title {
+  font-family: 'Fraunces', serif;
+  color: var(--ngo-paper);
+  margin-bottom: 3px;
+}
+
+.ngo-recent-header p {
+  margin: 0;
+
+  color: var(--ngo-muted);
+
+  font-size: 11px;
+}
+
+.ngo-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  color: var(--ngo-gold);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.ngo-view-all:hover {
+  color: var(--ngo-gold-soft);
+}
+
+
+/* =========================================================
+   RECENT ACTIVITY CARD
+========================================================= */
+
+.ngo-recent-card {
+  background: linear-gradient(145deg, rgba(247, 241, 230, 0.06), rgba(247, 241, 230, 0.025)) !important;
+
+  border: 1px solid var(--ngo-hairline) !important;
+
+  border-radius: 18px !important;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   ACTIVITY LIST — dashed connecting line, matching the
+   sidebar nav's dotted "route" line instead of a plain
+   solid bar.
+========================================================= */
+
+.ngo-activity-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ngo-activity-item {
+  display: grid;
+
+  grid-template-columns: 55px 1fr;
+
+  gap: 15px;
+
+  min-height: 82px;
+
+  position: relative;
+}
+
+.ngo-activity-item-last {
+  min-height: auto;
+}
+
+.ngo-activity-icon-wrapper {
+  position: relative;
+
+  display: flex;
+
+  justify-content: center;
+}
+
+.ngo-activity-icon {
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1.5px solid;
+
+  position: relative;
+  z-index: 2;
+}
+
+.ngo-activity-primary {
+  background: rgba(232, 163, 61, 0.14);
+  border-color: rgba(232, 163, 61, 0.4);
+  color: var(--ngo-gold-soft);
+}
+
+.ngo-activity-warning {
+  background: rgba(201, 104, 62, 0.16);
+  border-color: rgba(201, 104, 62, 0.4);
+  color: #e29a76;
+}
+
+.ngo-activity-info {
+  background: rgba(79, 179, 201, 0.14);
+  border-color: rgba(79, 179, 201, 0.4);
+  color: var(--ngo-teal);
+}
+
+.ngo-activity-success {
+  background: rgba(127, 182, 133, 0.14);
+  border-color: rgba(127, 182, 133, 0.4);
+  color: var(--ngo-sage);
+}
+
+.ngo-activity-danger {
+  background: rgba(214, 82, 82, 0.14);
+  border-color: rgba(214, 82, 82, 0.4);
+  color: #ed8585;
+}
+
+.ngo-activity-line {
+  position: absolute;
+
+  top: 44px;
+  bottom: -1px;
+
+  width: 1px;
+
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(232, 163, 61, 0.35) 0,
+    rgba(232, 163, 61, 0.35) 3px,
+    transparent 3px,
+    transparent 8px
+  );
+
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ngo-activity-content {
+  padding-bottom: 25px;
+}
+
+.ngo-activity-content-top {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.ngo-activity-content h6 {
+  margin: 0 0 4px;
+
+  font-family: 'Manrope', sans-serif;
+  color: var(--ngo-paper);
+  font-weight: 700;
+}
+
+.ngo-activity-content small {
+  color: var(--ngo-muted);
+  line-height: 1.6;
+}
+
+.ngo-activity-date {
+  color: rgba(247, 241, 230, 0.38);
+
+  white-space: nowrap;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   LOADING / EMPTY
+========================================================= */
+
+.ngo-activity-loading,
+.ngo-activity-empty {
+  padding: 35px 10px;
+
+  text-align: center;
+
+  color: var(--ngo-muted);
+}
+
+.ngo-empty-icon {
+  width: 48px;
+  height: 48px;
+
+  margin: 0 auto 12px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(232, 163, 61, 0.08);
+  border: 1px solid rgba(232, 163, 61, 0.2);
+
+  color: var(--ngo-gold-soft);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .ngo-profile-strip {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ngo-profile-meta {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .ngo-action-row {
+    padding: 15px 0 15px 30px;
+  }
+
+  .ngo-activity-content-top {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .ngo-activity-date {
+    white-space: normal;
+  }
+
+  .ngo-activity-item {
+    grid-template-columns: 45px 1fr;
+    gap: 12px;
+  }
+
+  .ngo-recent-header {
+    flex-direction: column;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .ngo-delivery-stat:first-child .ngo-delivery-icon::after {
+    animation: none;
+  }
+
+}

@@ -1,0 +1,455 @@
+/* ==========================================================================
+   KifuBridge — My Campaigns
+   A different shape from the usual "card with a badge and a bar": a glow
+   frame around each card, a diagonally-cut photo with a glass status pill
+   floating on it, ring gauges (conic-gradient) instead of progress bars,
+   and a compact divided requirements list instead of boxed sub-cards.
+   All accent colors are driven by one --mycmp-accent variable per card.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap");
+
+:root {
+  --mycmp-surface: #2b1240;
+  --mycmp-surface-mid: #3a1638;
+  --mycmp-surface-end: #170a24;
+  --mycmp-glass: rgba(23, 10, 36, 0.6);
+  --mycmp-text: #f8f1e6;
+  --mycmp-text-muted: rgba(248, 241, 230, 0.7);
+  --mycmp-gold: #f2a53e;
+  --mycmp-gold-bright: #ffc266;
+  --mycmp-success: #58c48c;
+  --mycmp-rose: #ea7fa0;
+  --mycmp-radius: 20px;
+  --mycmp-accent: var(--mycmp-gold-bright);
+}
+
+.mycmp-page {
+  font-family: "Manrope", sans-serif;
+}
+
+.mycmp-alert {
+  background-image: linear-gradient(120deg, rgba(111, 180, 232, 0.16), rgba(201, 146, 232, 0.1));
+  background-color: rgba(10, 6, 18, 0.4);
+  border: 1px solid rgba(111, 180, 232, 0.35);
+  border-left: 3px solid #6fb4e8;
+  color: var(--mycmp-text);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+/* ---------------------------------------------------------------------- *
+ * Glow frame
+ * A thin gradient ring wrapping the card, made by putting a conic
+ * gradient on the frame and letting a ~1.5px gap show it around the
+ * card's edge — the card itself never needs a visible border.
+ * ---------------------------------------------------------------------- */
+
+@keyframes mycmp-card-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.mycmp-frame {
+  position: relative;
+  height: 100%;
+  padding: 1.5px;
+  border-radius: calc(var(--mycmp-radius) + 2px);
+  background: conic-gradient(
+    from 200deg,
+    color-mix(in srgb, var(--mycmp-accent) 85%, transparent),
+    rgba(248, 241, 230, 0.06) 35%,
+    rgba(248, 241, 230, 0.06) 65%,
+    color-mix(in srgb, var(--mycmp-accent) 85%, transparent) 100%
+  );
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  animation: mycmp-card-in 0.45s ease both;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.mycmp-frame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 46px -20px rgba(0, 0, 0, 0.8),
+    0 0 34px -12px color-mix(in srgb, var(--mycmp-accent) 55%, transparent);
+}
+
+/* `.card.mycmp-card` (two classes) outranks Bootstrap's bare `.card` on
+   specificity, plus !important as a backstop — otherwise Bootstrap's
+   default white card background wins the cascade. */
+.card.mycmp-card {
+  height: 100%;
+  background-color: var(--mycmp-surface-end) !important;
+  background-image:
+    radial-gradient(circle at 18px 18px, rgba(248, 241, 230, 0.05) 1.5px, transparent 0),
+    linear-gradient(165deg, var(--mycmp-surface) 0%, var(--mycmp-surface-mid) 45%, var(--mycmp-surface-end) 100%) !important;
+  background-size: 26px 26px, cover;
+  border: none;
+  border-radius: var(--mycmp-radius);
+  color: var(--mycmp-text);
+  overflow: hidden;
+  box-shadow: none;
+}
+
+.card.mycmp-card > .card-body {
+  background: transparent !important;
+  position: relative;
+  padding-top: 40px;
+}
+
+/* ---------------------------------------------------------------------- *
+ * Image — diagonal cut into the body, floating glass chrome on top
+ * ---------------------------------------------------------------------- */
+
+.mycmp-img-wrap {
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+  margin-bottom: -34px;
+}
+
+.mycmp-card-img {
+  display: block;
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  filter: saturate(1.05);
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.mycmp-frame:hover .mycmp-card-img {
+  transform: scale(1.06);
+  filter: saturate(1.2);
+}
+
+.mycmp-status-pill {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--mycmp-text);
+  background: rgba(15, 8, 24, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid color-mix(in srgb, var(--mycmp-accent) 60%, transparent);
+  border-radius: 999px;
+  padding: 6px 12px 6px 10px;
+  box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.7);
+}
+
+.mycmp-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mycmp-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--mycmp-accent) 30%, transparent);
+}
+
+/* ---------------------------------------------------------------------- *
+ * Ring gauges — conic-gradient donuts driven by a --pct custom property.
+ * Used for both the big "overall" coin and the small per-requirement
+ * rings, so progress reads as a shape, not just a number.
+ * ---------------------------------------------------------------------- */
+
+.mycmp-gauge {
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--mycmp-accent) calc(var(--pct) * 1%),
+    rgba(248, 241, 230, 0.14) 0
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.5s ease;
+}
+
+.mycmp-gauge-face {
+  border-radius: 50%;
+  background: var(--mycmp-glass);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.05;
+  color: var(--mycmp-text);
+}
+
+.mycmp-gauge-overall {
+  position: absolute;
+  right: 16px;
+  bottom: -30px;
+  width: 76px;
+  height: 76px;
+  padding: 5px;
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.75);
+}
+
+.mycmp-gauge-overall .mycmp-gauge-face {
+  width: 100%;
+  height: 100%;
+}
+
+.mycmp-gauge-overall strong {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+}
+
+.mycmp-gauge-overall small {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mycmp-text-muted);
+}
+
+.mycmp-gauge-sm {
+  width: 38px;
+  height: 38px;
+  padding: 3px;
+}
+
+.mycmp-gauge-sm .mycmp-gauge-face {
+  width: 100%;
+  height: 100%;
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+.mycmp-gauge-complete {
+  background: conic-gradient(var(--mycmp-success) 100%, var(--mycmp-success) 0);
+}
+
+.mycmp-gauge-complete .mycmp-gauge-face {
+  color: var(--mycmp-success);
+}
+
+/* ---------------------------------------------------------------------- *
+ * Title, description, meta chips
+ * ---------------------------------------------------------------------- */
+
+.mycmp-title {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 1.28rem;
+  line-height: 1.3;
+  color: var(--mycmp-text);
+  padding-right: 90px;
+}
+
+.mycmp-desc {
+  font-size: 0.89rem;
+  color: var(--mycmp-text-muted);
+  line-height: 1.55;
+}
+
+.mycmp-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.mycmp-meta-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.78rem;
+  color: var(--mycmp-text);
+  background: rgba(248, 241, 230, 0.06);
+  border: 1px solid rgba(248, 241, 230, 0.1);
+  border-radius: 10px;
+  padding: 6px 12px;
+}
+
+.mycmp-meta-chip strong {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mycmp-accent);
+}
+
+/* ---------------------------------------------------------------------- *
+ * Requirements — a divided list with a ring gauge per row instead of
+ * separate boxed cards with linear bars.
+ * ---------------------------------------------------------------------- */
+
+.mycmp-req-heading {
+  font-family: "Fraunces", serif;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--mycmp-text);
+  margin-bottom: 8px;
+}
+
+.mycmp-empty-note {
+  font-size: 0.85rem;
+  color: var(--mycmp-text-muted);
+  background: rgba(248, 241, 230, 0.06);
+  border: 1px dashed rgba(248, 241, 230, 0.2);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.mycmp-req-list {
+  border-top: 1px dashed rgba(248, 241, 230, 0.14);
+}
+
+.mycmp-req-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 2px;
+  border-bottom: 1px dashed rgba(248, 241, 230, 0.14);
+}
+
+.mycmp-req-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mycmp-req-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mycmp-req-name {
+  font-size: 0.9rem;
+  color: var(--mycmp-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mycmp-req-remaining {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--mycmp-accent);
+}
+
+.mycmp-req-stats {
+  font-size: 0.78rem;
+  color: var(--mycmp-text-muted);
+  margin-top: 2px;
+}
+
+.mycmp-req-stats strong {
+  color: var(--mycmp-text);
+}
+
+.mycmp-total-note {
+  font-size: 0.78rem;
+  color: var(--mycmp-text-muted);
+  margin-top: 12px;
+}
+
+/* ---------------------------------------------------------------------- *
+ * Action buttons — icon-chip pill with a sheen that sweeps across on
+ * hover instead of a flat color-shift.
+ * ---------------------------------------------------------------------- */
+
+.mycmp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.mycmp-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--mycmp-text);
+  background: rgba(248, 241, 230, 0.06);
+  border: 1px solid rgba(248, 241, 230, 0.16);
+  border-radius: 999px;
+  padding: 8px 16px 8px 8px;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+.mycmp-btn:hover {
+  color: var(--mycmp-text);
+  text-decoration: none;
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--mycmp-btn-accent, var(--mycmp-gold-bright)) 60%, transparent);
+}
+
+.mycmp-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    color-mix(in srgb, var(--mycmp-btn-accent, var(--mycmp-gold-bright)) 30%, transparent) 50%,
+    transparent 80%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.5s ease;
+}
+
+.mycmp-btn:hover::before {
+  transform: translateX(120%);
+}
+
+.mycmp-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(248, 241, 230, 0.1);
+  font-size: 0.85rem;
+  z-index: 1;
+}
+
+.mycmp-btn-manage {
+  --mycmp-btn-accent: var(--mycmp-gold-bright);
+}
+
+.mycmp-btn-history {
+  --mycmp-btn-accent: var(--mycmp-success);
+}
+
+.mycmp-btn-impact {
+  --mycmp-btn-accent: var(--mycmp-rose);
+}
+
+/* ---------------------------------------------------------------------- *
+ * Responsive
+ * ---------------------------------------------------------------------- */
+
+@media (max-width: 480px) {
+  .mycmp-title {
+    padding-right: 0;
+  }
+
+  .mycmp-gauge-overall {
+    right: 12px;
+    bottom: -26px;
+    width: 64px;
+    height: 64px;
+  }
+
+  .mycmp-req-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}

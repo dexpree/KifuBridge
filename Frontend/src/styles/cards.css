@@ -1,0 +1,198 @@
+.dashboard-card{
+
+    height:170px;
+
+    border-radius:22px;
+
+    padding:25px;
+
+    color:#fdfdff;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    position:relative;
+
+    box-shadow:0 18px 35px rgba(0,0,0,.25);
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-8px) scale(1.02);
+
+}
+
+.dashboard-card h2{
+
+    font-size:40px;
+
+    font-weight:700;
+
+    margin:0 0 4px;
+
+    text-shadow:0 2px 8px rgba(0,0,0,.2);
+
+}
+
+.dashboard-card p{
+
+    margin:0;
+
+    opacity:.92;
+
+    font-size:18px;
+
+    font-weight:500;
+
+}
+
+.dashboard-card-icon{
+
+    font-size:55px;
+
+    opacity:.3;
+
+    position:relative;
+
+    z-index:1;
+
+}
+
+/* Top-right glow blob, kept from your version */
+.dashboard-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    right:-50px;
+
+    top:-50px;
+
+}
+
+/* NEW: soft bottom-left blob for a bit more depth, and a thin
+   top light sheen so the card reads as glass/premium rather
+   than a flat gradient rectangle */
+.dashboard-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.08);
+
+    left:-40px;
+
+    bottom:-40px;
+
+    pointer-events:none;
+
+}
+
+.dashboard-card > *{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/* ==========================================================
+   Colors — each variant now also gets a matching glow shadow
+   on hover, so it feels like it's lifting into its own light
+   rather than a generic black drop-shadow every time
+========================================================== */
+
+.primary{
+
+background:linear-gradient(
+135deg,
+#2563EB,
+#3B82F6
+);
+
+}
+
+.primary:hover{
+    box-shadow:0 22px 45px rgba(37,99,235,.35);
+}
+
+.success{
+
+background:linear-gradient(
+135deg,
+#16A34A,
+#22C55E
+);
+
+}
+
+.success:hover{
+    box-shadow:0 22px 45px rgba(22,163,74,.35);
+}
+
+.warning{
+
+background:linear-gradient(
+135deg,
+#D97706,
+#F59E0B
+);
+
+}
+
+.warning:hover{
+    box-shadow:0 22px 45px rgba(217,119,6,.35);
+}
+
+.info{
+
+background:linear-gradient(
+135deg,
+#0891B2,
+#06B6D4
+);
+
+}
+
+.info:hover{
+    box-shadow:0 22px 45px rgba(8,145,178,.35);
+}
+
+.danger{
+
+background:linear-gradient(
+135deg,
+#DC2626,
+#EF4444
+);
+}
+
+.danger:hover{
+    box-shadow:0 22px 45px rgba(220,38,38,.35);
+}

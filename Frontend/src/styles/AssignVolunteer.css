@@ -1,0 +1,1787 @@
+/* ============================================================
+   ASSIGN VOLUNTEER PAGE
+   DARK AUBERGINE + GOLD THEME
+============================================================ */
+
+
+/* ============================================================
+   PAGE
+============================================================ */
+
+.av-page {
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+  color: #f5eee0;
+
+  font-family: "Manrope", sans-serif;
+}
+
+
+/* ============================================================
+   BACK BUTTON
+============================================================ */
+
+.av-back {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 8px 0;
+
+  margin-bottom: 20px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #d4af6a !important;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.av-back:hover {
+  color: #f0d69a !important;
+
+  transform: translateX(-3px);
+}
+
+
+.av-back:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* ============================================================
+   EMPTY / LOADING
+============================================================ */
+
+.av-empty {
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 40px;
+
+  text-align: center;
+
+  color: #f5eee0 !important;
+
+  background:
+    rgba(30, 15, 48, 0.45);
+
+  border:
+    1px dashed rgba(212, 175, 106, 0.25);
+
+  border-radius: 16px;
+}
+
+
+.av-empty > i {
+  margin-bottom: 16px;
+
+  color: #d4af6a !important;
+
+  font-size: 42px;
+}
+
+
+.av-empty h5 {
+  margin: 0 0 8px;
+
+  color: #fff8eb !important;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+
+.av-empty p {
+  margin: 0;
+
+  color: #c9beaf !important;
+
+  font-size: 14px;
+}
+
+
+/* ============================================================
+   DONATION REQUEST CARD
+   DARK — NO WHITE
+============================================================ */
+
+.av-request-card {
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(45, 27, 63, 0.82),
+      rgba(25, 13, 42, 0.70)
+    ) !important;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.20) !important;
+
+  border-radius: 18px;
+
+  padding: 24px;
+
+  margin-bottom: 24px;
+
+  color: #f5eee0 !important;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(8px);
+
+  overflow: hidden;
+}
+
+
+/* subtle gold line */
+
+.av-request-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 8%;
+
+  width: 84%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(212, 175, 106, 0.55),
+      transparent
+    );
+}
+
+
+/* ============================================================
+   SECTION TITLE
+============================================================ */
+
+.av-section-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #fff8eb !important;
+
+  font-size: 17px;
+
+  font-weight: 700;
+}
+
+
+.av-section-title i {
+  color: #d4af6a !important;
+
+  font-size: 19px;
+}
+
+
+/* ============================================================
+   REQUEST MAIN
+============================================================ */
+
+.av-request-main {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 22px;
+
+  padding-bottom: 20px;
+
+  border-bottom:
+    1px solid rgba(212, 175, 106, 0.15);
+}
+
+
+.av-label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #bdb09f !important;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+
+.av-request-main h3 {
+  margin: 0;
+
+  color: #fff8eb !important;
+
+  font-family: "Fraunces", serif;
+
+  font-size: 24px;
+
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   BADGES
+============================================================ */
+
+.av-request-badges {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+
+.av-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 7px 12px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(212, 175, 106, 0.10) !important;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.25);
+
+  color: #e6cd97 !important;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+.av-badge--quantity {
+  background:
+    rgba(255, 255, 255, 0.05) !important;
+
+  border-color:
+    rgba(255, 255, 255, 0.10);
+
+  color: #d5cabb !important;
+}
+
+
+/* ============================================================
+   NGO
+============================================================ */
+
+.av-ngo {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  margin-top: 20px;
+}
+
+
+.av-ngo-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 2px;
+
+  color: #bdb09f !important;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+
+.av-ngo-title i {
+  color: #d4af6a !important;
+}
+
+
+.av-ngo strong {
+  color: #fff8eb !important;
+
+  font-size: 15px;
+}
+
+
+.av-ngo span {
+  color: #c9beaf !important;
+
+  font-size: 13px;
+}
+
+
+/* ============================================================
+   VOLUNTEER SECTION
+============================================================ */
+
+.av-volunteer-section {
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(45, 27, 63, 0.82),
+      rgba(25, 13, 42, 0.70)
+    ) !important;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.20) !important;
+
+  border-radius: 18px;
+
+  padding: 24px;
+
+  color: #f5eee0 !important;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(8px);
+}
+
+
+/* ============================================================
+   SECTION HEADER
+============================================================ */
+
+.av-section-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 24px;
+}
+
+
+.av-section-header p {
+  margin: 7px 0 0;
+
+  color: #c9beaf !important;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+.av-count {
+  flex-shrink: 0;
+
+  padding: 7px 12px;
+
+  background:
+    rgba(212, 175, 106, 0.10) !important;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.22);
+
+  border-radius: 999px;
+
+  color: #e6cd97 !important;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   NOTICE
+============================================================ */
+
+.av-notice {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 18px;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+}
+
+
+.av-notice > i {
+  font-size: 20px;
+}
+
+
+.av-notice--info {
+  background:
+    rgba(59, 130, 246, 0.08) !important;
+
+  border:
+    1px solid rgba(96, 165, 250, 0.20);
+
+  color: #a9c9ff !important;
+}
+
+
+.av-notice--warning {
+  align-items: flex-start;
+
+  background:
+    rgba(224, 181, 98, 0.08) !important;
+
+  border:
+    1px solid rgba(224, 181, 98, 0.22);
+
+  color: #e8c478 !important;
+}
+
+
+.av-notice--warning > i {
+  color: #e0b562 !important;
+}
+
+
+.av-notice strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #f3d58f !important;
+
+  font-size: 14px;
+}
+
+
+.av-notice p {
+  margin: 0;
+
+  color: #d2c6b6 !important;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   VOLUNTEER GRID
+============================================================ */
+
+.av-volunteer-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(310px, 1fr));
+
+  gap: 20px;
+}
+
+
+/* ============================================================
+   VOLUNTEER CARD
+   DARK — NO WHITE
+============================================================ */
+
+.av-volunteer-card {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding: 20px;
+
+  background:
+    rgba(22, 11, 37, 0.52) !important;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.15) !important;
+
+  border-radius: 16px;
+
+  color: #f5eee0 !important;
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.20);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  overflow: hidden;
+}
+
+
+.av-volunteer-card:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(212, 175, 106, 0.38) !important;
+
+  background:
+    rgba(212, 175, 106, 0.045) !important;
+
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.30);
+}
+
+
+.av-volunteer-card.is-selected {
+  border-color:
+    #d4af6a !important;
+
+  background:
+    rgba(212, 175, 106, 0.08) !important;
+
+  box-shadow:
+    0 0 0 3px rgba(212, 175, 106, 0.08),
+    0 10px 28px rgba(0, 0, 0, 0.30);
+}
+
+
+/* ============================================================
+   SELECTED INDICATOR
+============================================================ */
+
+.av-selected {
+  position: absolute;
+
+  top: 14px;
+
+  right: 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 28px;
+
+  height: 28px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(212, 175, 106, 0.14) !important;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.30);
+
+  color: #e6cd97 !important;
+
+  font-size: 21px;
+
+  z-index: 5;
+}
+
+
+/* ============================================================
+   PROFILE SECTION
+============================================================ */
+
+.av-profile-section {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 14px;
+}
+
+
+/* ============================================================
+   PROFILE IMAGE BUTTON
+============================================================ */
+
+.av-profile-image-button {
+  position: relative;
+
+  width: 96px;
+
+  height: 96px;
+
+  padding: 0;
+
+  border:
+    2px solid rgba(212, 175, 106, 0.20);
+
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  background:
+    rgba(212, 175, 106, 0.08) !important;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.30);
+
+  transition: 0.2s ease;
+}
+
+
+.av-profile-image-button:hover {
+  transform: scale(1.04);
+
+  border-color:
+    rgba(212, 175, 106, 0.45);
+}
+
+
+.av-profile-image {
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* ============================================================
+   PROFILE PLACEHOLDER
+============================================================ */
+
+.av-profile-placeholder {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 96px;
+
+  height: 96px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(212, 175, 106, 0.08) !important;
+
+  border:
+    2px solid rgba(212, 175, 106, 0.18);
+
+  color: #d4af6a !important;
+
+  font-size: 40px;
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ============================================================
+   IMAGE OVERLAY
+============================================================ */
+
+.av-image-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+    rgba(10, 5, 18, 0.65);
+
+  color: #f5eee0 !important;
+
+  font-size: 22px;
+
+  opacity: 0;
+
+  transition: opacity 0.2s ease;
+}
+
+
+.av-profile-image-button:hover .av-image-overlay,
+.av-vehicle-image-button:hover .av-image-overlay {
+  opacity: 1;
+}
+
+
+/* ============================================================
+   VOLUNTEER NAME
+============================================================ */
+
+.av-volunteer-name {
+  display: flex;
+
+  justify-content: center;
+
+  text-align: center;
+
+  margin-bottom: 16px;
+}
+
+
+.av-volunteer-name > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.av-volunteer-name strong {
+  color: #fff8eb !important;
+
+  font-size: 17px;
+
+  font-weight: 700;
+}
+
+
+.av-volunteer-name span {
+  color: #bdb09f !important;
+
+  font-size: 12px;
+
+  font-weight: 500;
+}
+
+
+/* ============================================================
+   CONTACT
+============================================================ */
+
+.av-contact {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  padding: 13px 0;
+
+  border-top:
+    1px solid rgba(212, 175, 106, 0.12);
+
+  border-bottom:
+    1px solid rgba(212, 175, 106, 0.12);
+}
+
+
+.av-contact span {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 9px;
+
+  min-width: 0;
+
+  color: #cfc4b5 !important;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+
+.av-contact i {
+  flex-shrink: 0;
+
+  width: 16px;
+
+  color: #d4af6a !important;
+
+  font-size: 14px;
+}
+
+
+/* ============================================================
+   LOCATION
+============================================================ */
+
+.av-location {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin-top: 13px;
+
+  color: #cfc4b5 !important;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+.av-location i {
+  flex-shrink: 0;
+
+  margin-top: 2px;
+
+  color: #d4af6a !important;
+}
+
+
+.av-location span {
+  color: #cfc4b5 !important;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* ============================================================
+   VEHICLE DETAILS
+============================================================ */
+
+.av-vehicle {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 8px;
+
+  margin-top: 16px;
+
+  padding: 14px;
+
+  background:
+    rgba(10, 5, 18, 0.35) !important;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.13);
+
+  border-radius: 11px;
+}
+
+
+.av-vehicle > div {
+  min-width: 0;
+}
+
+
+.av-mini-label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #a99d8e !important;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+}
+
+
+.av-vehicle strong {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  color: #f4eadb !important;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+
+.av-vehicle strong i {
+  color: #d4af6a !important;
+}
+
+
+/* ============================================================
+   VEHICLE IMAGE SECTION
+============================================================ */
+
+.av-vehicle-image-section {
+  margin-top: 16px;
+
+  padding-top: 15px;
+
+  border-top:
+    1px solid rgba(212, 175, 106, 0.12);
+}
+
+
+.av-vehicle-image-button {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  height: 150px;
+
+  padding: 0;
+
+  margin-top: 8px;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.16);
+
+  border-radius: 11px;
+
+  overflow: hidden;
+
+  background:
+    rgba(10, 5, 18, 0.40) !important;
+
+  cursor: pointer;
+}
+
+
+.av-vehicle-image {
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.25s ease;
+}
+
+
+.av-vehicle-image-button:hover .av-vehicle-image {
+  transform: scale(1.04);
+}
+
+
+/* ============================================================
+   NO VEHICLE IMAGE
+============================================================ */
+
+.av-no-image {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 90px;
+
+  margin-top: 8px;
+
+  padding: 14px;
+
+  background:
+    rgba(10, 5, 18, 0.30) !important;
+
+  border:
+    1px dashed rgba(212, 175, 106, 0.22);
+
+  border-radius: 11px;
+
+  color: #9f9486 !important;
+
+  font-size: 12px;
+
+  text-align: center;
+}
+
+
+.av-no-image i {
+  color: #d4af6a !important;
+
+  font-size: 18px;
+}
+
+
+/* ============================================================
+   AVAILABILITY
+============================================================ */
+
+.av-availability {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  align-self: flex-start;
+
+  margin-top: 15px;
+
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(112, 194, 138, 0.10) !important;
+
+  border:
+    1px solid rgba(112, 194, 138, 0.20);
+
+  color: #82d59b !important;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+.av-availability i {
+  font-size: 7px;
+}
+
+
+/* ============================================================
+   SELECT VOLUNTEER BUTTON
+============================================================ */
+
+.av-select-button {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  width: 100%;
+
+  margin-top: 16px;
+
+  padding: 11px 14px;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.25);
+
+  border-radius: 9px;
+
+  background:
+    rgba(212, 175, 106, 0.06) !important;
+
+  color: #e6cd97 !important;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.av-select-button:hover {
+  border-color:
+    rgba(212, 175, 106, 0.55);
+
+  background:
+    rgba(212, 175, 106, 0.12) !important;
+
+  color: #f2d99e !important;
+}
+
+
+.av-select-button.is-selected {
+  border-color:
+    #d4af6a;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d4af6a,
+      #b8905a
+    ) !important;
+
+  color: #1b1025 !important;
+
+  box-shadow:
+    0 6px 18px rgba(212, 175, 106, 0.18);
+}
+
+
+.av-select-button:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+
+/* ============================================================
+   ACTION AREA
+============================================================ */
+
+.av-action {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 28px;
+
+  padding-top: 22px;
+
+  border-top:
+    1px solid rgba(212, 175, 106, 0.15);
+}
+
+
+/* ============================================================
+   SELECTION SUMMARY
+============================================================ */
+
+.av-selection-summary {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #cfc4b5 !important;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+}
+
+
+.av-selection-summary i {
+  flex-shrink: 0;
+
+  color: #d4af6a !important;
+
+  font-size: 18px;
+}
+
+
+/* ============================================================
+   ASSIGN BUTTON
+============================================================ */
+
+.av-assign-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  min-width: 230px;
+
+  padding: 13px 20px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e6c477,
+      #c99a4d
+    ) !important;
+
+  color: #1a0e22 !important;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 18px rgba(212, 175, 106, 0.18);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.av-assign-button:hover:not(:disabled) {
+  background:
+    linear-gradient(
+      135deg,
+      #f0d18b,
+      #d4af6a
+    ) !important;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(212, 175, 106, 0.28);
+}
+
+
+.av-assign-button:disabled {
+  background:
+    rgba(255, 255, 255, 0.10) !important;
+
+  color: #81786d !important;
+
+  box-shadow: none;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* ============================================================
+   IMPORTANT TEXT OVERRIDES
+   Prevent Bootstrap from making text dark
+============================================================ */
+
+.av-page h1,
+.av-page h2,
+.av-page h3,
+.av-page h4,
+.av-page h5,
+.av-page h6 {
+  color: #fff8eb !important;
+}
+
+
+.av-page p {
+  color: #cfc4b5;
+}
+
+
+.av-page span {
+  color: inherit;
+}
+
+
+.av-page .text-muted {
+  color: #bdb09f !important;
+}
+
+
+.av-page .card,
+.av-page .card-body {
+  background: transparent !important;
+
+  color: #f5eee0 !important;
+}
+
+
+/* Prevent Bootstrap white backgrounds */
+
+.av-page .bg-white,
+.av-page .bg-light {
+  background:
+    rgba(18, 9, 30, 0.40) !important;
+
+  color: #f5eee0 !important;
+}
+
+
+/* ============================================================
+   IMAGE PREVIEW MODAL
+============================================================ */
+
+.av-image-modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 24px;
+
+  background:
+    rgba(9, 5, 15, 0.88);
+
+  backdrop-filter: blur(7px);
+
+  animation:
+    avModalFadeIn 0.2s ease;
+}
+
+
+/* ============================================================
+   MODAL CONTENT
+============================================================ */
+
+.av-image-modal-content {
+  display: flex;
+
+  flex-direction: column;
+
+  width: min(900px, 100%);
+
+  max-height: 90vh;
+
+  background:
+    #241432 !important;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.25);
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55);
+
+  animation:
+    avModalScaleIn 0.2s ease;
+}
+
+
+/* ============================================================
+   MODAL HEADER
+============================================================ */
+
+.av-image-modal-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 15px 18px;
+
+  border-bottom:
+    1px solid rgba(212, 175, 106, 0.16);
+
+  background:
+    #241432 !important;
+}
+
+
+.av-image-modal-header strong {
+  color: #f5eee0 !important;
+
+  font-size: 14px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   MODAL CLOSE
+============================================================ */
+
+.av-image-modal-close {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 34px;
+
+  height: 34px;
+
+  border:
+    1px solid rgba(212, 175, 106, 0.18);
+
+  border-radius: 8px;
+
+  background:
+    rgba(255, 255, 255, 0.05) !important;
+
+  color: #d4af6a !important;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.av-image-modal-close:hover {
+  background:
+    rgba(212, 175, 106, 0.14) !important;
+
+  color: #f5eee0 !important;
+}
+
+
+/* ============================================================
+   MODAL BODY
+============================================================ */
+
+.av-image-modal-body {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 300px;
+
+  max-height: calc(90vh - 70px);
+
+  padding: 20px;
+
+  background:
+    #12091e !important;
+
+  overflow: auto;
+}
+
+
+.av-image-modal-body img {
+  display: block;
+
+  max-width: 100%;
+
+  max-height: calc(90vh - 110px);
+
+  width: auto;
+
+  height: auto;
+
+  object-fit: contain;
+
+  border-radius: 6px;
+}
+
+
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+
+@keyframes avModalFadeIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+@keyframes avModalScaleIn {
+
+  from {
+    opacity: 0;
+
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 900px) {
+
+  .av-page {
+    padding: 20px;
+  }
+
+
+  .av-volunteer-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .av-action {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+
+  .av-selection-summary {
+    width: 100%;
+  }
+
+
+  .av-assign-button {
+    width: 100%;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 650px) {
+
+  .av-page {
+    padding: 15px;
+  }
+
+
+  .av-request-card,
+  .av-volunteer-section {
+    padding: 17px;
+
+    border-radius: 14px;
+  }
+
+
+  .av-request-main {
+    flex-direction: column;
+
+    gap: 14px;
+  }
+
+
+  .av-request-main h3 {
+    font-size: 20px;
+  }
+
+
+  .av-request-badges {
+    justify-content: flex-start;
+  }
+
+
+  .av-section-header {
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+
+  .av-count {
+    align-self: flex-start;
+  }
+
+
+  .av-volunteer-grid {
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+  }
+
+
+  .av-volunteer-card {
+    padding: 17px;
+  }
+
+
+  .av-vehicle {
+    grid-template-columns: 1fr;
+  }
+
+
+  .av-vehicle-image-button {
+    height: 180px;
+  }
+
+
+  .av-action {
+    gap: 14px;
+  }
+
+
+  .av-selection-summary {
+    align-items: flex-start;
+  }
+
+
+  .av-image-modal {
+    padding: 10px;
+  }
+
+
+  .av-image-modal-content {
+    max-height: 94vh;
+
+    border-radius: 12px;
+  }
+
+
+  .av-image-modal-body {
+    min-height: 250px;
+
+    padding: 10px;
+
+    max-height: calc(94vh - 65px);
+  }
+
+
+  .av-image-modal-body img {
+    max-height: calc(94vh - 90px);
+  }
+
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+============================================================ */
+
+@media (max-width: 400px) {
+
+  .av-page {
+    padding: 10px;
+  }
+
+
+  .av-request-card,
+  .av-volunteer-section {
+    padding: 14px;
+  }
+
+
+  .av-volunteer-card {
+    padding: 14px;
+  }
+
+
+  .av-profile-image-button,
+  .av-profile-placeholder {
+    width: 82px;
+
+    height: 82px;
+  }
+
+
+  .av-profile-placeholder {
+    font-size: 34px;
+  }
+
+
+  .av-vehicle-image-button {
+    height: 160px;
+  }
+
+
+  .av-assign-button {
+    min-width: 0;
+
+    padding: 12px 14px;
+  }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .av-volunteer-card,
+  .av-profile-image-button,
+  .av-select-button,
+  .av-assign-button,
+  .av-image-modal {
+    transition: none;
+
+    animation: none;
+  }
+
+}

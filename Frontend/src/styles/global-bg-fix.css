@@ -1,0 +1,28 @@
+:root{
+    --page-bg: linear-gradient(
+        160deg,
+        #FFFDF7 0%,
+        #FEF3C7 30%,
+        #FDE68A 60%,
+        #FDBA74 85%,
+        #FB923C 100%
+    );
+}
+
+html,
+body,
+#root{
+    min-height:100vh;
+    background:var(--page-bg) !important;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
+body > div:first-child{
+    min-height:100vh;
+    background:var(--page-bg);
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}

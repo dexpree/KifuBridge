@@ -1,0 +1,1468 @@
+/* ============================================================
+   ADMIN DONATIONS — CLEAN DOSSIER
+   Redesigned for readability and reduced visual congestion
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+
+/* ============================================================
+   VARIABLES
+   ============================================================ */
+
+:root {
+  --adn-bg: #0d0920;
+
+  --adn-panel: rgba(29, 22, 53, 0.88);
+  --adn-panel-soft: rgba(39, 29, 67, 0.72);
+  --adn-panel-deep: rgba(15, 11, 31, 0.72);
+
+  --adn-border: rgba(201, 172, 255, 0.13);
+  --adn-border-gold: rgba(226, 174, 79, 0.32);
+
+  --adn-text: #f8f5ff;
+  --adn-text-soft: #ded7eb;
+  --adn-muted: #a79dbb;
+  --adn-muted-2: #81768f;
+
+  --adn-gold: #e5ad50;
+  --adn-gold-light: #ffd37a;
+  --adn-gold-soft: rgba(229, 173, 80, 0.13);
+
+  --adn-purple: #8f6de3;
+  --adn-purple-soft: rgba(143, 109, 227, 0.14);
+
+  --adn-green: #55d58a;
+  --adn-green-soft: rgba(85, 213, 138, 0.12);
+
+  --adn-blue: #70b7ff;
+  --adn-blue-soft: rgba(112, 183, 255, 0.12);
+
+  --adn-orange: #f4ae52;
+  --adn-orange-soft: rgba(244, 174, 82, 0.12);
+
+  --adn-red: #f16c78;
+  --adn-red-soft: rgba(241, 108, 120, 0.12);
+
+  --adn-font-display: "Space Grotesk", sans-serif;
+  --adn-font-body: "Inter", sans-serif;
+  --adn-font-mono: "JetBrains Mono", monospace;
+}
+
+
+/* ============================================================
+   PAGE
+   ============================================================ */
+
+.adn-page {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+
+  padding: 4px 0 50px;
+
+  color: var(--adn-text);
+  font-family: var(--adn-font-body);
+}
+
+.adn-page::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(143, 109, 227, 0.08),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 70%,
+      rgba(229, 173, 80, 0.055),
+      transparent 30%
+    ),
+    linear-gradient(
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    auto,
+    auto,
+    42px 42px,
+    42px 42px;
+
+  mask-image:
+    radial-gradient(
+      circle at 50% 0%,
+      #000 0%,
+      transparent 82%
+    );
+
+  z-index: 0;
+}
+
+
+/* ============================================================
+   EYEBROW
+   ============================================================ */
+
+.adn-eyebrow {
+  position: relative;
+  z-index: 1;
+
+  margin: 0 0 14px;
+
+  color: var(--adn-gold);
+  font-family: var(--adn-font-mono);
+  font-size: 10px;
+  font-weight: 500;
+
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   TOOLBAR
+   ============================================================ */
+
+.adn-toolbar {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-bottom: 22px;
+
+  padding: 12px;
+
+  background: rgba(25, 18, 47, 0.72);
+
+  border: 1px solid var(--adn-border);
+  border-radius: 15px;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+
+/* SEARCH */
+
+.adn-search {
+  flex: 1 1 280px;
+
+  min-width: 220px;
+
+  height: 43px;
+
+  padding: 0 16px 0 43px;
+
+  color: var(--adn-text);
+
+  font-family: var(--adn-font-body);
+  font-size: 13px;
+
+  background-color: rgba(9, 6, 22, 0.52);
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='%23a79dbb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'%3E%3C/circle%3E%3Cline x1='16.5' y1='16.5' x2='21' y2='21'%3E%3C/line%3E%3C/svg%3E");
+
+  background-repeat: no-repeat;
+  background-position: 15px center;
+
+  border: 1px solid var(--adn-border);
+
+  border-radius: 11px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.adn-search::placeholder {
+  color: var(--adn-muted-2);
+}
+
+.adn-search:hover {
+  border-color: rgba(229, 173, 80, 0.25);
+}
+
+.adn-search:focus {
+  border-color: rgba(229, 173, 80, 0.55);
+
+  background-color: rgba(9, 6, 22, 0.75);
+
+  box-shadow:
+    0 0 0 3px rgba(229, 173, 80, 0.09);
+}
+
+
+/* ============================================================
+   STATUS LANES
+   ============================================================ */
+
+.adn-lanes {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  padding: 4px;
+
+  background: rgba(9, 6, 22, 0.42);
+
+  border: 1px solid var(--adn-border);
+
+  border-radius: 11px;
+}
+
+.adn-lane {
+  height: 34px;
+
+  padding: 0 13px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: var(--adn-muted);
+
+  font-family: var(--adn-font-display);
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.adn-lane:hover {
+  color: var(--adn-text);
+
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.adn-lane.is-active {
+  color: #21162e;
+
+  background: linear-gradient(
+    135deg,
+    var(--adn-gold-light),
+    var(--adn-gold)
+  );
+
+  box-shadow:
+    0 5px 15px rgba(229, 173, 80, 0.18);
+}
+
+
+/* ============================================================
+   TOOLBAR RIGHT
+   ============================================================ */
+
+.adn-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-left: auto;
+}
+
+
+/* CATEGORY */
+
+.adn-category-select {
+  height: 36px;
+
+  padding: 0 34px 0 12px;
+
+  appearance: none;
+
+  color: var(--adn-text-soft);
+
+  font-family: var(--adn-font-body);
+  font-size: 11px;
+  font-weight: 600;
+
+  background-color: rgba(9, 6, 22, 0.48);
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%23a79dbb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+
+  border: 1px solid var(--adn-border);
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  outline: none;
+}
+
+.adn-category-select:hover,
+.adn-category-select:focus {
+  border-color: var(--adn-border-gold);
+}
+
+.adn-category-select option {
+  background: #17102c;
+  color: var(--adn-text);
+}
+
+
+/* SORT */
+
+.adn-sort {
+  display: flex;
+  gap: 3px;
+
+  padding: 4px;
+
+  background: rgba(9, 6, 22, 0.42);
+
+  border: 1px solid var(--adn-border);
+
+  border-radius: 10px;
+}
+
+.adn-sort-btn {
+  height: 28px;
+
+  padding: 0 10px;
+
+  color: var(--adn-muted);
+
+  font-family: var(--adn-font-display);
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  background: transparent;
+
+  border: none;
+  border-radius: 7px;
+
+  cursor: pointer;
+}
+
+.adn-sort-btn:hover {
+  color: var(--adn-text);
+}
+
+.adn-sort-btn.is-active {
+  color: var(--adn-gold-light);
+
+  background: var(--adn-gold-soft);
+}
+
+
+/* ============================================================
+   GRID
+   IMPORTANT:
+   2 COLUMNS PREVENTS THE CONGESTED 5-COLUMN LOOK
+   ============================================================ */
+
+.adn-grid {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 20px;
+
+  width: 100%;
+}
+
+
+/* ============================================================
+   DONATION CARD
+   ============================================================ */
+
+.adn-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(35, 27, 61, 0.96),
+      rgba(23, 17, 43, 0.96)
+    );
+
+  border: 1px solid var(--adn-border);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 15px 38px rgba(0, 0, 0, 0.22);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.adn-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--adn-gold),
+    transparent
+  );
+
+  opacity: 0.65;
+}
+
+.adn-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(229, 173, 80, 0.25);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(229, 173, 80, 0.04);
+}
+
+
+/* ============================================================
+   IMAGE / CAROUSEL
+   ============================================================ */
+
+.adn-carousel {
+  position: relative;
+
+  width: 100%;
+
+  border-bottom: 1px solid var(--adn-border);
+
+  overflow: hidden;
+}
+
+.adn-carousel img {
+  display: block;
+
+  width: 100%;
+  height: 210px;
+
+  object-fit: cover;
+
+  filter: saturate(0.9) brightness(0.88);
+
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
+}
+
+.adn-card:hover .adn-carousel img {
+  transform: scale(1.025);
+
+  filter: saturate(1) brightness(0.95);
+}
+
+.adn-carousel .carousel-control-prev,
+.adn-carousel .carousel-control-next {
+  width: 44px;
+
+  opacity: 0;
+
+  transition: opacity 0.2s ease;
+}
+
+.adn-carousel:hover .carousel-control-prev,
+.adn-carousel:hover .carousel-control-next {
+  opacity: 1;
+}
+
+
+/* ============================================================
+   CARD HEADER
+   ============================================================ */
+
+.adn-card-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 18px 22px 0;
+
+  color: var(--adn-muted);
+
+  font-family: var(--adn-font-mono);
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.adn-refno {
+  color: var(--adn-muted-2);
+
+  font-size: 9px;
+
+  white-space: nowrap;
+}
+
+
+.adn-card-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  padding: 8px 22px 0;
+}
+
+.adn-item-name {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 0;
+
+  color: var(--adn-text);
+
+  font-family: var(--adn-font-display);
+  font-size: 20px;
+  font-weight: 700;
+
+  line-height: 1.25;
+}
+
+.adn-item-name i {
+  color: var(--adn-gold);
+
+  font-size: 17px;
+}
+
+
+/* ============================================================
+   CATEGORY BADGE
+   ============================================================ */
+
+.adn-badge {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 23px;
+
+  padding: 3px 9px;
+
+  border-radius: 999px;
+
+  font-family: var(--adn-font-display);
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.adn-badge--category {
+  color: #c9b4ff;
+
+  background: var(--adn-purple-soft);
+
+  border: 1px solid rgba(143, 109, 227, 0.25);
+}
+
+
+/* ============================================================
+   DESCRIPTION
+   ============================================================ */
+
+.adn-desc {
+  margin: 8px 22px 0;
+
+  color: var(--adn-muted);
+
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+
+/* ============================================================
+   DONATION MANIFEST
+   ============================================================ */
+
+.adn-manifest {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0;
+
+  margin: 17px 22px 0;
+
+  padding: 12px 0;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.adn-manifest-row {
+  display: grid;
+
+  grid-template-columns: 95px minmax(15px, 1fr) auto;
+
+  align-items: center;
+
+  min-width: 0;
+
+  gap: 9px;
+
+  padding: 6px 0;
+
+  font-family: var(--adn-font-mono);
+  font-size: 11px;
+}
+
+.adn-manifest-row .m-label {
+  color: var(--adn-muted);
+
+  font-size: 8.5px;
+  font-weight: 600;
+
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+}
+
+.adn-manifest-row .m-leader {
+  height: 1px;
+
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.12);
+}
+
+.adn-manifest-row .m-value {
+  max-width: 230px;
+
+  overflow: hidden;
+
+  color: var(--adn-text-soft);
+
+  text-align: right;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   DONOR SECTION
+   ============================================================ */
+
+.adn-docket {
+  position: relative;
+
+  margin: 16px 22px 0;
+
+  padding: 15px 16px 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(229, 173, 80, 0.065),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  border: 1px solid rgba(229, 173, 80, 0.14);
+
+  border-radius: 13px;
+}
+
+.adn-docket::before {
+  content: "";
+
+  position: absolute;
+
+  top: -1px;
+  left: 16px;
+
+  width: 38px;
+  height: 3px;
+
+  background: var(--adn-gold);
+
+  border-radius: 0 0 4px 4px;
+
+  opacity: 0.75;
+}
+
+.adn-docket-title {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 9px;
+
+  color: var(--adn-gold-light);
+
+  font-family: var(--adn-font-display);
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.adn-docket-row {
+  display: grid;
+
+  grid-template-columns: 85px minmax(0, 1fr);
+
+  gap: 12px;
+
+  padding: 5px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+
+  font-family: var(--adn-font-mono);
+  font-size: 10.5px;
+}
+
+.adn-docket-row:last-child {
+  border-bottom: none;
+}
+
+.adn-docket-row .d-label {
+  color: var(--adn-muted);
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.06em;
+
+  text-transform: uppercase;
+}
+
+.adn-docket-row > :last-child {
+  min-width: 0;
+
+  overflow-wrap: anywhere;
+
+  color: var(--adn-text-soft);
+
+  text-align: right;
+}
+
+
+/* ============================================================
+   ASSIGNMENT SECTION
+   ============================================================ */
+
+.adn-assignment {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin: 16px 22px 0;
+}
+
+
+/* ASSIGNMENT CARD */
+
+.adn-assignment-card {
+  min-width: 0;
+
+  padding: 14px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 13px;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.adn-assignment-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+.adn-assignment-card.has-assignment {
+  border-color: rgba(85, 213, 138, 0.22);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(85, 213, 138, 0.045),
+      rgba(255, 255, 255, 0.02)
+    );
+}
+
+.adn-assignment-card.is-missing {
+  opacity: 0.78;
+}
+
+
+/* ASSIGNMENT HEADER */
+
+.adn-assignment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 7px;
+
+  padding-bottom: 10px;
+
+  margin-bottom: 8px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.adn-assignment-title {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+
+  gap: 7px;
+
+  color: var(--adn-gold-light);
+
+  font-family: var(--adn-font-display);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.adn-assignment-title i {
+  color: var(--adn-gold);
+
+  font-size: 14px;
+}
+
+
+/* ASSIGNMENT STATUS */
+
+.adn-assignment-status {
+  flex-shrink: 0;
+
+  padding: 4px 7px;
+
+  border-radius: 999px;
+
+  font-family: var(--adn-font-mono);
+  font-size: 7.5px;
+  font-weight: 600;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+}
+
+.adn-assignment-status.assigned {
+  color: var(--adn-green);
+
+  background: var(--adn-green-soft);
+
+  border: 1px solid rgba(85, 213, 138, 0.2);
+}
+
+.adn-assignment-status.missing {
+  color: var(--adn-muted-2);
+
+  background: rgba(255, 255, 255, 0.035);
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+/* ============================================================
+   ASSIGNMENT DETAILS
+   ============================================================ */
+
+.adn-assignment-details {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.adn-detail-row {
+  display: grid;
+
+  grid-template-columns: 72px minmax(0, 1fr);
+
+  gap: 8px;
+
+  align-items: start;
+
+  font-size: 10px;
+}
+
+.adn-detail-label {
+  color: var(--adn-muted-2);
+
+  font-size: 7.5px;
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+
+  text-transform: uppercase;
+}
+
+.adn-detail-value {
+  min-width: 0;
+
+  color: var(--adn-text-soft);
+
+  font-size: 10px;
+
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+.adn-document-link {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  color: var(--adn-blue);
+
+  text-decoration: none;
+}
+
+.adn-document-link:hover {
+  color: #a9d5ff;
+
+  text-decoration: underline;
+}
+
+
+/* NO ASSIGNMENT */
+
+.adn-no-assignment {
+  padding: 8px 0 1px;
+
+  color: var(--adn-muted-2);
+
+  font-size: 9px;
+
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   DELIVERY CHIPS
+   ============================================================ */
+
+.adn-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin: 15px 22px 0;
+}
+
+.adn-chip {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 24px;
+
+  padding: 4px 9px;
+
+  color: var(--adn-text-soft);
+
+  font-family: var(--adn-font-mono);
+  font-size: 8.5px;
+  font-weight: 500;
+
+  background: rgba(255, 255, 255, 0.045);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 999px;
+
+  text-transform: capitalize;
+}
+
+
+/* ============================================================
+   STATUS STAMPS
+   ============================================================ */
+
+.adn-stamps {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin: 16px 22px 20px;
+
+  padding-top: 13px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.adn-stamp {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 25px;
+
+  padding: 4px 9px;
+
+  color: var(--adn-muted);
+
+  font-family: var(--adn-font-mono);
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(255, 255, 255, 0.11);
+
+  border-radius: 6px;
+}
+
+
+/* APPROVED */
+
+.adn-stamp--approved,
+.adn-stamp--delivered {
+  color: var(--adn-green);
+
+  background: var(--adn-green-soft);
+
+  border-color: rgba(85, 213, 138, 0.25);
+}
+
+
+/* PENDING */
+
+.adn-stamp--pending {
+  color: var(--adn-orange);
+
+  background: var(--adn-orange-soft);
+
+  border-color: rgba(244, 174, 82, 0.25);
+}
+
+
+/* REJECTED */
+
+.adn-stamp--rejected {
+  color: var(--adn-red);
+
+  background: var(--adn-red-soft);
+
+  border-color: rgba(241, 108, 120, 0.25);
+}
+
+
+/* ASSIGNED / PICKED UP */
+
+.adn-stamp--assigned,
+.adn-stamp--picked_up {
+  color: var(--adn-blue);
+
+  background: var(--adn-blue-soft);
+
+  border-color: rgba(112, 183, 255, 0.24);
+}
+
+
+/* ============================================================
+   PROOF / DELIVERY IMAGES
+   ============================================================ */
+
+.adn-proof {
+  margin: 16px 22px 0;
+
+  padding-top: 15px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.adn-proof-title {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 10px;
+
+  color: var(--adn-gold-light);
+
+  font-family: var(--adn-font-display);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.adn-proof-title i {
+  color: var(--adn-gold);
+}
+
+.adn-proof-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 9px;
+}
+
+.adn-proof-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  min-width: 0;
+}
+
+.adn-proof-label {
+  color: var(--adn-muted);
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+
+  text-transform: uppercase;
+}
+
+.adn-proof-img {
+  display: block;
+
+  width: 100%;
+  height: 130px;
+
+  object-fit: cover;
+
+  border: 1px solid rgba(229, 173, 80, 0.18);
+
+  border-radius: 10px;
+
+  opacity: 0.9;
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.adn-proof-img:hover {
+  transform: scale(1.015);
+
+  opacity: 1;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.adn-empty {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-height: 260px;
+
+  justify-content: center;
+
+  padding: 40px 20px;
+
+  color: var(--adn-muted);
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(35, 27, 61, 0.82),
+      rgba(22, 16, 42, 0.82)
+    );
+
+  border: 1px dashed rgba(229, 173, 80, 0.18);
+
+  border-radius: 18px;
+}
+
+.adn-empty::before {
+  content: "∅";
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 52px;
+  height: 52px;
+
+  margin-bottom: 13px;
+
+  color: var(--adn-gold);
+
+  font-family: var(--adn-font-display);
+  font-size: 22px;
+
+  background: var(--adn-gold-soft);
+
+  border: 1px solid rgba(229, 173, 80, 0.18);
+
+  border-radius: 50%;
+}
+
+
+/* ============================================================
+   RESPONSIVE — TABLET
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+  .adn-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adn-card {
+    max-width: none;
+  }
+
+  .adn-toolbar {
+    align-items: stretch;
+  }
+
+  .adn-search {
+    flex-basis: 100%;
+  }
+
+  .adn-toolbar-right {
+    margin-left: 0;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE — SMALL TABLET
+   ============================================================ */
+
+@media (max-width: 800px) {
+
+  .adn-toolbar {
+    padding: 10px;
+  }
+
+  .adn-lanes {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .adn-lane {
+    flex: 1;
+    min-width: max-content;
+  }
+
+  .adn-toolbar-right {
+    width: 100%;
+  }
+
+  .adn-category-select {
+    flex: 1;
+  }
+
+  .adn-sort {
+    flex-shrink: 0;
+  }
+
+  .adn-assignment {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+  .adn-page {
+    padding-bottom: 30px;
+  }
+
+  .adn-grid {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .adn-card-eyebrow,
+  .adn-card-head {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+
+  .adn-item-name {
+    font-size: 18px;
+  }
+
+  .adn-desc,
+  .adn-manifest,
+  .adn-docket,
+  .adn-assignment,
+  .adn-chip-row,
+  .adn-stamps,
+  .adn-proof {
+    margin-left: 17px;
+    margin-right: 17px;
+  }
+
+  .adn-assignment {
+    grid-template-columns: 1fr;
+  }
+
+  .adn-proof-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adn-proof-img {
+    height: 170px;
+  }
+
+  .adn-toolbar-right {
+    flex-direction: column;
+  }
+
+  .adn-category-select,
+  .adn-sort {
+    width: 100%;
+  }
+
+  .adn-sort-btn {
+    flex: 1;
+  }
+}
+
+
+/* ============================================================
+   VERY SMALL SCREENS
+   ============================================================ */
+
+@media (max-width: 430px) {
+
+  .adn-card {
+    border-radius: 14px;
+  }
+
+  .adn-card-eyebrow {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 4px;
+  }
+
+  .adn-manifest-row {
+    grid-template-columns: 75px minmax(8px, 1fr) auto;
+  }
+
+  .adn-docket-row {
+    grid-template-columns: 70px minmax(0, 1fr);
+  }
+
+  .adn-detail-row {
+    grid-template-columns: 65px minmax(0, 1fr);
+  }
+
+  .adn-detail-value {
+    text-align: left;
+  }
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .adn-card,
+  .adn-carousel img,
+  .adn-proof-img,
+  .adn-search,
+  .adn-lane {
+    transition: none;
+  }
+
+  .adn-card:hover {
+    transform: none;
+  }
+
+  .adn-carousel img:hover,
+  .adn-proof-img:hover {
+    transform: none;
+  }
+}

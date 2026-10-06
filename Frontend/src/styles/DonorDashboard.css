@@ -1,0 +1,590 @@
+/* ============================================================
+   DONOR DASHBOARD — dusk & gold system
+   Matches MyDonations / AvailableDonations / campaignDetails.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --dd-dusk-950: #150c22;
+  --dd-dusk-900: #1f1430;
+  --dd-dusk-800: #2b1b3d;
+  --dd-dusk-700: #392750;
+  --dd-dusk-600: #4a3468;
+  --dd-hairline: rgba(212, 175, 106, 0.16);
+
+  --dd-gold: #d4af6a;
+  --dd-gold-soft: #e6cd97;
+  --dd-gold-dim: rgba(212, 175, 106, 0.35);
+
+  --dd-cream: #f5eee0;
+  --dd-cream-dim: rgba(245, 238, 224, 0.62);
+  --dd-cream-faint: rgba(245, 238, 224, 0.4);
+
+  --dd-primary: #8fb3d9;
+  --dd-success: #7fb88f;
+  --dd-warning: #e0b562;
+  --dd-info: #8fcdd9;
+
+  --dd-font-display: 'Fraunces', serif;
+  --dd-font-body: 'Manrope', sans-serif;
+}
+
+/* ============================================================
+   PROFILE STRIP
+   ============================================================ */
+
+.donor-profile-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: linear-gradient(150deg, var(--dd-dusk-800), var(--dd-dusk-900));
+  border: 1px solid var(--dd-hairline);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  font-family: var(--dd-font-body);
+}
+
+.donor-profile-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.donor-profile-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  color: var(--dd-gold-soft);
+  background: linear-gradient(150deg, rgba(212, 175, 106, 0.24), rgba(212, 175, 106, 0.06));
+  border: 1px solid var(--dd-gold-dim);
+}
+
+.donor-profile-main h5 {
+  font-family: var(--dd-font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--dd-cream);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.donor-profile-main p {
+  font-size: 0.8rem;
+  color: var(--dd-cream-dim);
+  margin: 0.15rem 0 0;
+}
+
+.donor-profile-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.donor-impact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #e28fa0;
+  background: rgba(226, 143, 160, 0.12);
+  border: 1px solid rgba(226, 143, 160, 0.35);
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+}
+
+.donor-profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--dd-gold-soft);
+  text-decoration: none;
+  border: 1px solid var(--dd-gold-dim);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  transition: background 0.2s ease, transform 0.15s ease, color 0.2s ease;
+}
+
+.donor-profile-link:hover {
+  background: var(--dd-gold);
+  color: var(--dd-dusk-950);
+  transform: translateX(2px);
+}
+
+/* ============================================================
+   DASHBOARD PANELS (Donation Center / Impact Overview)
+   ============================================================ */
+
+.donor-dashboard-panel {
+  height: 100%;
+  background: linear-gradient(165deg, var(--dd-dusk-800), var(--dd-dusk-900));
+  border: 1px solid var(--dd-hairline);
+  border-radius: 18px;
+  padding: 1.75rem;
+  font-family: var(--dd-font-body);
+  box-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.55);
+}
+
+.donor-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--dd-hairline);
+}
+
+.donor-panel-eyebrow {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--dd-gold-soft);
+  margin-bottom: 0.4rem;
+}
+
+.donor-panel-header h4 {
+  font-family: var(--dd-font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--dd-cream);
+  margin: 0;
+}
+
+.donor-panel-header > i {
+  font-size: 1.4rem;
+  color: var(--dd-gold-dim);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   DONATION CENTER — ACTION LIST
+   ============================================================ */
+
+.donor-action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.donor-action-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  border: 1px solid var(--dd-hairline);
+  background: rgba(0, 0, 0, 0.18);
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.donor-action-row:hover {
+  border-color: var(--dd-gold-dim);
+  background: rgba(0, 0, 0, 0.28);
+  transform: translateX(3px);
+}
+
+.donor-action-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+
+.donor-action-primary {
+  background: rgba(143, 179, 217, 0.16);
+  color: var(--dd-primary);
+}
+
+.donor-action-warning {
+  background: rgba(224, 181, 98, 0.16);
+  color: var(--dd-warning);
+}
+
+.donor-action-success {
+  background: rgba(127, 184, 143, 0.16);
+  color: var(--dd-success);
+}
+
+.donor-action-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.donor-action-content strong {
+  font-size: 0.92rem;
+  color: var(--dd-cream);
+  font-weight: 700;
+}
+
+.donor-action-content span {
+  font-size: 0.78rem;
+  color: var(--dd-cream-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.donor-action-row > i.bi-chevron-right {
+  flex-shrink: 0;
+  color: var(--dd-cream-faint);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.donor-action-row:hover > i.bi-chevron-right {
+  transform: translateX(3px);
+  color: var(--dd-gold-soft);
+}
+
+/* ============================================================
+   IMPACT OVERVIEW PANEL
+   ============================================================ */
+
+.donor-impact-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.donor-impact-stat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--dd-hairline);
+}
+
+.donor-impact-stat:last-of-type {
+  border-bottom: none;
+}
+
+.donor-impact-stat-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--dd-gold-soft);
+  background: linear-gradient(150deg, rgba(212, 175, 106, 0.2), rgba(212, 175, 106, 0.05));
+}
+
+.donor-impact-stat > div:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.donor-impact-stat strong {
+  font-family: var(--dd-font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--dd-cream);
+  line-height: 1.2;
+}
+
+.donor-impact-stat span {
+  font-size: 0.78rem;
+  color: var(--dd-cream-dim);
+}
+
+.donor-impact-message {
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--dd-cream-dim);
+  font-style: italic;
+  background: rgba(226, 143, 160, 0.08);
+  border: 1px solid rgba(226, 143, 160, 0.25);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+}
+
+.donor-impact-message i {
+  color: #e28fa0;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   RECENT ACTIVITY CARD
+   ============================================================ */
+
+.donor-recent-card {
+  background: linear-gradient(165deg, var(--dd-dusk-800), var(--dd-dusk-900)) !important;
+  border: 1px solid var(--dd-hairline) !important;
+  border-radius: 18px !important;
+  font-family: var(--dd-font-body);
+}
+
+.donor-recent-card .card-body {
+  padding: 1.75rem;
+}
+
+.donor-recent-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.donor-recent-title {
+  font-family: var(--dd-font-display) !important;
+  font-size: 1.3rem !important;
+  color: var(--dd-cream) !important;
+  margin: 0.15rem 0 0.35rem !important;
+}
+
+.donor-recent-header p {
+  font-size: 0.85rem;
+  color: var(--dd-cream-dim);
+  margin: 0;
+}
+
+.donor-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--dd-gold-soft);
+  text-decoration: none;
+  border: 1px solid var(--dd-gold-dim);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.donor-view-all:hover {
+  background: var(--dd-gold);
+  color: var(--dd-dusk-950);
+  transform: translateX(2px);
+}
+
+.donor-recent-card hr {
+  border-color: var(--dd-hairline);
+  opacity: 1;
+  margin: 1.25rem 0;
+}
+
+/* Loading / empty */
+
+.donor-activity-loading {
+  text-align: center;
+  color: var(--dd-cream-dim);
+  padding: 2.5rem 1rem;
+  font-size: 0.88rem;
+}
+
+.donor-activity-empty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.donor-activity-empty-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--dd-gold-soft);
+  background: linear-gradient(150deg, rgba(212, 175, 106, 0.2), rgba(212, 175, 106, 0.05));
+}
+
+.donor-activity-empty h6 {
+  font-family: var(--dd-font-display);
+  font-weight: 600;
+  color: var(--dd-cream);
+  margin-bottom: 0.4rem;
+}
+
+.donor-activity-empty small {
+  color: var(--dd-cream-faint);
+  font-size: 0.8rem;
+}
+
+/* ============================================================
+   ACTIVITY TIMELINE
+   ============================================================ */
+
+.donor-activity-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.donor-activity-item {
+  display: flex;
+  gap: 1rem;
+}
+
+.donor-activity-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.donor-activity-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  z-index: 1;
+}
+
+.donor-activity-primary {
+  background: rgba(143, 179, 217, 0.18);
+  color: var(--dd-primary);
+}
+
+.donor-activity-warning {
+  background: rgba(224, 181, 98, 0.18);
+  color: var(--dd-warning);
+}
+
+.donor-activity-success {
+  background: rgba(127, 184, 143, 0.18);
+  color: var(--dd-success);
+}
+
+.donor-activity-info {
+  background: rgba(143, 205, 217, 0.18);
+  color: var(--dd-info);
+}
+
+.donor-activity-danger {
+  background: rgba(217, 123, 108, 0.18);
+  color: #d97b6c;
+}
+
+.donor-activity-line {
+  width: 2px;
+  flex: 1;
+  min-height: 24px;
+  background: var(--dd-hairline);
+  margin: 0.25rem 0;
+}
+
+.donor-activity-content {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 1.5rem;
+}
+
+.donor-activity-item-last .donor-activity-content {
+  padding-bottom: 0;
+}
+
+.donor-activity-content-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.donor-activity-content-top h6 {
+  font-family: var(--dd-font-body);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--dd-cream);
+  margin: 0.2rem 0 0.25rem;
+}
+
+.donor-activity-content-top small.text-muted {
+  color: var(--dd-cream-dim) !important;
+  font-size: 0.8rem;
+}
+
+.donor-activity-date {
+  flex-shrink: 0;
+  color: var(--dd-cream-faint) !important;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   QUICK ACTIONS SECTION HEADING
+   ============================================================ */
+
+h3.fw-bold.mt-5.mb-4 {
+  font-family: var(--dd-font-display);
+  font-weight: 600 !important;
+  color: var(--dd-cream);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .donor-profile-strip {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .donor-profile-meta {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .donor-dashboard-panel {
+    padding: 1.25rem;
+  }
+
+  .donor-recent-card .card-body {
+    padding: 1.25rem;
+  }
+
+  .donor-recent-header {
+    flex-direction: column;
+  }
+
+  .donor-activity-content-top {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .donor-action-row,
+  .donor-profile-link,
+  .donor-view-all,
+  .donor-action-row > i.bi-chevron-right {
+    transition: none;
+  }
+}

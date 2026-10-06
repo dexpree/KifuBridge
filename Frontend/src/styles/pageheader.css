@@ -1,0 +1,964 @@
+/* ============================================================
+   KIFUBRIDGE PAGE HEADER
+   Premium Gold / Deep Purple
+============================================================ */
+
+.page-header {
+  position: relative;
+  width: 100%;
+
+  margin-bottom: 26px;
+  padding: 5px 0 18px;
+
+  color: #ffffff;
+
+  isolation: isolate;
+
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   AMBIENT GOLD GLOW
+============================================================ */
+
+.page-header::before {
+  content: "";
+
+  position: absolute;
+
+  top: -90px;
+  left: -100px;
+
+  width: 320px;
+  height: 220px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(246, 190, 82, 0.09) 0%,
+      rgba(246, 190, 82, 0.035) 35%,
+      transparent 72%
+    );
+
+  pointer-events: none;
+
+  z-index: -1;
+
+  animation: headerAmbientGlow 7s ease-in-out infinite;
+}
+
+
+@keyframes headerAmbientGlow {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: translate3d(35px, 12px, 0) scale(1.12);
+    opacity: 1;
+  }
+}
+
+
+/* ============================================================
+   BACK BUTTON
+============================================================ */
+
+.back-btn {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 8px;
+
+  margin: 0 0 15px;
+
+  padding: 7px 13px 7px 7px;
+
+  border: 1px solid rgba(244, 190, 92, 0.20);
+
+  border-radius: 999px;
+
+  background: rgba(244, 190, 92, 0.045);
+
+  color: #cfc7d8;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.back-btn:hover {
+  color: #ffd77d;
+
+  background: rgba(244, 190, 92, 0.10);
+
+  border-color: rgba(244, 190, 92, 0.40);
+
+  transform: translateX(-3px);
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.12),
+    0 0 15px rgba(244, 190, 92, 0.06);
+}
+
+
+.back-btn:active {
+  transform: translateX(-1px) scale(0.98);
+}
+
+
+/* ============================================================
+   BACK ICON
+============================================================ */
+
+.back-btn-icon {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(244, 190, 92, 0.10);
+
+  color: #efbd5b;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.back-btn:hover .back-btn-icon {
+  color: #ffe09a;
+
+  background: rgba(244, 190, 92, 0.18);
+
+  transform: translateX(-2px);
+}
+
+
+/* ============================================================
+   HEADER CONTENT
+============================================================ */
+
+.page-header-content {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  width: 100%;
+
+  min-width: 0;
+
+  gap: 15px;
+}
+
+
+/* ============================================================
+   ICON
+============================================================ */
+
+.page-header-icon-wrap {
+  position: relative;
+
+  width: 50px;
+  height: 50px;
+
+  flex: 0 0 auto;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(244, 190, 92, 0.14),
+      rgba(168, 85, 247, 0.07)
+    );
+
+  border: 1px solid rgba(244, 190, 92, 0.23);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.12);
+
+  animation: iconFloat 4s ease-in-out infinite;
+}
+
+
+@keyframes iconFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+
+.page-header-icon-wrap::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -5px;
+
+  border-radius: 19px;
+
+  border: 1px solid rgba(244, 190, 92, 0.06);
+
+  animation: iconRing 3s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+
+@keyframes iconRing {
+
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+
+.page-header-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #f8ca6b;
+
+  font-size: 21px;
+
+  line-height: 1;
+
+  filter:
+    drop-shadow(
+      0 0 8px rgba(244, 190, 92, 0.28)
+    );
+
+  animation: iconGlow 3s ease-in-out infinite;
+}
+
+
+@keyframes iconGlow {
+
+  0%,
+  100% {
+    filter:
+      drop-shadow(
+        0 0 6px rgba(244, 190, 92, 0.18)
+      );
+  }
+
+  50% {
+    filter:
+      drop-shadow(
+        0 0 13px rgba(244, 190, 92, 0.42)
+      );
+  }
+}
+
+
+/* ============================================================
+   MAIN TITLE AREA
+============================================================ */
+
+.page-header-main {
+  min-width: 0;
+
+  flex: 1;
+}
+
+
+/* ============================================================
+   TITLE ROW
+============================================================ */
+
+.page-header-title-row {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  min-width: 0;
+}
+
+
+/* ============================================================
+   GOLD ACCENT BAR
+============================================================ */
+
+.page-header-accent {
+  position: relative;
+
+  width: 4px;
+  height: 28px;
+
+  flex: 0 0 auto;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffe39a 0%,
+      #f5c45f 45%,
+      #d9962f 100%
+    );
+
+  box-shadow:
+    0 0 8px rgba(244, 190, 92, 0.40),
+    0 0 18px rgba(244, 190, 92, 0.12);
+
+  animation:
+    accentPulse 2.8s ease-in-out infinite;
+}
+
+
+@keyframes accentPulse {
+
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scaleY(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+    box-shadow:
+      0 0 10px rgba(244, 190, 92, 0.55),
+      0 0 24px rgba(244, 190, 92, 0.18);
+  }
+}
+
+
+/* ============================================================
+   TITLE
+   GOLD + SUBTLE SHIMMER
+============================================================ */
+
+.page-header-title {
+  position: relative;
+
+  margin: 0;
+
+  font-family:
+    "Space Grotesk",
+    "Inter",
+    sans-serif;
+
+  font-size: clamp(24px, 2.4vw, 31px);
+
+  font-weight: 700;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.025em;
+
+  /* Main gold color */
+  color: #f6c866 !important;
+
+  /*
+     Gradient gives the gold a premium metallic feel.
+     The fallback color above keeps the text visible.
+  */
+  background:
+    linear-gradient(
+      110deg,
+      #d99b35 0%,
+      #f2c15f 22%,
+      #ffe5a0 42%,
+      #f4bd54 58%,
+      #d99b35 82%,
+      #f7ce72 100%
+    );
+
+  background-size: 220% 100%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  animation:
+    titleGoldShimmer 5s ease-in-out infinite;
+}
+
+
+@keyframes titleGoldShimmer {
+
+  0% {
+    background-position: 100% 50%;
+  }
+
+  50% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+
+/* ============================================================
+   TITLE SOFT GLOW
+============================================================ */
+
+.page-header-title::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -5px;
+
+  width: 45%;
+
+  height: 7px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(244, 190, 92, 0.17),
+      transparent 70%
+    );
+
+  filter: blur(3px);
+
+  pointer-events: none;
+
+  opacity: 0.55;
+
+  animation: titleGlow 3.5s ease-in-out infinite;
+}
+
+
+@keyframes titleGlow {
+
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scaleX(0.8);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scaleX(1);
+  }
+}
+
+
+/* ============================================================
+   BADGE
+============================================================ */
+
+.page-header-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(244, 190, 92, 0.08);
+
+  border: 1px solid rgba(244, 190, 92, 0.23);
+
+  color: #f0ca78;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.page-header-badge:hover {
+  background: rgba(244, 190, 92, 0.13);
+
+  border-color: rgba(244, 190, 92, 0.36);
+
+  box-shadow:
+    0 0 15px rgba(244, 190, 92, 0.08);
+}
+
+
+/* ============================================================
+   BADGE DOT
+============================================================ */
+
+.page-header-badge-dot {
+  position: relative;
+
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 auto;
+
+  border-radius: 50%;
+
+  background: #f4c45e;
+
+  box-shadow:
+    0 0 0 3px rgba(244, 190, 92, 0.08),
+    0 0 9px rgba(244, 190, 92, 0.45);
+
+  animation: badgePulse 1.8s ease-in-out infinite;
+}
+
+
+@keyframes badgePulse {
+
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+
+/* ============================================================
+   SUBTITLE
+============================================================ */
+
+.page-header-subtitle {
+  margin: 7px 0 0 14px;
+
+  max-width: 780px;
+
+  color: #c0b8ca !important;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 12px;
+
+  font-weight: 400;
+
+  line-height: 1.55;
+
+  letter-spacing: 0.005em;
+
+  opacity: 0;
+
+  animation:
+    subtitleReveal 0.65s ease forwards;
+
+  animation-delay: 0.15s;
+}
+
+
+@keyframes subtitleReveal {
+
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ============================================================
+   ACTIONS
+============================================================ */
+
+.page-header-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 9px;
+
+  flex-shrink: 0;
+
+  margin-left: auto;
+}
+
+
+/* ============================================================
+   ACTION BUTTONS
+============================================================ */
+
+.page-header-actions button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  min-height: 38px;
+
+  padding: 8px 15px;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(244, 190, 92, 0.22);
+
+  background:
+    rgba(244, 190, 92, 0.06);
+
+  color: #f0c875;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+
+.page-header-actions button:hover {
+  transform: translateY(-2px);
+
+  background:
+    rgba(244, 190, 92, 0.12);
+
+  border-color:
+    rgba(244, 190, 92, 0.42);
+
+  color: #ffdb83;
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.16),
+    0 0 18px rgba(244, 190, 92, 0.07);
+}
+
+
+/* ============================================================
+   DECORATIVE GOLD LINE
+============================================================ */
+
+.page-header-line {
+  position: relative;
+
+  width: 100%;
+
+  height: 1px;
+
+  margin-top: 18px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(244, 190, 92, 0.28),
+      rgba(244, 190, 92, 0.10) 35%,
+      rgba(255, 255, 255, 0.045) 70%,
+      transparent
+    );
+}
+
+
+/* Moving gold highlight */
+
+.page-header-line span {
+  position: absolute;
+
+  left: 0;
+  top: -1px;
+
+  width: 100px;
+  height: 2px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #e5a83e 25%,
+      #ffe29a 50%,
+      #e5a83e 75%,
+      transparent
+    );
+
+  box-shadow:
+    0 0 10px rgba(244, 190, 92, 0.35);
+
+  animation:
+    goldLineMove 4s ease-in-out infinite;
+}
+
+
+@keyframes goldLineMove {
+
+  0% {
+    transform: translateX(-120px);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(50vw);
+    opacity: 0.9;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(110vw);
+    opacity: 0;
+  }
+}
+
+
+/* ============================================================
+   FOCUS
+============================================================ */
+
+.back-btn:focus-visible,
+.page-header-actions button:focus-visible {
+  outline: 2px solid #e9b858;
+
+  outline-offset: 3px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 850px) {
+
+  .page-header-content {
+    align-items: flex-start;
+  }
+
+  .page-header-title {
+    font-size: 25px;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .page-header {
+    margin-bottom: 20px;
+
+    padding-bottom: 15px;
+  }
+
+  .page-header-content {
+    display: grid;
+
+    grid-template-columns: auto 1fr;
+
+    gap: 12px;
+  }
+
+  .page-header-icon-wrap {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 13px;
+  }
+
+  .page-header-icon {
+    font-size: 19px;
+  }
+
+  .page-header-title {
+    font-size: 23px;
+  }
+
+  .page-header-subtitle {
+    margin-left: 14px;
+
+    font-size: 11px;
+  }
+
+  .page-header-actions {
+    grid-column: 1 / -1;
+
+    justify-content: flex-start;
+
+    margin-left: 0;
+
+    margin-top: 3px;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .page-header {
+    padding-left: 1px;
+    padding-right: 1px;
+  }
+
+  .back-btn {
+    font-size: 10px;
+
+    padding: 6px 10px 6px 7px;
+  }
+
+  .back-btn-icon {
+    width: 23px;
+    height: 23px;
+  }
+
+  .page-header-title-row {
+    gap: 7px;
+  }
+
+  .page-header-accent {
+    width: 3px;
+    height: 22px;
+  }
+
+  .page-header-title {
+    font-size: 21px;
+  }
+
+  .page-header-badge {
+    padding: 4px 8px;
+
+    font-size: 8px;
+  }
+
+  .page-header-subtitle {
+    margin-top: 6px;
+
+    font-size: 10.5px;
+
+    line-height: 1.5;
+  }
+
+  .page-header-actions {
+    width: 100%;
+  }
+
+  .page-header-actions button {
+    flex: 1;
+
+    min-height: 36px;
+  }
+
+  .page-header-line {
+    margin-top: 14px;
+  }
+
+}
+
+
+/* ============================================================
+   REDUCE MOTION
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .page-header::before,
+  .page-header-icon-wrap,
+  .page-header-icon-wrap::before,
+  .page-header-icon,
+  .page-header-accent,
+  .page-header-title,
+  .page-header-title::after,
+  .page-header-badge-dot,
+  .page-header-subtitle,
+  .page-header-line span {
+    animation: none;
+  }
+
+  .page-header-subtitle {
+    opacity: 1;
+  }
+
+  .back-btn,
+  .page-header-actions button {
+    transition: none;
+  }
+}

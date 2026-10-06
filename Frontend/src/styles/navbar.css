@@ -1,0 +1,268 @@
+/* ===========================
+   KifuBridge Navbar — liquid glass, resizes around the sidebar
+=========================== */
+
+:root {
+  --kb-ink: #1b1f3b;
+  --kb-ink-soft: #2d2f5e;
+  --kb-gold: #e8a33d;
+  --kb-gold-bright: #facc15;
+  --kb-cream: #fdf8f0;
+  --kb-slate: #e2e8f0;
+
+  --navbar-margin: 16px;
+}
+
+.custom-navbar {
+  position: fixed;
+  top: 16px;
+
+  /* starts right after the expanded sidebar, not underneath it */
+  left: 322px;
+  right: var(--navbar-margin);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 20px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.10),
+      rgba(255, 255, 255, 0.02)
+    ),
+    linear-gradient(
+      135deg,
+      rgba(27, 31, 59, 0.55),
+      rgba(45, 47, 94, 0.45)
+    );
+
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+
+  border: 1px solid rgba(232, 163, 61, 0.18);
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+  /* lower than the sidebar (999) — if anything still overlaps by a pixel,
+     the sidebar wins instead of covering it */
+  z-index: 500;
+
+  transition: left 0.45s cubic-bezier(.23,1,.32,1), padding 0.35s ease,
+    background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+body.sidebar-collapsed .custom-navbar {
+  left: 122px;
+}
+
+.custom-navbar.navbar-full {
+  left: var(--navbar-margin);
+}
+
+body.sidebar-collapsed .custom-navbar.navbar-full {
+  left: var(--navbar-margin);
+}
+body.sidebar-collapsed .custom-navbar {
+  left: 122px;
+}
+
+.custom-navbar.scrolled {
+  padding: 8px 18px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.02)
+    ),
+    linear-gradient(
+      135deg,
+      rgba(27, 31, 59, 0.82),
+      rgba(45, 47, 94, 0.75)
+    );
+  border-color: rgba(232, 163, 61, 0.3);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* ===========================
+   THREE-ZONE LAYOUT
+=========================== */
+
+.navbar-side {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 44px;
+}
+
+.navbar-side-left {
+  justify-content: flex-start;
+}
+
+.navbar-side-right{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+}
+
+/* ===========================
+   BRAND — centered
+=========================== */
+
+.navbar-brand {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 9px;
+
+  color: var(--kb-cream) !important;
+
+  font-family: "Fraunces", serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  text-shadow: 0 1px 5px rgba(2, 6, 23, 0.5);
+
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: var(--kb-gold) !important;
+  transform: translateY(-1px);
+}
+
+.brand-mark {
+  flex-shrink: 0;
+  transition: filter 0.3s ease;
+}
+
+.navbar-brand:hover .brand-mark {
+  filter: drop-shadow(0 0 4px rgba(232, 163, 61, 0.6));
+}
+
+/* ===========================
+   ICON BUTTONS
+=========================== */
+
+.nav-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  color: var(--kb-slate);
+
+  cursor: pointer;
+  text-decoration: none;
+
+  transition: background 0.25s ease, color 0.25s ease,
+    transform 0.25s ease, border-color 0.25s ease;
+}
+
+/* icons are inline SVGs now (not an icon font), sized and
+   coloured via currentColor so hover/danger states still work */
+.nav-icon-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.nav-icon-btn:hover {
+  background: rgba(232, 163, 61, 0.16);
+  border-color: rgba(232, 163, 61, 0.4);
+  color: var(--kb-cream);
+  transform: translateY(-1px);
+}
+
+.nav-icon-btn:active {
+  transform: translateY(0) scale(0.94);
+}
+
+.nav-icon-btn.danger:hover {
+  background: rgba(220, 38, 38, 0.25);
+  border-color: rgba(220, 38, 38, 0.45);
+  color: white;
+}
+
+/* ===========================
+   GET STARTED
+=========================== */
+
+.btn-getstarted {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 9px 20px;
+  border-radius: 50px;
+
+  background: linear-gradient(135deg, var(--kb-gold-bright), var(--kb-gold));
+  color: #1b1200 !important;
+
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-getstarted:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(250, 204, 21, 0.35);
+}
+
+/* ===========================
+   MOBILE — sidebar is off-screen here anyway, navbar goes full width
+=========================== */
+
+@media (max-width: 992px) {
+  .custom-navbar,
+  body.sidebar-collapsed .custom-navbar {
+    left: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .custom-navbar {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    padding: 8px 14px;
+  }
+
+  body.sidebar-collapsed .custom-navbar {
+    left: 10px;
+  }
+
+  .navbar-brand span {
+    display: none;
+  }
+
+  .nav-icon-btn,
+  .navbar-brand svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .btn-getstarted {
+    padding: 8px 14px;
+    font-size: 0.82rem;
+  }
+}
